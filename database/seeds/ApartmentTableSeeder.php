@@ -17,6 +17,7 @@ class ApartmentTableSeeder extends Seeder
       for ($i=0; $i < 10; $i++) {
         $new_apartment = new Apartment();
         $new_apartment->user_id = $faker->numberBetween($min=1, $max=10);
+        $new_apartment->title = $faker->sentence;
         $new_apartment->n_rooms = $faker->numberBetween($min=1, $max=10);
         $new_apartment->n_single_beds = $faker->numberBetween($min=1, $max=6);
         $new_apartment->n_double_beds = $faker->numberBetween($min=1, $max=6);

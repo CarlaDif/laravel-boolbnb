@@ -23,12 +23,17 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
+    // protected function authenticated()
+    //   {
+    //    return redirect()->route('upr.home_upr');
+    //   }
+
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/upr/admin';
 
     /**
      * Create a new controller instance.
@@ -49,7 +54,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['string', 'max:255'],
+            'surname' => ['string', 'max:255'],
+            'tel' => ['numeric', 'digits_between:10,15'],
+            'birth' => [ 'date'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -65,8 +73,12 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+            'surname' => $data['surname'],
+            'tel' => $data['tel'],
+            'birth' => $data['birth'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
     }
+
 }

@@ -20,12 +20,16 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    protected function authenticated()
+      {
+       return redirect()->route('upr.home_upr');
+      }
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    // protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
@@ -36,4 +40,6 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+
 }

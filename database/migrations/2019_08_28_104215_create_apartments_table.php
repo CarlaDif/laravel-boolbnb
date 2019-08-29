@@ -17,6 +17,7 @@ class CreateApartmentsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
 
+            $table->string('title', 150);
             $table->smallInteger('n_rooms');
             $table->smallInteger('n_single_beds')->nullable();
             $table->smallInteger('n_double_beds')->nullable();

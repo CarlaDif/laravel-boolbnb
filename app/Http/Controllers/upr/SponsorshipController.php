@@ -1,12 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\Controller;
 
 use App\Sponsorship;
 use Illuminate\Http\Request;
 
 class SponsorshipController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +21,6 @@ class SponsorshipController extends Controller
     {
         //
     }
-
     /**
      * Show the form for creating a new resource.
      *

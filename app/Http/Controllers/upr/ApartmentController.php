@@ -1,12 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\upr;
+use App\Http\Controllers\Controller;
 
 use App\Apartment;
 use Illuminate\Http\Request;
 
 class ApartmentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
