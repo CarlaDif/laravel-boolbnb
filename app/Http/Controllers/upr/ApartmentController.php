@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers\upr;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 use App\Apartment;
+use App\User;
 use Illuminate\Http\Request;
 
 class ApartmentController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +18,12 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        //
+      $user = Auth::user();
+      $apartments = Apartment::all();
+      return view('upr.home_upr')->with([
+        'apartments'=>$apartments,
+        'user'=> $user
+      ]);
     }
 
     /**

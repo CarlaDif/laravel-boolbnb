@@ -2,7 +2,12 @@
 
 @section('content')
   <div class="container">
-    PAGINA HOME ADMIN
+    QUESTA é la home da loggati!!!!!!!!
+    <h1>Ciao {{ $user->name }} </h1>
   </div>
-
+@foreach ($apartments as $apartment)
+  <div class="">
+    {{ $apartment->address }}
+  </div>
+@endforeach
 @endsection

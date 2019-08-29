@@ -16,6 +16,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::middleware('auth')->prefix('upr')->namespace('upr')->name('upr.')->group(function(){
-  Route::get('/admin', 'HomeController@index')->name('home_upr');
+Route::middleware('auth')->prefix('users')->namespace('upr')->name('upr.')->group(function(){
+  Route::get('/', 'HomeController@index')->name('home_upr');
+  Route::resource('users', 'ApartmentController');
 });
