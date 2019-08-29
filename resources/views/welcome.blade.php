@@ -2,11 +2,11 @@
 
 @section('content')
   <div class="container">
-    QUESTA é HOME VISIBILE DA TUTTI!!!!!!!!
+    <h1>QUESTA é HOME VISIBILE DA TUTTI!!!!!!!!</h1>
+    @foreach ($apartments as $apartment)
+      <div class="">
+        {{ $apartment->address }}
+      </div>
+    @endforeach
   </div>
-@foreach ($apartments as $apartment)
-  <div class="">
-    {{ $apartment->address }}
-  </div>
-@endforeach
 @endsection

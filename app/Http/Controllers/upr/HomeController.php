@@ -24,7 +24,7 @@ class HomeController extends Controller
     public function index()
     {
         $apartments = Apartment::all();
-        return view('upr.home_upr')->with([
+        return view('welcome')->with([
           'apartments'=>$apartments
         ]);
     }
