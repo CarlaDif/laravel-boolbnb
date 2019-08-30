@@ -35,6 +35,8 @@ class ApartmentController extends Controller
 
      public function postCreateStep1(Request $request)
      {
+       $user_id = Auth::user()->id;
+
        $validatedData = $request->validate([
            'title' => 'required',
            'address' => 'required',
@@ -51,6 +53,8 @@ class ApartmentController extends Controller
            $request->session()->put('apartment', $apartment);
        }
 
+       $apartment['user_id'] = $user_id;
+
        return redirect('/apartment/create-step2');
      }
 
@@ -64,10 +68,10 @@ class ApartmentController extends Controller
      {
 
        $validatedData = $request->validate([
-           'n_single_beds' => 'required|numeric|max:1000',
-           'n_double_beds' => 'required|numeric|max:1000',
-           'n_baths' => 'required|numeric|max:1000',
-           'mq' => 'required'
+           'n_single_beds' => 'required|numeric|min:0|max:1000',
+           'n_double_beds' => 'required|numeric|min:0|max:1000',
+           'n_baths' => 'required|numeric|min:1|max:1000',
+           'mq' => 'required|min:0'
        ]);
 
        if(empty($request->session()->get('apartment'))){
@@ -98,7 +102,7 @@ class ApartmentController extends Controller
     public function store(Request $request)
     {
       $validatedData = $request->validate([
-           'price_per_night' => 'required',
+           'price_per_night' => 'required|min:0',
        ]);
 
        if(empty($request->session()->get('apartment'))){
@@ -110,6 +114,8 @@ class ApartmentController extends Controller
            $apartment->fill($validatedData);
            $request->session()->put('apartment', $apartment);
        }
+
+       dd($apartment);
 
        $apartment->save();
        return redirect()->route('home');
