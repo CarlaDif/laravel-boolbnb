@@ -113,6 +113,7 @@ class ApartmentController extends Controller
        }else{
            $apartment = $request->session()->get('apartment');
            $apartment->fill($validatedData);
+           $apartment->is_public = '1';
            $request->session()->put('apartment', $apartment);
        }
 
