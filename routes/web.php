@@ -17,7 +17,16 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::middleware('auth')->namespace('upr')->name('upr.')->group(function(){
-  // Route::get('/', 'HomeController@index')->name('home_upr');
+
   Route::get('profile', 'ProfileController@index')->name('profile');
-  Route::resource('users', 'ApartmentController');
+  Route::resource('apartments', 'ApartmentController');
+
+  Route::get('/apartment/create-step1', 'ApartmentController@createStep1')->name('apartments.create-step1');
+  Route::post('/apartment/create-step1', 'ApartmentController@postCreateStep1')->name('apartments.create-step1');
+
+  Route::get('/apartment/create-step2', 'ApartmentController@createStep2')->name('apartments.create-step2');
+  Route::post('/apartment/create-step2', 'ApartmentController@postCreateStep2')->name('apartments.create-step2');
+
+  Route::get('/apartment/create-step3', 'ApartmentController@createStep3')->name('apartments.create-step3');
+
 });
