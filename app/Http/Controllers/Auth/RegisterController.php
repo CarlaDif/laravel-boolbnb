@@ -34,7 +34,7 @@ class RegisterController extends Controller
      * @var string
      */
     protected function redirectTo() {
-      return '/users/users';
+      return '/';
     }
 
     /**

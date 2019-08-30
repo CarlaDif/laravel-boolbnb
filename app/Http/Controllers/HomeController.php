@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 use App\Apartment;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -21,9 +23,20 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+      if(Auth::user()) {
+        $user = Auth::user();
         $apartments = Apartment::all();
+
         return view('welcome')->with([
-          'apartments'=>$apartments
+          'apartments'=>$apartments,
+          'user'=> $user
         ]);
+      }
+
+      $apartments = Apartment::all();
+      return view('welcome')->with([
+        'apartments'=>$apartments,
+      ]);
     }
 }

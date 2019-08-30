@@ -18,12 +18,7 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-      $user = Auth::user();
-      $apartments = Apartment::all();
-      return view('upr.home_upr')->with([
-        'apartments'=>$apartments,
-        'user'=> $user
-      ]);
+      
     }
 
     /**

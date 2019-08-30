@@ -22,7 +22,7 @@ class LoginController extends Controller
 
     protected function authenticated()
       {
-       return redirect()->route('upr.users.index');
+       return redirect()->route('home');
       }
     /**
      * Where to redirect users after login.

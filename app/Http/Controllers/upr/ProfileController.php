@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\upr;
 use App\Http\Controllers\Controller;
-// use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
-use App\Apartment;
 use App\User;
 
-class HomeController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -23,9 +22,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::all();
-        return view('welcome')->with([
-          'apartments'=>$apartments
+
+      if(Auth::user()) {
+        $user = Auth::user();
+
+        return view('upr.profile')->with([
+          'user'=> $user
         ]);
+      }
+      
     }
 }
