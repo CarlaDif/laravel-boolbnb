@@ -7,6 +7,10 @@
         @csrf
         <h3>Quante persone può ospitare il tuo alloggio?</h3>
         <div class="form-group mt-5">
+          <label for="n_rooms">Stanze</label>
+          <input type="number" class="form-control" id="n_rooms" name="n_rooms">
+        </div>
+        <div class="form-group mt-5">
           <label for="n_single_beds">Letti Singoli</label>
           <input type="number" class="form-control" id="n_single_beds" name="n_single_beds">
         </div>

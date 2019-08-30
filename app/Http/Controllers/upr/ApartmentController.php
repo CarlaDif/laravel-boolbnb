@@ -68,6 +68,7 @@ class ApartmentController extends Controller
      {
 
        $validatedData = $request->validate([
+           'n_rooms' => 'numeric|min:0',
            'n_single_beds' => 'required|numeric|min:0|max:1000',
            'n_double_beds' => 'required|numeric|min:0|max:1000',
            'n_baths' => 'required|numeric|min:1|max:1000',
@@ -115,7 +116,7 @@ class ApartmentController extends Controller
            $request->session()->put('apartment', $apartment);
        }
 
-       dd($apartment);
+       // dd($apartment);
 
        $apartment->save();
        return redirect()->route('home');
