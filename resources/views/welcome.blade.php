@@ -82,7 +82,7 @@
       <div class="row justify-content-between mt-3">
         @foreach ($apartments as $apartment)
           @guest
-          <a href="{{ route('apartments.show', $apartment->id) }}">
+          <a href="{{ route('ui.apartments.show', $apartment->id) }}">
           @else
             <a href="{{ route('upr.apartments.show', $apartment->id) }}">
           @endguest

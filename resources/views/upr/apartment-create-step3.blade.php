@@ -7,6 +7,13 @@
         @csrf
         <h3>Quanto costa?</h3>
         <div class="form-group mt-5">
+          <label>Servizi dell'appartamento</label>
+          @foreach ($services as $service)
+            <br>
+            <label><input type="checkbox" name="services[]" value="{{ $service->id }}">{{ $service->name }}</label>
+          @endforeach
+        </div>
+        <div class="form-group mt-5">
           <label for="price_per_night">Prezzo a persona per una notte</label>
           <input type="number" class="form-control" id="price_per_night" name="price_per_night" value="{{ old('price_per_night') }}">
         </div>

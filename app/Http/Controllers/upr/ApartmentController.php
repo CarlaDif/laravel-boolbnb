@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\upr;
+namespace App\Http\Controllers\Upr;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 use App\Apartment;
 use App\User;
+use App\Service;
 use Illuminate\Http\Request;
 
 class ApartmentController extends Controller
@@ -91,7 +92,14 @@ class ApartmentController extends Controller
      public function createStep3(Request $request)
      {
         $apartment = $request->session()->get('apartment');
-        return view('upr.apartment-create-step3', compact('apartment', $apartment));
+        $services = Service::all();
+
+        $data = [
+        'apartment' => $apartment,
+        'services' => $services
+        ];
+
+        return view('upr.apartment-create-step3', $data);
      }
 
     /**
@@ -104,6 +112,7 @@ class ApartmentController extends Controller
     {
       $validatedData = $request->validate([
            'price_per_night' => 'required|min:0',
+           'services' => 'required'
        ]);
 
        if(empty($request->session()->get('apartment'))){
@@ -117,9 +126,11 @@ class ApartmentController extends Controller
            $request->session()->put('apartment', $apartment);
        }
 
-       // dd($apartment);
+       // // dd($apartment);
+       // dd($service);
 
        $apartment->save();
+       $apartment->services()->sync($validatedData['services']);
        return redirect()->route('home');
     }
 
@@ -132,7 +143,15 @@ class ApartmentController extends Controller
     public function show($apartment_id)
     {
         $apartment = Apartment::find($apartment_id);
-        return view('apartmentdetail', compact('apartment'));
+        $services = Service::all();
+//
+// $posts = Post::where('category_id', $category->id)->get();
+        $data = [
+        'apartment' => $apartment,
+        'services' => $services
+        ];
+
+        return view('apartmentdetail', $data);
     }
 
     /**
