@@ -81,7 +81,11 @@
       </div>
       <div class="row justify-content-between mt-3">
         @foreach ($apartments as $apartment)
-          <a href="#">
+          @guest
+          <a href="{{ route('apartments.show', $apartment->id) }}">
+          @else
+            <a href="{{ route('upr.apartments.show', $apartment->id) }}">
+          @endguest
             <div class="card" style="width: 17rem;">
               <img src="https://pmcvariety.files.wordpress.com/2018/07/bradybunchhouse_sc11.jpg?w=1000&h=563&crop=1" class="card-img-top" alt="Anteprima Appartamento">
               <div class="card-body">

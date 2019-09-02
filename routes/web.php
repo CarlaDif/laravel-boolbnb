@@ -30,3 +30,5 @@ Route::middleware('auth')->namespace('upr')->name('upr.')->group(function(){
   Route::get('/apartment/create-step3', 'ApartmentController@createStep3')->name('apartments.create-step3');
 
 });
+
+Route::get('/apartments/{apartment}', 'ApartmentController@show')->name('apartments.show');
