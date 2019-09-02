@@ -10,7 +10,10 @@
           <label>Servizi dell'appartamento</label>
           @foreach ($services as $service)
             <br>
-            <label><input type="checkbox" name="services[]" value="{{ $service->id }}">{{ $service->name }}</label>
+            <label><input type="checkbox" name="services[]"
+              value="{{ $service->id }}"
+              {{ in_array($service->id, old("services") ?: []) ? "checked": ""}}
+              >{{ $service->name }}</label>
           @endforeach
         </div>
         <div class="form-group mt-5">
@@ -27,6 +30,9 @@
           <div class="alert alert-danger mt-4">
             @error('price_per_night')
                 <li>Inserire il prezzo a notte</li>
+            @enderror
+            @error('services')
+                <li>Inserire almeno un servizio</li>
             @enderror
           </div>
         @endif

@@ -93,7 +93,6 @@ class ApartmentController extends Controller
      {
         $apartment = $request->session()->get('apartment');
         $services = Service::all();
-
         $data = [
         'apartment' => $apartment,
         'services' => $services
