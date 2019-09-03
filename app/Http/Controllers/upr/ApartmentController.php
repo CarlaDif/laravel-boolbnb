@@ -201,7 +201,7 @@ class ApartmentController extends Controller
         'n_double_beds' => 'required|numeric|min:0|max:1000',
         'n_baths' => 'required|numeric|min:1|max:1000',
         'mq' => 'required|min:0',
-        'price_per_night' => 'required|min:0',
+        'price_per_night' => 'required|integer|min:1',
         'services' => 'required',
         'main_img' => 'required|image'
       ]);

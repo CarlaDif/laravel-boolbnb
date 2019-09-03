@@ -80,24 +80,28 @@
         <h4>Alloggi in tutto il mondo</h4>
       </div>
       <div class="row justify-content-between mt-3">
+      <div class="card-deck">
         @foreach ($apartments as $apartment)
           @guest
           <a href="{{ route('ui.apartments.show', $apartment->id) }}">
           @else
-            <a href="{{ route('upr.apartments.show', $apartment->id) }}">
+          <a href="{{ route('upr.apartments.show', $apartment->id) }}">
           @endguest
-            <div class="card" style="width: 17rem;">
-              @if (!empty($apartment->main_img))
-                <img src="{{ asset('storage/' . $apartment->main_img) }}" class="card-img-top" alt="Anteprima Appartamento">
-                @else
-                <img src="https://pmcvariety.files.wordpress.com/2018/07/bradybunchhouse_sc11.jpg?w=1000&h=563&crop=1" class="card-img-top" alt="Anteprima non disponibile">
-              @endif
+
+          <div class="card mt-3" style="width: 16rem;">
+            @if (!empty($apartment->main_img))
+              <img src="{{ asset('storage/' . $apartment->main_img) }}" class="card-img-top" alt="Anteprima Appartamento">
+            @else
+              <img src="https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/1/6/3/5/235361-6-eng-GB/System-Logistics-Spa-SIC-Food-20142.jpg" class="card-img-top" alt="Anteprima non disponibile">
+            @endif
               <div class="card-body">
                 <h5 class="card-title">{{ $apartment->title }}</h5>
+                <p>{{ $apartment->address }}</p>
               </div>
             </div>
           </a>
-        @endforeach
+          @endforeach
+      </div>
       </div>
     </div>
   </section>
