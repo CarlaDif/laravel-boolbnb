@@ -8,6 +8,7 @@ use App\Apartment;
 use App\User;
 use App\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
 {
@@ -109,10 +110,19 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
+
+
       $validatedData = $request->validate([
            'price_per_night' => 'required|min:0',
-           'services' => 'required'
+           'services' => 'required',
+           'main_img' => 'required|image'
        ]);
+
+       // $data = $request->all();
+       //path dell'img (percorso images/nome-file.estensione)
+       $img = Storage::put('images', $validatedData['main_img']);
+
+      // dd($main_img);
 
        if(empty($request->session()->get('apartment'))){
            $apartment = new Apartment();
@@ -125,9 +135,10 @@ class ApartmentController extends Controller
            $request->session()->put('apartment', $apartment);
        }
 
-       // // dd($apartment);
+       // dd($apartment);
        // dd($service);
 
+       $apartment->main_img = $img;
        $apartment->save();
        $apartment->services()->sync($validatedData['services']);
        return redirect()->route('home');

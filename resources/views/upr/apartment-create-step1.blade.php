@@ -12,7 +12,6 @@
           <label for="title">Nome dell'appartamento</label>
           <input type="text" class="form-control" id="title" name="title" placeholder="Inserisci un nome del tuo appartamento" value="{{ old('title') }}" >
         </div>
-
         <div class="form-group">
           <label for="address">Indirizzo</label>
           <input type="text" class="form-control" id="address" name="address" placeholder="Inserisci l'indirizzo del tuo appartamento" value="{{ old('address') }}" >
@@ -21,7 +20,6 @@
           <label for="description">Descrizione</label>
           <textarea class="form-control" name="description" rows="8" placeholder="Inserisci una breve descrizione per il tuo appartamento" value="{{ old('description') }}" ></textarea>
         </div>
-
 
         {{-- @if ($errors->any())
             <div class="alert alert-danger">
