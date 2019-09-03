@@ -8,7 +8,7 @@
         <h3>Quante persone può ospitare il tuo alloggio?</h3>
         <div class="form-group mt-5">
           <label for="n_rooms">Stanze</label>
-          <input type="number" class="form-control" id="n_rooms" name="n_rooms" value="{{ old('username') }}" >
+          <input type="number" class="form-control" id="n_rooms" name="n_rooms" value="{{ old('n_rooms') }}" >
         </div>
         <div class="form-group mt-5">
           <label for="n_single_beds">Letti Singoli</label>
@@ -27,10 +27,9 @@
           <input type="number" class="form-control" id="mq" name="mq" value="{{ old('mq') }}" >
         </div>
 
-        <a href="{{ route('home') }}" class="btn btn-danger">Indietro</a>
+        <a href="{{ route('upr.apartments.create-step1') }}" class="btn btn-danger">Indietro</a>
         <input type="submit" value="Avanti" class="btn btn-success">
 
-        {{-- <a href="{{ route('upr.apartments.bed') }}" class="btn btn-success">Avanti</a> --}}
         @if ($errors->any())
           <div class="alert alert-danger mt-4">
             @error('n_rooms')

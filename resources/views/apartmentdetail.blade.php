@@ -3,6 +3,7 @@
 @section('content')
   <div class="container">
     <h1>{{ $apartment->title }}</h1>
+    <a href="{{ route('upr.apartments.edit', $apartment->id) }}" class="btn btn-orange">Modifica</a>
     <div class="card" style="width: 50rem;">
       @if (!empty($apartment->main_img))
         <img src="{{ asset('storage/' . $apartment->main_img) }}" class="card-img-top" alt="Anteprima Appartamento">

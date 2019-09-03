@@ -110,19 +110,14 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
-
-
       $validatedData = $request->validate([
            'price_per_night' => 'required|min:0',
            'services' => 'required',
            'main_img' => 'required|image'
        ]);
 
-       // $data = $request->all();
        //path dell'img (percorso images/nome-file.estensione)
        $img = Storage::put('images', $validatedData['main_img']);
-
-      // dd($main_img);
 
        if(empty($request->session()->get('apartment'))){
            $apartment = new Apartment();
@@ -134,9 +129,6 @@ class ApartmentController extends Controller
            $apartment->is_public = '1';
            $request->session()->put('apartment', $apartment);
        }
-
-       // dd($apartment);
-       // dd($service);
 
        $apartment->main_img = $img;
        $apartment->save();
@@ -153,9 +145,13 @@ class ApartmentController extends Controller
     public function show($apartment_id)
     {
         $apartment = Apartment::find($apartment_id);
+
+        if (empty($apartment)) {
+          abort(404);
+        }
+
         $services = Service::all();
-//
-// $posts = Post::where('category_id', $category->id)->get();
+
         $data = [
         'apartment' => $apartment,
         'services' => $services
@@ -170,9 +166,21 @@ class ApartmentController extends Controller
      * @param  \App\Apartment  $apartment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Apartment $apartment)
+    public function edit($apartment_id)
     {
-        //
+      $apartment = Apartment::find($apartment_id);
+      $services = Service::all();
+
+      $data = [
+        'apartment' => $apartment,
+        'services' => $services
+      ];
+
+      if (empty($apartment)) {
+        abort(404);
+      }
+
+      return view('upr.apartment-edit', $data);
     }
 
     /**
@@ -182,9 +190,34 @@ class ApartmentController extends Controller
      * @param  \App\Apartment  $apartment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Apartment $apartment)
+    public function update(Request $request, $apartment_id)
     {
-        //
+      $validatedData = $request->validate([
+        'title' => 'required',
+        'address' => 'required',
+        'description' => 'required',
+        'n_rooms' => 'numeric|min:0',
+        'n_single_beds' => 'required|numeric|min:0|max:1000',
+        'n_double_beds' => 'required|numeric|min:0|max:1000',
+        'n_baths' => 'required|numeric|min:1|max:1000',
+        'mq' => 'required|min:0',
+        'price_per_night' => 'required|min:0',
+        'services' => 'required',
+        'main_img' => 'required|image'
+      ]);
+
+      $apartment = Apartment::find($apartment_id);
+
+      //path img images/nome-file.estensione
+      $img = Storage::put('images', $validatedData['main_img']);
+
+      //assegnazione path esatta da salvare nel db
+      $validatedData['main_img'] = $img;
+
+      //aggiornamento dati
+      $apartment->update($validatedData);
+
+      return redirect()->route('home');
     }
 
     /**

@@ -30,10 +30,8 @@
           <input type="number" class="form-control" id="price_per_night" name="price_per_night" value="{{ old('price_per_night') }}">
         </div>
 
-        <a href="{{ route('home') }}" class="btn btn-danger">Indietro</a>
+        <a href="{{ route('upr.apartments.create-step2') }}" class="btn btn-danger">Indietro</a>
         <input type="submit" value="Salva" class="btn btn-success">
-
-        {{-- <a href="{{ route('upr.apartments.bed') }}" class="btn btn-success">Avanti</a> --}}
 
         @if ($errors->any())
           <div class="alert alert-danger mt-4">
@@ -44,7 +42,7 @@
                 <li>Inserire almeno un servizio</li>
             @enderror
             @error('main_img')
-                <li>Img bla bla</li>
+                <li>Inserire un'immagine per l'appartamento</li>
             @enderror
           </div>
         @endif
