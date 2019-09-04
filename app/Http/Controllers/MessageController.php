@@ -22,11 +22,12 @@ class MessageController extends Controller
     $data = $request->all();
 
     $data['apartment_id'] = $apartment->id;
-    // dd($data);
 
     $new_message = new Message();
     $new_message->fill($data);
     $new_message->save();
+
+    
 
     return redirect()->route('thankyou');
   }

@@ -84,10 +84,10 @@
               <li class="list-group-item">Prezzo per notte: {{ $apartment->price_per_night }}€</li>
             </ul>
         </div>
-        <hr>
         {{-- FORM EMAIL --}}
 
         @if ($apartment->user_id != Auth::user()->id)
+          <hr class="mt-5">
           <h4 class="mt-3">Contatta il proprietario dell'appartamento</h4>
           <form class="mt-3" action="{{ route('store-message', $apartment->id) }}" method="post">
             @csrf
