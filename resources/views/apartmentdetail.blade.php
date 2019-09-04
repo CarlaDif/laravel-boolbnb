@@ -1,16 +1,68 @@
 @extends('layouts.app')
 
 @section('content')
+  <div class="container-fluid no-gutters px-0">
+    <div class="row no-gutters">
+      <div class="col-md-6" style="height:500px;">
+        @if (!empty($apartment->main_img))
+          <img style="height:500px;" src="{{ asset('storage/' . $apartment->main_img) }}" class="img-fluid" alt="Anteprima Appartamento">
+          @else
+          <img style="height:500px;" src="http://www.newdesignfile.com/postpic/2015/02/nophoto-available-clip-art_68021.jpg" class="img-fluid" alt="Anteprima non disponibile">
+        @endif
+      </div>
+      <div class="col-md-6">
+        <div class="row no-gutters">
+          <div class="col-md-6" style="max-height:250px;">
+            {{-- @if (!empty($apartment->main_img))
+              <img src="{{ asset('storage/' . $apartment->main_img) }}" class="img-fluid" alt="Anteprima Appartamento">
+              @else --}}
+              <img style="height:250px;" src="https://media.gettyimages.com/photos/spring-field-picture-id539016480?s=612x612" class="img-fluid" alt="Anteprima non disponibile">
+            {{-- @endif --}}
+          </div>
+          <div class="col-md-6" style="max-height:250px;">
+            {{-- @if (!empty($apartment->main_img))
+              <img src="{{ asset('storage/' . $apartment->main_img) }}" class="img-fluid" alt="Anteprima Appartamento">
+              @else --}}
+              <img style="height:250px;" src="https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="img-fluid" alt="Anteprima non disponibile">
+            {{-- @endif --}}
+          </div>
+        </div>
+        <div class="row no-gutters">
+          <div class="col-md-6" style="max-height:250px;">
+            {{-- @if (!empty($apartment->main_img))
+              <img src="{{ asset('storage/' . $apartment->main_img) }}" class="img-fluid" alt="Anteprima Appartamento">
+              @else --}}
+              <img style="height:250px;" src="https://media.gettyimages.com/photos/spring-field-picture-id539016480?s=612x612" class="img-fluid" alt="Anteprima non disponibile">
+            {{-- @endif --}}
+          </div>
+          <div class="col-md-6" style="max-height:250px;">
+            {{-- @if (!empty($apartment->main_img))
+              <img src="{{ asset('storage/' . $apartment->main_img) }}" class="img-fluid" alt="Anteprima Appartamento">
+              @else --}}
+              <img style="height:250px;" src="https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="img-fluid" alt="Anteprima non disponibile">
+            {{-- @endif --}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="container">
-    <h1>{{ $apartment->title }}</h1>
-    <div class="row justify-content-between">
+    <div class="row mt-5">
+      <div class="col-12">
+        <h1>{{ $apartment->title }}</h1>
+      </div>
+      <div class="col-12">
+        <a href="#">{{ $apartment->address }}</a>
+      </div>
+    </div>
+    <div class="row justify-content-between mt-3">
       <div class="col-md-8">
         <div class="card mb-3">
-          @if (!empty($apartment->main_img))
+          {{-- @if (!empty($apartment->main_img))
             <img src="{{ asset('storage/' . $apartment->main_img) }}" class="card-img-top" alt="Anteprima Appartamento">
             @else
             <img src="http://www.newdesignfile.com/postpic/2015/02/nophoto-available-clip-art_68021.jpg" class="card-img-top" alt="Anteprima non disponibile">
-          @endif
+          @endif --}}
           <div class="card-body">
             <p>{{ $apartment->description }}</p>
             <p>Servizi:<br>
