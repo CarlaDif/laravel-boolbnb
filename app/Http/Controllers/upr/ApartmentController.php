@@ -196,7 +196,7 @@ class ApartmentController extends Controller
         'title' => 'required',
         'address' => 'required',
         'description' => 'required',
-        'n_rooms' => 'numeric|min:0',
+        'n_rooms' => 'numeric|min:1',
         'n_single_beds' => 'required|numeric|min:0|max:1000',
         'n_double_beds' => 'required|numeric|min:0|max:1000',
         'n_baths' => 'required|numeric|min:1|max:1000',
@@ -213,6 +213,8 @@ class ApartmentController extends Controller
 
       //assegnazione path esatta da salvare nel db
       $validatedData['main_img'] = $img;
+
+      $apartment->services()->sync($validatedData['services']);
 
       //aggiornamento dati
       $apartment->update($validatedData);

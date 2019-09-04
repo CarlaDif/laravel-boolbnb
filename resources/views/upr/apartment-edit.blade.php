@@ -88,8 +88,7 @@
               <div class="col-4">
                 <label>
                   <input type="checkbox" name="services[]"
-                  value="{{ $service->id }}"
-                  {{ in_array($service->id, old("services") ?: []) ? "checked": ""}}>
+                  value="{{ $service->id }}"{{ in_array($service->id, old("services") ?: []) ? "checked": ""}}>
                   {{ $service->name }}
                 </label>
               </div>
@@ -117,46 +116,6 @@
               <div class="alert alert-danger">{{ $message }}</div>
           @enderror
         </div>
-
-
-        {{-- @if ($errors->any())
-          <div class="alert alert-danger mt-4">
-            @error('title')
-                <li>Inserire il titolo dell'appartamento</li>
-            @enderror
-            @error('address')
-                <li>Inserire l'indirizzo dell'appartamento</li>
-            @enderror
-            @error('description')
-                <li>Inserire la descrizione dell'appartamento</li>
-            @enderror
-            @error('n_rooms')
-                <li>Inserire il numero delle stanze</li>
-            @enderror
-            @error('n_single_beds')
-                <li>Inserire numero letti singoli</li>
-            @enderror
-            @error('n_double_beds')
-                <li>Inserire numero letti matrimoniali</li>
-            @enderror
-            @error('n_baths')
-                <li>Inserire numero bagni</li>
-            @enderror
-            @error('mq')
-                <li>Inserire metratura dell'appartamento</li>
-            @enderror
-            @error('price_per_night')
-                <li>Inserire il prezzo a notte</li>
-            @enderror
-            @error('services')
-                <li>Inserire almeno un servizio</li>
-            @enderror
-            @error('main_img')
-                <li>Inserire un'immagine per l'appartamento</li>
-            @enderror
-          </div>
-        @endif --}}
-
         <a href="{{ route('home') }}" class="btn btn-danger">Indietro</a>
         <input type="submit" value="Salva" class="btn btn-success">
       </form>
