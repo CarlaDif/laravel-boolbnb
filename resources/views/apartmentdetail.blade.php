@@ -84,11 +84,42 @@
               <li class="list-group-item">Prezzo per notte: {{ $apartment->price_per_night }}€</li>
             </ul>
         </div>
+        <hr>
+        {{-- FORM EMAIL --}}
+        <form class="mt-5" action="{{ route('store-message', $apartment->id) }}" method="post">
+          @csrf
+          <div class="form-group">
+            <label for="name">Nome:</label>
+            <input type="text" class="form-control" name="name" placeholder="Inserisci il tuo nome">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email:</label>
+              <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Inserisci la tua email"
+              @guest
+                value=""
+              @else
+                value="{{ Auth::user()->email }}"
+              @endguest
+              >
+            <small id="emailHelp" class="form-text text-muted">Non condivideremo la tua email con nessuno.</small>
+          </div>
+          <div class="form-group">
+            <label for="subject">Oggetto:</label>
+            <input type="text" class="form-control" name="subject" placeholder="Inserisci oggetto email">
+          </div>
+          <div class="form-group">
+            <label for="message">Testo messaggio:</label>
+            <textarea class="form-control" name="message" rows="6" placeholder="Scrivi un messaggio a proprietario di questo appartamento"></textarea>
+          </div>
+         <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
         @guest
         <a href="{{ route('home') }}" class="btn btn-danger">Torna alla home</a>
         @else
         <a href="{{ route('home') }}" class="btn btn-danger">Torna alla home</a>
-        <a href="{{ route('upr.apartments.edit', $apartment->id) }}" class="btn btn-warning">Modifica dati appartamento</a>
+          @if ($apartment->user_id == Auth::user()->id)
+            <a href="{{ route('upr.apartments.edit', $apartment->id) }}" class="btn btn-warning">Modifica dati appartamento</a>
+          @endif
         @endguest
       </div>
       <div class="col-md-4">

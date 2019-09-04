@@ -16,6 +16,8 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::post('/email/{apartment_id}', 'MessageController@storeMessage')->name('store-message');
+Route::get('/thankyou', 'MessageController@thankyou')->name('thankyou');
 
 Route::namespace('Ui')->name('ui.')->group(function(){
   Route::resource('/user/apartments', 'ApartmentController');
