@@ -27,9 +27,6 @@
           <input type="number" class="form-control" id="mq" name="mq" value="{{ old('mq') }}" >
         </div>
 
-        <a href="{{ route('upr.apartments.create-step1') }}" class="btn btn-danger">Indietro</a>
-        <input type="submit" value="Avanti" class="btn btn-success">
-
         @if ($errors->any())
           <div class="alert alert-danger mt-4">
             @error('n_rooms')
@@ -49,7 +46,13 @@
             @enderror
           </div>
         @endif
+        
+        @if(Session::has('message'))
+        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+        @endif
 
+        <a href="{{ route('upr.apartments.create-step1') }}" class="btn btn-danger">Indietro</a>
+        <input type="submit" value="Avanti" class="btn btn-success">
 
       </form>
     </div>

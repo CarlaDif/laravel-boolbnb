@@ -10,6 +10,7 @@ use App\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class ApartmentController extends Controller
 {
@@ -63,13 +64,28 @@ class ApartmentController extends Controller
 
      public function createStep2(Request $request)
      {
+        //recupero dati sessione precedente
         $apartment = $request->session()->get('apartment');
+
+        //inserisco i dati recuperati in un array
+        if(!empty($apartment)) {
+          $array_apartment = $apartment->toArray();
+          //verifico che i dati recuperati dalla precedente sessione, siano tutti i dati che mi servono per proseguire
+          //se i dati non sono sufficenti
+          if(count($array_apartment) < 4) {
+            Session::flash('message', 'Devi prima compilare tutti i campi del form!');
+            return redirect()->route('upr.apartments.create-step1');
+          }
+        } elseif (!$apartment) {
+          Session::flash('message', 'Devi prima compilare tutti i campi del form!');
+          return redirect()->route('upr.apartments.create-step1');
+        }
+        //se i dati sono sufficenti si procede allo step successivo
         return view('upr.apartment-create-step2', compact('apartment', $apartment));
      }
 
      public function postCreateStep2(Request $request)
      {
-
        $validatedData = $request->validate([
            'n_rooms' => 'numeric|min:0',
            'n_single_beds' => 'required|numeric|min:0|max:1000',
@@ -100,6 +116,20 @@ class ApartmentController extends Controller
         'services' => $services
         ];
 
+        //inserisco i dati recuperati in un array
+        if(!empty($apartment)) {
+          $array_apartment = $apartment->toArray();
+          //verifico che i dati recuperati dalla precedente sessione, siano tutti i dati che mi servono per proseguire
+          //se i dati non sono sufficenti
+          if(count($array_apartment) < 8) {
+            Session::flash('message', 'Devi prima compilare tutti i campi del form!');
+            return redirect()->route('upr.apartments.create-step2');
+          }
+        } elseif (!$apartment) {
+          Session::flash('message', 'Devi prima compilare tutti i campi del form!');
+          return redirect()->route('upr.apartments.create-step1');
+        }
+        //se i dati sono sufficenti si procede allo step successivo
         return view('upr.apartment-create-step3', $data);
      }
 

@@ -3,7 +3,6 @@
 @section('content')
   <div class="container-fluid d-flex">
     <div class="col-md-7 mt-5">
-
       <form class="w-50 ml-auto" action="{{ route('upr.apartments.create-step1') }}" method="post">
         @csrf
         <h3>Inserisci i primi dati del tuo appartamento!</h3>
@@ -32,6 +31,9 @@
                 <li>Inserire la descrizione dell'appartamento</li>
             @enderror
           </div>
+        @endif
+        @if(Session::has('message'))
+        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
         @endif
 
         <a href="{{ route('home') }}" class="btn btn-danger">Indietro</a>
