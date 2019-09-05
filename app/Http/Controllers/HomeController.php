@@ -24,7 +24,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
       $request->session()->forget('apartment');
-      
+
       if(Auth::user()) {
         $user = Auth::user();
         $apartments = Apartment::all();
@@ -36,6 +36,7 @@ class HomeController extends Controller
       }
 
       $apartments = Apartment::all();
+      
       return view('welcome')->with([
         'apartments'=>$apartments,
       ]);

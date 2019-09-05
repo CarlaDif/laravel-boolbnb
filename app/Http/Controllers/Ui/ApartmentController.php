@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Apartment;
 use App\User;
+use App\Service;
 use Illuminate\Http\Request;
 
 class ApartmentController extends Controller
@@ -18,6 +19,19 @@ class ApartmentController extends Controller
   public function show($apartment_id)
   {
       $apartment = Apartment::find($apartment_id);
-      return view('apartmentdetail', compact('apartment'));
+
+      if (empty($apartment)) {
+        abort(404);
+      }
+
+      $services = Service::all();
+
+      $data = [
+      'apartment' => $apartment,
+      'services' => $services,
+      ];
+
+
+      return view('apartmentdetail', $data);
   }
 }

@@ -82,12 +82,13 @@
       <div class="row justify-content-between mt-3">
       <div class="card-deck">
         @foreach ($apartments as $apartment)
+          <a href=
           @guest
-          <a href="{{ route('ui.apartments.show', $apartment->id) }}">
+            "{{ route('ui.apartments.show', $apartment->id) }}"
           @else
-          <a href="{{ route('upr.apartments.show', $apartment->id) }}">
+            "{{ route('upr.apartments.show', $apartment->id) }}"
           @endguest
-
+          >
           <div class="card mt-3" style="width: 16rem;">
             @if (!empty($apartment->main_img))
               <img src="{{ asset('storage/' . $apartment->main_img) }}" class="card-img-top" alt="Anteprima Appartamento">

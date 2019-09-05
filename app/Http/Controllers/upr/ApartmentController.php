@@ -145,6 +145,7 @@ class ApartmentController extends Controller
     public function show($apartment_id)
     {
         $apartment = Apartment::find($apartment_id);
+        // $user = Auth::user();
 
         if (empty($apartment)) {
           abort(404);
@@ -154,7 +155,7 @@ class ApartmentController extends Controller
 
         $data = [
         'apartment' => $apartment,
-        'services' => $services
+        'services' => $services,
         ];
 
         return view('apartmentdetail', $data);
@@ -175,6 +176,10 @@ class ApartmentController extends Controller
         'apartment' => $apartment,
         'services' => $services
       ];
+
+      if(Auth::user()->id != $apartment->user_id) {
+        abort(404);
+      }
 
       if (empty($apartment)) {
         abort(404);
@@ -230,7 +235,11 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
-        //
+      if (empty($apartment)) {
+        abort(404);
+      }
+
+      //procedo con la delete
     }
 
 }
