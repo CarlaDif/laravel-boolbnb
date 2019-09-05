@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="container-fluid d-flex">
-    <div class="col-md-7 mt-5">
+    <div class="col-md-8 mt-5">
 
       <form class="w-50 ml-auto" action="{{ route('upr.apartments.update', $apartment->id) }}" method="post" enctype="multipart/form-data">
         @csrf
@@ -81,14 +81,19 @@
         </div>
 
         {{-- services --}}
-        <div class="form-group mt-5">
+        <div class="form-group">
           <label>Servizi dell'appartamento</label>
           <div class="row justify-content-between">
             @foreach ($services as $service)
               <div class="col-4">
                 <label>
-                  <input type="checkbox" name="services[]"
-                  value="{{ $service->id }}"{{ in_array($service->id, old("services") ?: []) ? "checked": ""}}>
+                  <input class="form-check-input" type="checkbox" name="services[]" value="{{ $service->id }}"
+                    @foreach ($apartment_services as $apartment_service)
+                      @if ($apartment_service->service_id == $service->id)
+                        checked
+                      @endif
+                    @endforeach
+                  >
                   {{ $service->name }}
                 </label>
               </div>
@@ -111,7 +116,7 @@
        {{-- price_per_night --}}
         <div class="form-group mt-5">
           <label for="price_per_night">Prezzo a persona per una notte</label>
-          <input type="number" class="form-control" id="price_per_night" name="price_per_night" value="{{ old('price_per_night') }}">
+          <input type="number" class="form-control" id="price_per_night" name="price_per_night" value="{{ old('price_per_night', $apartment->price_per_night) }}">
           @error('price_per_night')
               <div class="alert alert-danger">{{ $message }}</div>
           @enderror

@@ -9,6 +9,7 @@ use App\User;
 use App\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class ApartmentController extends Controller
 {
@@ -172,9 +173,14 @@ class ApartmentController extends Controller
       $apartment = Apartment::find($apartment_id);
       $services = Service::all();
 
+      $apartment_services = DB::table('apartment_service')->where('apartment_id', $apartment_id)->get();
+
+      // dd($apartment_services);
+
       $data = [
         'apartment' => $apartment,
-        'services' => $services
+        'services' => $services,
+        'apartment_services' => $apartment_services
       ];
 
       if(Auth::user()->id != $apartment->user_id) {
