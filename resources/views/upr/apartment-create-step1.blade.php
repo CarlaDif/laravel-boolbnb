@@ -33,7 +33,7 @@
           </div>
         @endif
         @if(Session::has('message'))
-        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+          <p class="alert {{ Session::get('alert-class', 'alert-danger') }}">{{ Session::get('message') }}</p>
         @endif
 
         <a href="{{ route('home') }}" class="btn btn-danger">Indietro</a>

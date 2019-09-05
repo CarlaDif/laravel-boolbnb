@@ -29,7 +29,7 @@
           <label for="price_per_night">Prezzo a persona per una notte</label>
           <input type="number" class="form-control" id="price_per_night" name="price_per_night" value="{{ old('price_per_night') }}">
         </div>
-        
+
         @if ($errors->any())
           <div class="alert alert-danger mt-4">
             @error('price_per_night')
@@ -45,7 +45,7 @@
         @endif
 
         @if(Session::has('message'))
-        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+          <p class="alert {{ Session::get('alert-class', 'alert-danger') }}">{{ Session::get('message') }}</p>
         @endif
 
         <a href="{{ route('upr.apartments.create-step2') }}" class="btn btn-danger">Indietro</a>
