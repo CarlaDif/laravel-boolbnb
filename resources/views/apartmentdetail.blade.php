@@ -5,21 +5,20 @@
     <div class="row no-gutters">
       <div class="col-md-6" style="height:500px;">{{-- COLONNA PRINCIPALE --}}
         @if (!empty($apartment->main_img))
-          <img style="height:500px; object-fit: cover;" src="{{ asset('storage/' . $apartment->main_img) }}" class="img-fluid" alt="Anteprima Appartamento">
+          <img style="height:500px; width:100%; object-fit: cover;" src="{{ asset('storage/' . $apartment->main_img) }}" class="img-fluid" alt="Anteprima Appartamento">
           @else
-          <img style="height:500px; object-fit: cover;" src="http://www.newdesignfile.com/postpic/2015/02/nophoto-available-clip-art_68021.jpg" class="img-fluid" alt="Anteprima non disponibile">
+          <img style="height:500px; width:100%; object-fit: cover;" src="https://kitv.images.worldnow.com/images/16468883_G.png?lastEditedDate=1522902908000" class="img-fluid" alt="Anteprima non disponibile">
         @endif
       </div>
       <div class="col-md-6" style="height:500px;"> {{-- COLONNA PRINCIPALE DOPPIE IMG --}}
         <div class="row no-gutters d-flex flex-wrap">
           @if (!empty($apartment_imgs))
-            @foreach ($apartment_imgs as $img)
-              <img style="height:250px; width:50%; object-fit: cover;" src="{{ asset('storage/' . $img->path) }}" alt="Anteprima Stanze Appartamento">
-            @endforeach
-          @else
-            @for ($i = 0; $i < 4; $i++)
-              <img style="height:250px; width:50%; object-fit: cover;" src="https://media.gettyimages.com/photos/spring-field-picture-id539016480?s=612x612" class="img-fluid" alt="Anteprima non disponibile">
-            @endfor
+              @forelse ($apartment_imgs as $img)
+                <img style="height:250px; width:50%; object-fit: cover;" src="{{ asset('storage/' . $img->path) }}" alt="Anteprima Stanze Appartamento">
+              @empty
+                <img style="height:500px; width:100%; object-fit: cover;" src="https://ldonna.cdn-news30.it/blobs/full/e/6/4/6/e646c3b5-59e5-45d8-a16d-32a9778a81bd.jpg?_636392901355046092" class="img-fluid" alt="Anteprima non disponibile">
+
+              @endforelse
           @endif
         </div>
       </div>

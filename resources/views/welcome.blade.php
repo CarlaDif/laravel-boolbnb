@@ -93,7 +93,7 @@
             @if (!empty($apartment->main_img))
               <img src="{{ asset('storage/' . $apartment->main_img) }}" class="card-img-top" style="width: 250px; height: 150px; object-fit: cover;" alt="Anteprima Appartamento">
             @else
-              <img style="width: 250px; height: 150px; object-fit: cover;" src="https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/1/6/3/5/235361-6-eng-GB/System-Logistics-Spa-SIC-Food-20142.jpg" class="card-img-top" alt="Anteprima non disponibile">
+              <img style="width: 250px; height: 150px; object-fit: cover;" src="https://kitv.images.worldnow.com/images/16468883_G.png?lastEditedDate=1522902908000" class="card-img-top" alt="Anteprima non disponibile">
             @endif
               <div class="card-body">
                 <h5 class="card-title">{{ $apartment->title }}</h5>
