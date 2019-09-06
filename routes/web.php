@@ -38,6 +38,7 @@ Route::middleware('auth')->namespace('Upr')->name('upr.')->group(function(){
 
   // Route::get('/mymessages', 'UserMessageController@myMessages')->name('mymessages');
 
+  Route::get('messages', 'ProfileController@showMessage')->name('all-messages');
 });
 
 

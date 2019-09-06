@@ -3,7 +3,6 @@
 @section('content')
   <div class="container-fluid d-flex">
     <div class="col-md-8 mt-5">
-
       <form class="w-50 ml-auto" action="{{ route('upr.apartments.update', $apartment->id) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')

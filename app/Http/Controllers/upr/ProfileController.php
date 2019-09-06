@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
@@ -30,6 +31,16 @@ class ProfileController extends Controller
           'user'=> $user
         ]);
       }
-      
+
+    }
+
+    //funzione per recuperare i mesaggi inviati all'utente loggato, proprietario di uno o più appartamenti
+    public function showMessage() {
+      $messages = DB::table('messages')
+                      ->join('apartments', 'messages.apartment_id', '=', 'apartments.id')
+                      ->where('user_id', Auth::user()->id)
+                      ->select('messages.*')
+                      ->get();
+      dd($messages);
     }
 }

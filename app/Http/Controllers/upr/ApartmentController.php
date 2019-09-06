@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\View;
 
 class ApartmentController extends Controller
 {
@@ -176,9 +177,8 @@ class ApartmentController extends Controller
     public function show($apartment_id)
     {
         $apartment = Apartment::find($apartment_id);
-        // $user = Auth::user();
 
-        if (empty($apartment)) {
+        if (!$apartment) {
           abort(404);
         }
 
@@ -186,7 +186,7 @@ class ApartmentController extends Controller
 
         $data = [
         'apartment' => $apartment,
-        'services' => $services,
+        'services' => $services
         ];
 
         return view('apartmentdetail', $data);
@@ -201,27 +201,24 @@ class ApartmentController extends Controller
     public function edit($apartment_id)
     {
       $apartment = Apartment::find($apartment_id);
-      $services = Service::all();
+      //se l'id appartamento non esiste all'interno della tabella degli appartamenti
+      $check = DB::table('apartments')->pluck('id')->toArray();
 
-      if (!$apartment_id) {
+      if(!in_array($apartment_id, $check) || $apartment->user_id != Auth::user()->id) {
         abort(404);
+      } else {
+        $apartment = Apartment::find($apartment_id);
+        $services = Service::all();
+        $apartment_services = DB::table('apartment_service')->where('apartment_id', $apartment_id)->get();
+
+        $data = [
+          'apartment' => $apartment,
+          'services' => $services,
+          'apartment_services' => $apartment_services
+        ];
+
+        return view('upr.apartment-edit', $data);
       }
-
-      $apartment_services = DB::table('apartment_service')->where('apartment_id', $apartment_id)->get();
-
-      $data = [
-        'apartment' => $apartment,
-        'services' => $services,
-        'apartment_services' => $apartment_services,
-      ];
-
-
-      // if(Auth::user()->id != $apartment->user_id || empty($apartment_id)) {
-      //   abort(404);
-      // }
-
-
-      return view('upr.apartment-edit', $data);
     }
 
     /**
@@ -276,7 +273,6 @@ class ApartmentController extends Controller
         abort(404);
       }
 
-      //procedo con la delete
     }
 
 }
