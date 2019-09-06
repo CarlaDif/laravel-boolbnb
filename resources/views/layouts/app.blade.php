@@ -126,48 +126,26 @@
       {{-- --------------------------------------FIlter-MENU--------------------------- --}}
        <div class="container-fluid filter-menu my-3">
           <div class="links">
-            <a href="#" class="btn btn-sm btn-outline-secondary" >Date</a>
-            <a href="#" class="btn btn-sm btn-outline-secondary" >Ospiti</a>
-            <a href="#" class="btn btn-sm btn-outline-secondary" >Viaggio Di Lavoro</a>
-            <a href="#" class="btn btn-sm btn-outline-secondary" >Tipo Di Alloggio</a>
-            <span class="position-relative price">
-              <a href="#" class="btn btn-sm btn-outline-secondary" >Prezzo</a>
-              <div class="price_menu position-absolute">
-                <input
-                type="range"
-                min="10"
-                max="1000"
-                step="10"
-                value="300"
-                id="range_price">
-              </div>
-            </span>
-            <a href="#" class="btn btn-sm btn-outline-secondary" >Prenotazione Immediata</a>
-            <a href="#" class="btn btn-sm btn-outline-secondary" >Piu Filtri</a>
+            <a href="#" class="btn btn-sm btn-outline-secondary">Date</a>
+            <a href="#" class="btn btn-sm btn-outline-secondary">Ospiti</a>
+            <a href="#" class="btn btn-sm btn-outline-secondary">Viaggio Di Lavoro</a>
+            <a href="#" class="btn btn-sm btn-outline-secondary">Tipo Di Alloggio</a>
+            <a href="#" class="btn btn-sm btn-outline-secondary">Prezzo</a>
+            <a href="#" class="btn btn-sm btn-outline-secondary">Prenotazione Immediata</a>
+            <a href="#" class="btn btn-sm btn-outline-secondary">Piu Filtri</a>
           </div>
         </div>
         <main class="py-4">
             @yield('content')
         </main>
     </div>
-    <script id="apartment_template" type="text/x-handlebars-template">
-     <!-- <div>
-       <a href="@{{address}}">
-         <div class="card" style="width: 17rem;">
-           <img src="#" class="card-img-top" alt="Anteprima Appartamento">
-           <div class="card-body">
-             <h5 class="card-title">@{{ title }}</h5>
-           </div>
-         </div>
-       </a>
-     </div> -->
-
+    {{-- <script id="apartment_template" type="text/x-handlebars-template">
      <a href=
-     @guest
+      @guest
        "{{ route('ui.apartments.show', $apartment->id) }}"
-     @else
+      @else
        "{{ route('upr.apartments.show', $apartment->id) }}"
-     @endguest
+      @endguest
      >
      <div class="card mt-3" style="width: 16rem;">
        @if (!empty($apartment->main_img))
@@ -181,7 +159,6 @@
          </div>
        </div>
      </a>
-
-   </script>
+   </script> --}}
   </body>
 </html>

@@ -1,60 +1,69 @@
-.has-search{
- z-index: 10;
+.has-search {
+  z-index: 10;
 }
 .has-search .form-control {
   padding-left: 2.375rem;
 }
 .sub-menu{
- width:500px;
- background-color: white;
- display:none;
- box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
- p{
-   font-size: 13px;
-   font-weight: bold;
- }
- .close{
-   position:absolute;
-   cursor:pointer;
-   right:18px;
-   top:18px;
- }
-}
-.has-search input{
- border: none;
- box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
- font-size: 15px;
- &:focus{
-   box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
-   outline: none;
-   border: none;
- }
- &:active{
-   box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
-   outline: none;
-   border: none;
- }
-}
-.has-search .form-control-feedback {
-   position: absolute;
-   z-index: 2;
-   display: block;
-   width: 2.375rem;
-   height: 2.375rem;
-   line-height: 2.375rem;
-   text-align: center;
-   pointer-events: none;
-   color: #aaa;
+  width:500px;
+  background-color: white;
+  display:none;
+  box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
+
+  p {
+    font-size: 13px;
+    font-weight: bold;
+  }
+
+  .close {
+    position:absolute;
+    cursor:pointer;
+    right:18px;
+    top:18px;
+  }
 }
 
-// ----------------------FILTER MENU---------------------
-.filter-menu{
- .links{
-   margin-left: 200px;
- }
+.has-search input {
+  border: none;
+  box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
+  font-size: 15px;
+
+  &:focus {
+    box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
+    outline: none;
+    border: none;
+  }
+
+  &:active {
+    box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
+    outline: none;
+    border: none;
+  }
+}
+
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
+}
+
+/* ----- FILTER MENU ----- */
+.filter-menu {
+
+  .links{
+    margin-left: 200px;
+  }
+
  display:none;
 }
-.price_menu{
- display: none;
- background-color: white;
+
+.price_menu {
+  display: none;
+  background-color: white;
 }

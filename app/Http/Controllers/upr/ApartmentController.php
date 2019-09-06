@@ -7,11 +7,13 @@ use Illuminate\Support\Facades\Auth;
 use App\Apartment;
 use App\User;
 use App\Service;
+use App\Apartment_img;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Str;
 
 class ApartmentController extends Controller
 {
@@ -143,29 +145,56 @@ class ApartmentController extends Controller
     public function store(Request $request)
     {
       $validatedData = $request->validate([
-           'price_per_night' => 'required|min:0',
-           'services' => 'required',
-           'main_img' => 'required|image',
-           'is_public' => 'required|boolean'
+          'price_per_night' => 'required|min:0',
+          'services' => 'required',
+          'main_img' => 'required|image',
+          'is_public' => 'required|boolean',
        ]);
 
-       //path dell'img (percorso images/nome-file.estensione)
-       $img = Storage::put('images', $validatedData['main_img']);
+      $validatedImages = $request->validate([
+        'paths' => 'array'
+      ]);
 
-       if(empty($request->session()->get('apartment'))){
-           $apartment = new Apartment();
-           $apartment->fill($validatedData);
-           $request->session()->put('apartment', $apartment);
-       }else{
-           $apartment = $request->session()->get('apartment');
-           $apartment->fill($validatedData);
-           $request->session()->put('apartment', $apartment);
-       }
+      //path dell'img (percorso images/nome-file.estensione)
+      $img = Storage::put('images', $validatedData['main_img']);
 
-       $apartment->main_img = $img;
-       $apartment->save();
-       $apartment->services()->sync($validatedData['services']);
-       return redirect()->route('home');
+      $input = $request->all();
+
+      if(empty($request->session()->get('apartment'))){
+        $apartment = new Apartment();
+        $apartment->fill($validatedData);
+        $request->session()->put('apartment', $apartment);
+      }else{
+        $apartment = $request->session()->get('apartment');
+        $apartment->fill($validatedData);
+        $request->session()->put('apartment', $apartment);
+      }
+
+      $apartment->main_img = $img;
+
+      $paths = array();
+
+      $apartment->save();
+
+      //salvataggio img nel database
+      if($files = $request->file('paths')){
+        foreach($files as $file){
+          //nome del file e storage nel db
+          $path = Storage::put('images', $file);
+
+          // $path = Storage::put('images/', $path);
+          $row = Apartment_img::insert(
+            [
+              'path' => $path,
+              'apartment_id' => $apartment->id,
+              'slug' => Str::slug($path, '-')
+            ]);
+        }
+      }
+
+      //sincronizzo i servizi dell'appartamento
+      $apartment->services()->sync($validatedData['services']);
+      return redirect()->route('home');
     }
 
     /**
@@ -178,6 +207,8 @@ class ApartmentController extends Controller
     {
         $apartment = Apartment::find($apartment_id);
 
+        $apartment_imgs = Apartment_img::where('apartment_id', $apartment_id)->take(4)->get();
+
         if (!$apartment) {
           abort(404);
         }
@@ -186,7 +217,8 @@ class ApartmentController extends Controller
 
         $data = [
         'apartment' => $apartment,
-        'services' => $services
+        'services' => $services,
+        'apartment_imgs' => $apartment_imgs
         ];
 
         return view('apartmentdetail', $data);

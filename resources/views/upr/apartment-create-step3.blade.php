@@ -22,9 +22,17 @@
           </div>
         </div>
         <div class="form-group">
-         <label for="main_img">Inserisci una foto dell'appartamento</label>
+         <label for="main_img">Inserisci la foto principale dell'appartamento</label>
          <input type="file" name="main_img" class="form-control-file">
        </div>
+
+       {{-- GROUP IMAGES --}}
+        <label>Seleziona alcune foto per rendere il tuo annuncio più accattivante</label>
+        <input required type="file" class="form-control-file" name="paths[]" placeholder="address" multiple>
+        @error('paths')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
         <div class="form-group mt-5">
           <label for="price_per_night">Prezzo a persona per una notte</label>
           <input type="number" class="form-control" id="price_per_night" name="price_per_night" value="{{ old('price_per_night') }}">
@@ -47,6 +55,7 @@
             @error('main_img')
                 <li>Inserire un'immagine per l'appartamento</li>
             @enderror
+
           </div>
         @endif
 
