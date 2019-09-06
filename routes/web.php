@@ -36,6 +36,8 @@ Route::middleware('auth')->namespace('Upr')->name('upr.')->group(function(){
 
   Route::get('/apartment/create-step3', 'ApartmentController@createStep3')->name('apartments.create-step3');
 
+  // Route::get('/mymessages', 'UserMessageController@myMessages')->name('mymessages');
+
 });
 
 

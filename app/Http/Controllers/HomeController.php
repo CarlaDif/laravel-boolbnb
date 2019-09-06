@@ -27,7 +27,7 @@ class HomeController extends Controller
 
       if(Auth::user()) {
         $user = Auth::user();
-        $apartments = Apartment::all();
+        $apartments = Apartment::where('is_public', 1)->get();
 
         return view('welcome')->with([
           'apartments'=>$apartments,
@@ -35,8 +35,8 @@ class HomeController extends Controller
         ]);
       }
 
-      $apartments = Apartment::all();
-      
+      $apartments = Apartment::where('is_public', 1)->get();
+
       return view('welcome')->with([
         'apartments'=>$apartments,
       ]);

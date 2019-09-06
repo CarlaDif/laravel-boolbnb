@@ -10,22 +10,37 @@
           <label for="n_rooms">Stanze</label>
           <input type="number" class="form-control" id="n_rooms" name="n_rooms" value="{{ old('n_rooms') }}" >
         </div>
+        @error('n_rooms')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <div class="form-group mt-5">
           <label for="n_single_beds">Letti Singoli</label>
           <input type="number" class="form-control" id="n_single_beds" name="n_single_beds" value="{{ old('n_single_beds') }}" >
         </div>
+        @error('n_single_beds')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <div class="form-group">
           <label for="n_double_beds">Letti Matrimoniali</label>
           <input type="number" class="form-control" id="n_double_beds" name="n_double_beds" value="{{ old('n_double_beds') }}" >
         </div>
+        @error('n_double_beds')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <div class="form-group">
           <label for="n_baths">Numero di Bagni</label>
           <input type="number" class="form-control" id="n_baths" name="n_baths" value="{{ old('n_baths') }}" >
         </div>
+        @error('n_baths')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <div class="form-group">
           <label for="mq">Metri quadrati</label>
           <input type="number" class="form-control" id="mq" name="mq" value="{{ old('mq') }}" >
         </div>
+        @error('mq')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
 
         @if ($errors->any())
           <div class="alert alert-danger mt-4">

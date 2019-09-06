@@ -121,6 +121,12 @@
               <div class="alert alert-danger">{{ $message }}</div>
           @enderror
         </div>
+        <div class="form-group mt-5">
+          <label for="is_public">Pubblico</label>
+          <input type="radio" class="" id="is_public" name="is_public" value="1" {{ ($apartment->is_public == 1) ? 'checked' : ''}} >
+          <label for="is_public">Privato</label>
+          <input type="radio" class="" id="is_public" name="is_public" value="0" {{ ($apartment->is_public == 0) ? 'checked' : ''}}>
+        </div>
         <a href="{{ route('home') }}" class="btn btn-danger">Indietro</a>
         <input type="submit" value="Salva" class="btn btn-success">
       </form>

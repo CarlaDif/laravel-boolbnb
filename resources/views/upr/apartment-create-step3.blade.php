@@ -29,6 +29,12 @@
           <label for="price_per_night">Prezzo a persona per una notte</label>
           <input type="number" class="form-control" id="price_per_night" name="price_per_night" value="{{ old('price_per_night') }}">
         </div>
+        <div class="form-group mt-5">
+          <label for="is_public">Pubblico</label>
+          <input type="radio" class="" id="is_public" name="is_public" value="1">
+          <label for="is_public">Privato</label>
+          <input type="radio" class="" id="is_public" name="is_public" value="0">
+        </div>
 
         @if ($errors->any())
           <div class="alert alert-danger mt-4">

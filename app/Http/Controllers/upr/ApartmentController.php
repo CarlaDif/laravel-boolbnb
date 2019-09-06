@@ -91,7 +91,7 @@ class ApartmentController extends Controller
            'n_single_beds' => 'required|numeric|min:0|max:1000',
            'n_double_beds' => 'required|numeric|min:0|max:1000',
            'n_baths' => 'required|numeric|min:1|max:1000',
-           'mq' => 'required|min:0'
+           'mq' => 'required|min:0',
        ]);
 
        if(empty($request->session()->get('apartment'))){
@@ -144,7 +144,8 @@ class ApartmentController extends Controller
       $validatedData = $request->validate([
            'price_per_night' => 'required|min:0',
            'services' => 'required',
-           'main_img' => 'required|image'
+           'main_img' => 'required|image',
+           'is_public' => 'required|boolean'
        ]);
 
        //path dell'img (percorso images/nome-file.estensione)
@@ -157,7 +158,6 @@ class ApartmentController extends Controller
        }else{
            $apartment = $request->session()->get('apartment');
            $apartment->fill($validatedData);
-           $apartment->is_public = '1';
            $request->session()->put('apartment', $apartment);
        }
 
@@ -203,23 +203,23 @@ class ApartmentController extends Controller
       $apartment = Apartment::find($apartment_id);
       $services = Service::all();
 
-      $apartment_services = DB::table('apartment_service')->where('apartment_id', $apartment_id)->get();
+      if (!$apartment_id) {
+        abort(404);
+      }
 
-      // dd($apartment_services);
+      $apartment_services = DB::table('apartment_service')->where('apartment_id', $apartment_id)->get();
 
       $data = [
         'apartment' => $apartment,
         'services' => $services,
-        'apartment_services' => $apartment_services
+        'apartment_services' => $apartment_services,
       ];
 
-      if(Auth::user()->id != $apartment->user_id) {
-        abort(404);
-      }
 
-      if (empty($apartment)) {
-        abort(404);
-      }
+      // if(Auth::user()->id != $apartment->user_id || empty($apartment_id)) {
+      //   abort(404);
+      // }
+
 
       return view('upr.apartment-edit', $data);
     }
@@ -244,7 +244,8 @@ class ApartmentController extends Controller
         'mq' => 'required|min:0',
         'price_per_night' => 'required|integer|min:1',
         'services' => 'required',
-        'main_img' => 'required|image'
+        'main_img' => 'required|image',
+        'is_public' => 'required|boolean'
       ]);
 
       $apartment = Apartment::find($apartment_id);
