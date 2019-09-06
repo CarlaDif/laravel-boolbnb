@@ -80,7 +80,7 @@
         <h4>Alloggi in tutto il mondo</h4>
       </div>
       <div class="row justify-content-between mt-3">
-      <div class="card-deck">
+      <div class="card-deck" id="apartments">
         @foreach ($apartments as $apartment)
           <a href=
           @guest

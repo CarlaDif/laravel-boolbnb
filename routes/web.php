@@ -41,5 +41,5 @@ Route::middleware('auth')->namespace('Upr')->name('upr.')->group(function(){
   Route::get('messages', 'ProfileController@showMessage')->name('all-messages');
 });
 
-
+Route::get('search-apartments','SearchApartments@inputSearch')->name('searchApartments');
 // Route::get('/apartments/{apartment}', 'ApartmentController@show')->name('apartments.show');
