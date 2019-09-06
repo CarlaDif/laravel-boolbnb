@@ -285,6 +285,22 @@ class ApartmentController extends Controller
       //assegnazione path esatta da salvare nel db
       $validatedData['main_img'] = $img;
 
+      //salvataggio img nel database
+      if($files = $request->file('paths')){
+        foreach($files as $file){
+          //nome del file e storage nel db
+          $path = Storage::put('images', $file);
+
+          // $path = Storage::put('images/', $path);
+          $row = Apartment_img::insert(
+            [
+              'path' => $path,
+              'apartment_id' => $apartment->id,
+              'slug' => Str::slug($path, '-')
+            ]);
+        }
+      }
+
       $apartment->services()->sync($validatedData['services']);
 
       //aggiornamento dati

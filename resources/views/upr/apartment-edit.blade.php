@@ -112,6 +112,13 @@
          @enderror
        </div>
 
+       {{-- GROUP IMAGES --}}
+        <label>Seleziona alcune foto per rendere il tuo annuncio più accattivante</label>
+        <input required type="file" class="form-control-file" name="paths[]" placeholder="address" multiple>
+        @error('paths')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
        {{-- price_per_night --}}
         <div class="form-group mt-5">
           <label for="price_per_night">Prezzo a persona per una notte</label>
