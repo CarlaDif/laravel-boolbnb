@@ -5,19 +5,21 @@
     <div class="row no-gutters">
       <div class="col-md-6" style="height:500px;">{{-- COLONNA PRINCIPALE --}}
         @if (!empty($apartment->main_img))
-          <img style="height:500px;" src="{{ asset('storage/' . $apartment->main_img) }}" class="img-fluid" alt="Anteprima Appartamento">
+          <img style="height:500px; object-fit: cover;" src="{{ asset('storage/' . $apartment->main_img) }}" class="img-fluid" alt="Anteprima Appartamento">
           @else
-          <img style="height:500px;" src="http://www.newdesignfile.com/postpic/2015/02/nophoto-available-clip-art_68021.jpg" class="img-fluid" alt="Anteprima non disponibile">
+          <img style="height:500px; object-fit: cover;" src="http://www.newdesignfile.com/postpic/2015/02/nophoto-available-clip-art_68021.jpg" class="img-fluid" alt="Anteprima non disponibile">
         @endif
       </div>
       <div class="col-md-6" style="height:500px;"> {{-- COLONNA PRINCIPALE DOPPIE IMG --}}
         <div class="row no-gutters d-flex flex-wrap">
           @if (!empty($apartment_imgs))
             @foreach ($apartment_imgs as $img)
-              <img style="height:250px; width:50%;" src="{{ asset('storage/' . $img->path) }}" alt="Anteprima Stanze Appartamento">
+              <img style="height:250px; width:50%; object-fit: cover;" src="{{ asset('storage/' . $img->path) }}" alt="Anteprima Stanze Appartamento">
             @endforeach
           @else
-            <img style="height:250px; width:50%;" src="https://media.gettyimages.com/photos/spring-field-picture-id539016480?s=612x612" class="img-fluid" alt="Anteprima non disponibile">
+            @for ($i = 0; $i < 4; $i++)
+              <img style="height:250px; width:50%; object-fit: cover;" src="https://media.gettyimages.com/photos/spring-field-picture-id539016480?s=612x612" class="img-fluid" alt="Anteprima non disponibile">
+            @endfor
           @endif
         </div>
       </div>

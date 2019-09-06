@@ -152,7 +152,7 @@ class ApartmentController extends Controller
        ]);
 
       $validatedImages = $request->validate([
-        'paths' => 'array'
+        'paths' => 'array|min:4'
       ]);
 
       //path dell'img (percorso images/nome-file.estensione)
