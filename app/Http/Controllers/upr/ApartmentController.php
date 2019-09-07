@@ -328,6 +328,10 @@ class ApartmentController extends Controller
         abort(404);
       }
 
+      if ($apartment->user_id != Auth::user()->id) {
+        abort(403, 'Unauthorized action.');
+      }
+
       $apartment = Apartment::find($apartment->id);
       $apartment->delete();
 

@@ -58,6 +58,7 @@
               <li class="list-group-item">Prezzo per notte: {{ $apartment->price_per_night }}€</li>
             </ul>
           </div>
+
           @auth
             @if ($apartment->user_id == Auth::user()->id)
               <div class="row">
@@ -72,6 +73,7 @@
               </div>
             @endif
           @endauth
+
         </div>
         <div class="col-md-4">
           {{-- Mappa --}}
