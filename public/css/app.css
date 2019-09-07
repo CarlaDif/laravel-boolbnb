@@ -10701,6 +10701,8 @@ a.text-dark:focus {
   color: #aaa;
 }
 
+/* ----- FILTER MENU ----- */
+
 .filter-menu {
   display: none;
 }
