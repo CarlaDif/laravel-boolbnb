@@ -25,7 +25,8 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-
+      $apartments = Apartment::where('user_id', Auth::user()->id)->get();
+      return view('upr.myapartments', compact('apartments', $apartments));
     }
 
     /**
@@ -179,6 +180,9 @@ class ApartmentController extends Controller
       //salvataggio img nel database
       if($files = $request->file('paths')){
         foreach($files as $file){
+
+          $img_name = $file->getClientOriginalName();
+
           //nome del file e storage nel db
           $path = Storage::put('images', $file);
 
@@ -187,7 +191,7 @@ class ApartmentController extends Controller
             [
               'path' => $path,
               'apartment_id' => $apartment->id,
-              'slug' => Str::slug($path, '-')
+              'slug' => Str::slug($img_name, '-')
             ]);
         }
       }
@@ -288,6 +292,9 @@ class ApartmentController extends Controller
       //salvataggio img nel database
       if($files = $request->file('paths')){
         foreach($files as $file){
+
+          $img_name = $file->getClientOriginalName();
+          
           //nome del file e storage nel db
           $path = Storage::put('images', $file);
 
@@ -296,7 +303,7 @@ class ApartmentController extends Controller
             [
               'path' => $path,
               'apartment_id' => $apartment->id,
-              'slug' => Str::slug($path, '-')
+              'slug' => Str::slug($img_name, '-')
             ]);
         }
       }
