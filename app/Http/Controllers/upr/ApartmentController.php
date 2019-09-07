@@ -334,7 +334,6 @@ class ApartmentController extends Controller
 
       $apartment = Apartment::find($apartment->id);
       $apartment->delete();
-
       return redirect()->route('home');
 
     }

@@ -141,7 +141,7 @@
               <div class="alert alert-danger">{{ $message }}</div>
           @enderror
         </div>
-        
+
         <a href="{{ route('home') }}" class="btn btn-danger">Indietro</a>
         <input type="submit" value="Salva" class="btn btn-success">
       </form>

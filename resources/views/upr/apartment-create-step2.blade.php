@@ -14,7 +14,7 @@
           @enderror
         </div>
 
-        <div class="form-group mt-5">
+        <div class="form-group">
           <label for="n_single_beds">Letti Singoli</label>
           <input type="number" class="form-control" id="n_single_beds" name="n_single_beds" value="{{ old('n_single_beds') }}" >
           @error('n_single_beds')

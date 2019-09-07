@@ -49219,6 +49219,14 @@ $(document).ready(function () {
   var app = new Vue({
     el: '#app'
   });
+
+  function deleteData(id) {
+    var id = id;
+    var url = '{{ route("upr.apartments.destroy", ":id") }}';
+    url = url.replace(':id', id);
+    $("#deleteForm").attr('action', url);
+    console.log($("#deleteForm").attr('action', url));
+  }
 });
 /*-------------------------------------NAV SEARCH----------------------------------*/
 

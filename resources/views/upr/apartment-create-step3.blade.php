@@ -12,7 +12,7 @@
             @foreach ($services as $service)
               <div class="col-4">
                 <label>
-                  <input type="checkbox" name="services[]"
+                  <input class="form-check-input" type="checkbox" name="services[]"
                   value="{{ $service->id }}"
                   {{ in_array($service->id, old("services") ?: []) ? "checked": ""}}>
                   {{ $service->name }}

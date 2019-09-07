@@ -64,15 +64,42 @@
               <div class="row">
                 <div class="col-md-8">
                   <a class="btn btn-info mb-2" href="{{ route('upr.apartments.edit', $apartment->id) }}">Modifica</a>
-                  <form action="{{ route('upr.apartments.destroy', $apartment->id) }}" method="post">
-                    @method('DELETE')
-                    @csrf
-                    <input class="btn btn-danger" type="submit" value="Elimina inserzione">
-                  </form>
+
+                  {{-- richiamo al modal per il messaggio di conferma --}}
+                  <a class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Elimina inserzione</a>
+                  {{-- modal messaggio conferma --}}
+                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">CONFERMA ELIMINA INSERZIONE</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form action="{{ route('upr.apartments.destroy', $apartment->id) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <div class="form-group">
+                              <p class="text-center">Sei sicuro di voler eliminare questa inserzione?</p>
+                              <p class="text-center">Una volta che avrai dato la conferma, non sarà possible tornare indietro</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+                              <input class="btn btn-danger" type="submit" value="Elimina inserzione">
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             @endif
           @endauth
+
+
 
         </div>
         <div class="col-md-4">
