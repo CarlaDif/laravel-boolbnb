@@ -20,44 +20,45 @@
               </div>
             @endforeach
           </div>
+          @error('services')
+              <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
         </div>
         <div class="form-group">
          <label for="main_img">Inserisci la foto principale dell'appartamento</label>
          <input type="file" name="main_img" class="form-control-file">
+         @error('main_img')
+             <div class="alert alert-danger">{{ $message }}</div>
+         @enderror
        </div>
 
-       {{-- GROUP IMAGES --}}
-        <label>Seleziona alcune foto per rendere il tuo annuncio più accattivante</label>
-        <input required type="file" class="form-control-file" name="paths[]" placeholder="address" multiple>
-        @error('paths')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+       {{-- group images --}}
+        <div class="form-group mt-5">
+          <label>Seleziona alcune foto per rendere il tuo annuncio più accattivante</label>
+          <input type="file" class="form-control-file" name="paths[]" placeholder="address" multiple>
+          @error('paths[]')
+              <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
+        </div>
 
         <div class="form-group mt-5">
           <label for="price_per_night">Prezzo a persona per una notte</label>
           <input type="number" class="form-control" id="price_per_night" name="price_per_night" value="{{ old('price_per_night') }}">
+          @error('price_per_night')
+              <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
         </div>
+
+        {{-- public --}}
         <div class="form-group mt-5">
           <label for="is_public">Pubblico</label>
           <input type="radio" class="" id="is_public" name="is_public" value="1">
           <label for="is_public">Privato</label>
           <input type="radio" class="" id="is_public" name="is_public" value="0">
+          @error('is_public')
+              <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
         </div>
-
-        @if ($errors->any())
-          <div class="alert alert-danger mt-4">
-            @error('price_per_night')
-                <li>Inserire il prezzo a notte</li>
-            @enderror
-            @error('services')
-                <li>Inserire almeno un servizio</li>
-            @enderror
-            @error('main_img')
-                <li>Inserire un'immagine per l'appartamento</li>
-            @enderror
-
-          </div>
-        @endif
 
         @if(Session::has('message'))
           <p class="alert {{ Session::get('alert-class', 'alert-danger') }}">{{ Session::get('message') }}</p>

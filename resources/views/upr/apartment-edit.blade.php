@@ -112,12 +112,14 @@
          @enderror
        </div>
 
-       {{-- GROUP IMAGES --}}
-        <label>Seleziona alcune foto per rendere il tuo annuncio più accattivante</label>
-        <input required type="file" class="form-control-file" name="paths[]" placeholder="address" multiple>
-        @error('paths')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+       {{-- group images --}}
+        <div class="form-group mt-5">
+          <label>Seleziona alcune foto per rendere il tuo annuncio più accattivante</label>
+          <input required type="file" class="form-control-file" name="paths[]" placeholder="address" multiple>
+          @error('paths')
+              <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
+        </div>
 
        {{-- price_per_night --}}
         <div class="form-group mt-5">
@@ -127,12 +129,19 @@
               <div class="alert alert-danger">{{ $message }}</div>
           @enderror
         </div>
+
+        {{-- public --}}
+
         <div class="form-group mt-5">
           <label for="is_public">Pubblico</label>
           <input type="radio" class="" id="is_public" name="is_public" value="1" {{ ($apartment->is_public == 1) ? 'checked' : ''}} >
           <label for="is_public">Privato</label>
           <input type="radio" class="" id="is_public" name="is_public" value="0" {{ ($apartment->is_public == 0) ? 'checked' : ''}}>
+          @error('is_public')
+              <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
         </div>
+        
         <a href="{{ route('home') }}" class="btn btn-danger">Indietro</a>
         <input type="submit" value="Salva" class="btn btn-success">
       </form>

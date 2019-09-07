@@ -153,7 +153,7 @@ class ApartmentController extends Controller
        ]);
 
       $validatedImages = $request->validate([
-        'paths' => 'array|min:4'
+        'paths' => 'required|array|min:4|image'
       ]);
 
       //path dell'img (percorso images/nome-file.estensione)
@@ -294,7 +294,7 @@ class ApartmentController extends Controller
         foreach($files as $file){
 
           $img_name = $file->getClientOriginalName();
-          
+
           //nome del file e storage nel db
           $path = Storage::put('images', $file);
 
