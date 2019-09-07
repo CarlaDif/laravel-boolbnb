@@ -17,7 +17,6 @@
                 <img style="height:250px; width:50%; object-fit: cover;" src="{{ asset('storage/' . $img->path) }}" alt="Anteprima Stanze Appartamento">
               @empty
                 <img style="height:500px; width:100%; object-fit: cover;" src="https://ldonna.cdn-news30.it/blobs/full/e/6/4/6/e646c3b5-59e5-45d8-a16d-32a9778a81bd.jpg?_636392901355046092" class="img-fluid" alt="Anteprima non disponibile">
-
               @endforelse
           @endif
         </div>
@@ -33,13 +32,6 @@
       </div>
       <div class="col-4">
         <a href="#">{{ $apartment->address }}</a>
-      </div>
-      <div class="col-4 text-right">
-        @auth
-          @if ($apartment->user_id == Auth::user()->id)
-            <a href="{{ route('upr.apartments.edit', $apartment->id) }}">Modifica dati appartamento</a>
-          @endif
-        @endauth
       </div>
       <div class="row justify-content-between mt-3">
         <div class="col-md-8">
@@ -66,6 +58,20 @@
               <li class="list-group-item">Prezzo per notte: {{ $apartment->price_per_night }}€</li>
             </ul>
           </div>
+          @auth
+            @if ($apartment->user_id == Auth::user()->id)
+              <div class="row">
+                <div class="col-md-8">
+                  <a class="btn btn-info mb-2" href="{{ route('upr.apartments.edit', $apartment->id) }}">Modifica</a>
+                  <form action="{{ route('upr.apartments.destroy', $apartment->id) }}" method="post">
+                    @method('DELETE')
+                    @csrf
+                    <input class="btn btn-danger" type="submit" value="Elimina inserzione">
+                  </form>
+                </div>
+              </div>
+            @endif
+          @endauth
         </div>
         <div class="col-md-4">
           {{-- Mappa --}}
@@ -144,8 +150,5 @@
         </div>
       </div>
     @endguest
-
-    {{-- <a href="{{ route('home') }}" class="btn btn-danger mt-3">Torna alla home</a> --}}
-
   </div>
 @endsection
