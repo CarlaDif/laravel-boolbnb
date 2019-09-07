@@ -14,8 +14,8 @@ class UpdateApartmentsTable extends Migration
     public function up()
     {
         Schema::table('apartments', function (Blueprint $table) {
-          $table->decimal('latitude', 10, 7)->after('address');
-          $table->decimal('longitude', 10, 7)->after('latitude');
+          $table->decimal('latitude', 10, 7)->after('address')->nullable();
+          $table->decimal('longitude', 10, 7)->after('latitude')->nullable();
 
           $table->boolean('is_sponsored')->after('is_public')->default('0');
         });

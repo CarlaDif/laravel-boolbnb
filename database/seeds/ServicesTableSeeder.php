@@ -12,19 +12,23 @@ class ServicesTableSeeder extends Seeder
     public function run()
     {
       $services = [
-        'basic',
-        'wifi',
-        'aria condizionata',
-        'terrazzo',
-        'cucina',
-        'appendiabiti',
-        'ferro da stiro',
-        'asciugacapelli',
-        'colazione',
-        'acqua calda',
-        'riscaldamento',
-        'asciugatrice',
-        'rilevatore di fumo',
+        'Basic',
+        'WiFi',
+        'Aria condizionata',
+        'Terrazzo',
+        'Cucina',
+        'Appendiabiti',
+        'Ferro da stiro',
+        'Asciugacapelli',
+        'Colazione inclusa',
+        'Acqua calda',
+        'Riscaldamento',
+        'Asciugatrice',
+        'Rilevatore di fumo',
+        'Piscina',
+        'Sauna',
+        'Posto Macchina',
+        'Portineria',
       ];
       foreach ($services as $single_service) {
         $newservice = new Service;

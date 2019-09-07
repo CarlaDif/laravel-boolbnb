@@ -36,9 +36,9 @@
         <div class="form-group mt-5">
           <label>Seleziona alcune foto per rendere il tuo annuncio più accattivante</label>
           <input type="file" class="form-control-file" name="paths[]" placeholder="address" multiple>
-          @error('paths[]')
+          {{-- @error('paths[]')
               <div class="alert alert-danger">{{ $message }}</div>
-          @enderror
+          @enderror --}}
         </div>
 
         <div class="form-group mt-5">
