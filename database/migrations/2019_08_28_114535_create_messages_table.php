@@ -17,7 +17,7 @@ class CreateMessagesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('apartment_id')->unsigned();
             $table->string('name', 50);
-            $table->string('email', 100)->unique();
+            $table->string('email', 100);
             $table->string('subject');
             $table->longText('message');
             $table->timestamps();
