@@ -21,4 +21,19 @@ class SearchApartments extends Controller
      }
    }
 
+ public function page(Request $request ){
+
+   $validatedData = $request->validate([
+       'search' => 'required',
+   ]);
+     $apartments = Apartment::all();
+     $search = $request->search;
+
+     return view('search_page')->with([
+       'apartments'=>$apartments,
+       'search'=>$search
+     ]);
+
+ }
+
 }

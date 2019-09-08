@@ -56,21 +56,6 @@ $('.price').click(function(){
   $(this).find('.price_menu').show();
 })
 
-// $("#range_price[type='range']").val(10).change().rangeslider({
-//    size: 1,
-//    borderSize: 0.4,
-//    percentage: 100,
-//    horizontalClass: 'rangeslider--horizontal',
-//    verticalClass: 'rangeslider--vertical',
-//    fillClass: 'rangeslider__fill',
-//    handleClass: 'rangeslider__handle',
-//    // Callback function
-//    onInit: function() {},
-//    // Callback function
-//    onSlide: function(position, value) {},
-//    // Callback function
-//    onSlideEnd: function(position, value) {}
-// });
 // ----------------------------------ATTIVATIONE SEARCH LIVE--------------
 $.ajaxSetup({
   headers: {

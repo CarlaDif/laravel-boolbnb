@@ -31,24 +31,30 @@
                   {{-- {{ config('app.name', 'BoolBnB') }} --}}
                 </a>
                 {{-- -------------------------------SEARCH BAR------------------------------}}
-                 <div class="form-group has-search mt-auto mb-auto position-relative">
-                   <span class="fa fa-search form-control-feedback"></span>
-                   <input type="text" class="form-control" placeholder="Type for Search">
-                   <div class="sub-menu position-absolute p-3">
-                     <p class="">ESPLORA THE BOOLBNB</p>
-                     <span class="close"><i class="far fa-times-circle"></i></span>
-                     <div class="">
-                       <a class="btn btn btn-outline-dark mr-2 mt-2" type="button" name="button">Tutto</a>
-                       <a class="btn btn btn-outline-dark mr-2 mt-2" type="button" name="button">Soggiorni</a>
-                       <a class="btn btn btn-outline-dark mr-2 mt-2" type="button" name="button">Esperienze</a>
-                       <a class="btn btn btn-outline-dark mr-2 mt-2" type="button" name="button">Avventure</a>
-                       <a class="btn btn btn-outline-dark mr-2 mt-2" type="button" data-menu-filter="Appartamenti" name="button">Appartamenti</a>
-                       <div>
-                         <small>*funziona solo appartamneti</small>
-                       </div>
-                     </div>
-                   </div>
-                 </div>
+                <form class="d-flex align-items-center " action="{{ route('searchPage') }}" method="get">
+                     @csrf
+                      <div class="form-group has-search mt-auto mb-auto position-relative">
+                        <span class="fa fa-search form-control-feedback"></span>
+                        <input type="text" name="search" class="form-control" placeholder="Type for Search">
+                        <div class="sub-menu position-absolute p-3">
+                          <p class="">ESPLORA THE BOOLBNB</p>
+                          <span class="close"><i class="far fa-times-circle"></i></span>
+                          <div class="">
+                            <a class="btn btn btn-outline-dark mr-2 mt-2" type="button" name="button">Tutto</a>
+                            <a class="btn btn btn-outline-dark mr-2 mt-2" type="button" name="button">Soggiorni</a>
+                            <a class="btn btn btn-outline-dark mr-2 mt-2" type="button" name="button">Esperienze</a>
+                            <a class="btn btn btn-outline-dark mr-2 mt-2" type="button" name="button">Avventure</a>
+                            <a class="btn btn btn-outline-dark mr-2 mt-2" type="button" data-menu-filter="Appartamenti" name="button">Appartamenti</a>
+                            <div>
+                              <small>*funziona solo appartamneti</small>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <input type="submit" class="search_page btn btn-sm btn-outline-info" value="Go">
+
+                  </form>
+
                  {{-- -------------------------------FINE SEARCH BAR------------------------------}}
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
