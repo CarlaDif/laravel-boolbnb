@@ -6,12 +6,13 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Message;
 
 class MessageConfirm extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $message;
+    public $messaggio;
 
 
     /**
@@ -19,9 +20,9 @@ class MessageConfirm extends Mailable
      *
      * @return void
      */
-    public function __construct($new_message)
+    public function __construct(Message $new_message)
     {
-      $this->message = $new_message;
+      $this->messaggio = $new_message;
     }
 
     /**

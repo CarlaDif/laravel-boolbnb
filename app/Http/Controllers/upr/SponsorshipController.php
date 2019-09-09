@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Upr;
 use App\Http\Controllers\Controller;
 
 use App\Sponsorship;

@@ -32,10 +32,11 @@ class MessageController extends Controller
 
     //assegno il messaggio dell'utente ad una variabile
     $email_utente = $data['email'];
+    $email_host = $apartment->user->email;
 
     //invio l'email di conferma all'utente che ha inviato il messaggio
     Mail::to($email_utente)->send(new MessageConfirm($new_message));
-    Mail::to($email_utente)->send(new MessageFromWebsite($new_message));
+    Mail::to($email_host)->send(new MessageFromWebsite($new_message));
 
     //
 
