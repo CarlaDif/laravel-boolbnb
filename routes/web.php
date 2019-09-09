@@ -28,6 +28,8 @@ Route::middleware('auth')->namespace('Upr')->name('upr.')->group(function(){
   Route::get('profile', 'ProfileController@index')->name('profile');
   Route::resource('/apartments', 'ApartmentController');
 
+  Route::get('/myapartments', 'ApartmentController@myIndex')->name('my-apartments');
+
   Route::get('/apartment/create-step1', 'ApartmentController@createStep1')->name('apartments.create-step1');
   Route::post('/apartment/create-step1', 'ApartmentController@postCreateStep1')->name('apartments.create-step1');
 

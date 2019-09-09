@@ -23,7 +23,7 @@ class ApartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function myIndex()
     {
       $apartments = Apartment::where('user_id', Auth::user()->id)->get();
       return view('upr.myapartments', compact('apartments', $apartments));
@@ -336,7 +336,7 @@ class ApartmentController extends Controller
 
       $apartment = Apartment::find($apartment->id);
       $apartment->delete();
-      return redirect()->route('home');
+      return redirect()->route('upr.my-apartments');
 
     }
 

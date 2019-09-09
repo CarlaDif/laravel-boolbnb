@@ -21,8 +21,8 @@
             <input type="text" name="" value="{{ old('address') }}" class="tt-search-box-input form-control" placeholder="Inserisci l'indirizzo del tuo appartamento">
             <div class="bootstrap-select-wrapper position-absolute w-100">
               <div class="tendina">
-                <select class="list_results custom-select" name="address"></select>
-                <input type="hidden" name="address" value="">
+                <select class="list_results custom-select" name=""></select>
+                <input type="hidden" value="" name="address">
                 <input type="hidden" value="" id="latitude_hidden" name="latitude">
                 <input type="hidden" value="" id="longitude_hidden" name="longitude">
               </div>

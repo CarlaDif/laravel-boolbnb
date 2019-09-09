@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="col-3">
-        <button type="button" class="btn btn-outline-info mb-2"><a href="{{ route('upr.apartments.index') }}">Visualizza le tue inserzioni</a></button>
+        <button type="button" class="btn btn-outline-info mb-2"><a href="{{ route('upr.my-apartments') }}">Visualizza le tue inserzioni</a></button>
       </div>
     </div>
   </div>
