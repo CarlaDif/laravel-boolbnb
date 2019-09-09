@@ -56,21 +56,21 @@
                 <form class="d-flex align-items-center " action="{{ route('searchPage') }}" method="get">
                     @csrf
                     {{-- DATI TOMTOM --}}
-                    <input type="hidden" value="" id="latitude_hidden" name="latitude">
-                    <input type="hidden" value="" id="longitude_hidden" name="longitude">
                     <div id="foldable" class="tt-overlay-panel -left-top -medium js-foldable"></div>
                     <div class="tt-search-box-search-icon form-group has-search mt-auto mb-auto position-relative">
 
                       <span class="fa fa-search form-control-feedback"></span>
-                      <input type="text" name="search" value="" class="tt-search-box-input form-control" placeholder="Seleziona una località">
-
+                      {{-- ABBIAMO MODIFICATO IL NAME DA "search" a "city" SOLO PER INSERIRE IL VALORE CERCATO NELL'INPUT --}}
+                      <input type="text" name="city" value="" class="tt-search-box-input form-control input-address" placeholder="Seleziona una località">
+                      <input type="hidden" value="" id="latitude_hidden" name="latitude">
+                      <input type="hidden" value="" id="longitude_hidden" name="longitude">
                       <div class="bootstrap-select-wrapper position-absolute w-100">
                         <div class="tendina">
-                          <select class="list_results custom-select" name=""></select>
+                          <select class="list_results custom-select" name="" multiple></select>
                         </div>
                       </div>
 
-                      <div class="sub-menu position-absolute p-3">
+                      {{-- <div class="sub-menu position-absolute p-3">
                         <p class="">ESPLORA THE BOOLBNB</p>
                         <span class="close"><i class="far fa-times-circle"></i></span>
                         <div class="">
@@ -83,9 +83,9 @@
                             <small>*funziona solo appartamenti</small>
                           </div>
                         </div>
-                      </div>
+                      </div> --}}
                     </div>
-                    <input type="submit" class="bt_cerca search_page btn btn-sm btn-outline-info" value="Go">
+                    <input type="submit" class="bt_cerca search_page btn btn-sm btn-outline-info" value="Cerca">
                   </form>
 
 
@@ -192,7 +192,7 @@
    </script> --}}
    <!-- uso handlebars -->
      <script id="entry-template_select_one" type="text/x-handlebars-template">
-        <option value="@{{ lng }}" data-lat="@{{ lat }}" class="scelto">@{{ places }} - @{{ country }}</option>
+        <option value="@{{ lng }}" data-lat="@{{ lat }}" data-city="@{{ city }}" class="scelto">@{{ city }} - @{{ country }}</option>
      </script>
      <!-- fine handlebars -->
     {{-- <script src="{{ asset('sdk/tomtom.min.js') }}"></script> --}}

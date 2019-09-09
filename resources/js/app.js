@@ -37,15 +37,24 @@ $(document).ready(function(){
 
   var template_html_select_one = $('#entry-template_select_one').html();
   var template_function_select_one = Handlebars.compile(template_html_select_one);
+  // var template_html_select_two = $('#entry-template_select_two').html();
+  // var template_function_select_two = Handlebars.compile(template_html_select_two);
+  $('.tendina').hide();
+
+  $('.input-address').on('click', function(){
+    $('.tendina').show();
+  }).off('click', function(){
+    $('.tendina').hide();
+  });
 
   $('.tt-search-box-input').keyup(function() {
     $('.tendina .list_results').empty();
     var input = this.value;
-    // $('#output').val(input);
-    // $('.tendina').toggleClass('d-none');
+    var country = $('.country').val();
     console.log(input);
     tt.services.fuzzySearch({
-      key: 'hnv7SvjzVtjVwSfr7a4r73AfxNk04jgL',
+      key: '0N3hABOJffswv4qPJ9Y5GjKfzDhRQrLA',
+      countrySet: country,
       //la query sarà una variabile ricevuta dall'input
       query: input,
       typeahead: true,
@@ -53,47 +62,63 @@ $(document).ready(function(){
     .go()
     .then(function(response) {
       for (var i = 0; i < 5; i++) {
-        //new tt.Marker().setLngLat(response.results[0].position).addTo(map);
-        console.log(response.results[i]);
-        //console.log(response.results[i].address.municipality);
         var variabile_hldbar_one = {
-          //'places': '<a class="">' + response.results[i].address.municipality + '</a>',
-          'places': response.results[i].address.municipality,
+          'country': response.results[i].address.country,
+          'city': response.results[i].address.municipality,
           'streetName': response.results[i].address.streetName,
+          'streetNumber': response.results[i].address.streetNumber,
+          'countrySubdivision': response.results[i].address.countrySubdivision,
+          'postalCode': response.results[i].address.postalCode,
           'lng': response.results[i].position.lng,
           'lat': response.results[i].position.lat,
           'position': response.results[i].position,
-          'country': response.results[i].address.country
         };
-        //console.log(variabile_hldbar_one);
         var html_finale_select_one = template_function_select_one(variabile_hldbar_one);
+        // var html_finale_select_two = template_function_select_two(variabile_hldbar_one);
         $('.list_results').append(html_finale_select_one);
-        //var latitude = response.results[0].position.lat;
-        //console.log(latitude);
-        //fine for
-      }
-      //fine then
-    });
-  //fine funzione keyup
+        // $('.country_results').append(html_finale_select_two);
+      }   //fine for
+    }); //fine then
+  }); //fine funzione keyup
+
+ $('.list_results').click(function(){
+    var via = $('.list_results option:selected').attr('data-address');
+    var lng_place = $('.list_results').val();
+    var lng_int = parseFloat(lng_place);
+    var lat_place = $('.list_results option:selected').attr('data-lat');
+    var lat_place_int = parseFloat(lat_place);
+    var lat_place = $('.list_results option:selected').attr('data-lat');
+    var city = $('.list_results option:selected').attr('data-city');
+    var regione = $('.list_results option:selected').attr('data-countrySubdivision');
+    var cap = $('.list_results option:selected').attr('data-postalCode');
+    var paese = $('.list_results option:selected').attr('data-country');
+    var civico = $('.list_results option:selected').attr('data-street-number');
+    console.log('civico'+ civico);
+    $('input[type=hidden][name=latitude]').val(lat_place_int);
+    $('input[type=hidden][name=longitude]').val(lng_int);
+    $('input[type=text][name=place]').val(via + ' ' + civico + ', ' + city + '-' + paese);
+    $('input[type=text][name=city]').val(city);
+    $('input[type=text][name=regione]').val(regione);
+    $('input[type=text][name=cap]').val(cap);
+    $('input[type=hidden][name=address]').val(via + ' ' + civico + ', ' + city + '-' + paese);
+    $('.tendina').hide();
+  //fine click
   });
 
   $('.bt_cerca').click(function(){
-    var via = $('.scelto').attr('data-via');
-    console.log(via);
+    var via = $('.list_results option:selected').attr('data-address');
+    var city = $('.list_results option:selected').attr('data-city');
+    var country = $('.list_results option:selected').attr('data-country');
     var lng_place = $('.list_results').val();
     var lng_int = parseFloat(lng_place);
-    var lat_place = $('.scelto').attr('data-lat');
+    var lat_place = $('.list_results option:selected').attr('data-lat');
     var lat_place_int = parseFloat(lat_place);
-    console.log(lng_int);
-    console.log(lat_place_int);
+    var city = $('.list_results option:selected').attr('data-city');
+    $('input[type=text][name=city]').val(city);
     $("input[type=hidden][name=latitude]").val(lat_place_int);
     $("input[type=hidden][name=longitude]").val(lng_int);
-    $("input[type=hidden][name=address]").val(via);
-  //fine click
- });
-
-
-
+    $("input[type=hidden][name=address]").val();
+ }); //fine click
 
 
 
@@ -110,7 +135,7 @@ $(document).ready(function(){
  //e inserisco lat e long nella funzione tomtom
  tt.setProductInfo('com.company-name.product-name', '4.47.6');
  var map = tt.map({
-    key: 'hnv7SvjzVtjVwSfr7a4r73AfxNk04jgL',
+    key: '0N3hABOJffswv4qPJ9Y5GjKfzDhRQrLA',
     container: 'map',
     style: 'tomtom://vector/1/basic-main',
     //prima longitudine poi latitudine indirizzo boolean
