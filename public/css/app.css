@@ -10703,16 +10703,11 @@ a.text-dark:focus {
 
 /* ----- FILTER MENU ----- */
 
-.filter-menu {
-  display: none;
-}
-
 .filter-menu .links {
   margin-left: 200px;
 }
 
 .price_menu {
-  display: none;
   background-color: white;
 }
 

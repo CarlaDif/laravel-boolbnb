@@ -34,11 +34,17 @@
 
        {{-- group images --}}
         <div class="form-group mt-5">
-          <label for="paths">Seleziona alcune foto per rendere il tuo annuncio più accattivante</label>
+          <label for="paths">Aggiungi alcune foto per rendere il tuo annuncio più accattivante
+            <small>Seleziona almeno 4 immagini</small>
+          </label>
           <input type="file" class="form-control-file" name="paths[]" placeholder="address" multiple>
           @error('paths')
               <div class="alert alert-danger">{{ $message }}</div>
           @enderror
+          {{-- messaggio errore img multiple - funziona non benissimo --}}
+          <div class="alert alert-danger">{{ $errors->has('paths') ? $errors->first('paths') : '' }}</div>
+
+
         </div>
 
         <div class="form-group mt-5">

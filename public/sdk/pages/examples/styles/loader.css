@@ -1,0 +1,24 @@
+.loader:before {
+    animation: loader .6s linear infinite;
+    border-radius: 50%;
+    border-right: 2px solid transparent;
+    border-top: 2px solid #0077dd;
+    box-sizing: border-box;
+    content: "";
+    height: 20px;
+    margin-left: -10px;
+    position: absolute;
+    width: 20px;
+}
+
+.loader-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+@keyframes loader {
+    to {
+        transform: rotate(360deg);
+    }
+}

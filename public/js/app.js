@@ -49220,13 +49220,78 @@ $(document).ready(function () {
     el: '#app'
   });
 
-  function deleteData(id) {
-    var id = id;
-    var url = '{{ route("upr.apartments.destroy", ":id") }}';
-    url = url.replace(':id', id);
-    $("#deleteForm").attr('action', url);
-    console.log($("#deleteForm").attr('action', url));
-  }
+  var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+
+  var template_html_select_one = $('#entry-template_select_one').html();
+  var template_function_select_one = Handlebars.compile(template_html_select_one);
+  $('.tt-search-box-input').keyup(function () {
+    $('.tendina .list_results').empty();
+    var input = this.value; // $('#output').val(input);
+    // $('.tendina').toggleClass('d-none');
+
+    console.log(input);
+    tt.services.fuzzySearch({
+      key: 'hnv7SvjzVtjVwSfr7a4r73AfxNk04jgL',
+      //la query sarà una variabile ricevuta dall'input
+      query: input,
+      typeahead: true
+    }).go().then(function (response) {
+      for (var i = 0; i < 5; i++) {
+        //new tt.Marker().setLngLat(response.results[0].position).addTo(map);
+        console.log(response.results[i]); //console.log(response.results[i].address.municipality);
+
+        var variabile_hldbar_one = {
+          //'places': '<a class="">' + response.results[i].address.municipality + '</a>',
+          'places': response.results[i].address.municipality,
+          'streetName': response.results[i].address.streetName,
+          'lng': response.results[i].position.lng,
+          'lat': response.results[i].position.lat,
+          'position': response.results[i].position,
+          'country': response.results[i].address.country
+        }; //console.log(variabile_hldbar_one);
+
+        var html_finale_select_one = template_function_select_one(variabile_hldbar_one);
+        $('.list_results').append(html_finale_select_one); //var latitude = response.results[0].position.lat;
+        //console.log(latitude);
+        //fine for
+      } //fine then
+
+    }); //fine funzione keyup
+  });
+  $('.bt_cerca').click(function () {
+    var via = $('.scelto').attr('data-via');
+    console.log(via);
+    var lng_place = $('.list_results').val();
+    var lng_int = parseFloat(lng_place);
+    var lat_place = $('.scelto').attr('data-lat');
+    var lat_place_int = parseFloat(lat_place);
+    console.log(lng_int);
+    console.log(lat_place_int);
+    $("input[type=hidden][name=latitude]").val(lat_place_int);
+    $("input[type=hidden][name=longitude]").val(lng_int);
+    $("input[type=hidden][name=address]").val(via); //fine click
+  }); //SEZIONE DETTAGLI APPARTAMENTO
+  //recupero valore lat e long ecuperati dall'input hidden del file
+  //blade a cui ho mandato dati dal database
+
+  var latitude_details = $('.latitude_details').val(); // var latitude_details_int = parseFloat(latitude_details);
+  // console.log(latitude_details_int);
+
+  var longitude_details = $('.longitude_details').val(); // var longitude_details_int = parseFloat(longitude_details);
+  // console.log(longitude_details_int);
+  //e inserisco lat e long nella funzione tomtom
+
+  tt.setProductInfo('com.company-name.product-name', '4.47.6');
+  var map = tt.map({
+    key: 'hnv7SvjzVtjVwSfr7a4r73AfxNk04jgL',
+    container: 'map',
+    style: 'tomtom://vector/1/basic-main',
+    //prima longitudine poi latitudine indirizzo boolean
+    center: [longitude_details, latitude_details],
+    //regolare lo zoom sul punto trovato
+    zoom: 12
+  });
+  var marker = new tt.Marker().setLngLat([longitude_details, latitude_details]).addTo(map);
 });
 /*-------------------------------------NAV SEARCH----------------------------------*/
 
@@ -49244,22 +49309,7 @@ $('a[data-menu-filter="Appartamenti"]').click(function () {
 });
 $('.price').click(function () {
   $(this).find('.price_menu').show();
-}); // $("#range_price[type='range']").val(10).change().rangeslider({
-//    size: 1,
-//    borderSize: 0.4,
-//    percentage: 100,
-//    horizontalClass: 'rangeslider--horizontal',
-//    verticalClass: 'rangeslider--vertical',
-//    fillClass: 'rangeslider__fill',
-//    handleClass: 'rangeslider__handle',
-//    // Callback function
-//    onInit: function() {},
-//    // Callback function
-//    onSlide: function(position, value) {},
-//    // Callback function
-//    onSlideEnd: function(position, value) {}
-// });
-// ----------------------------------ATTIVATIONE SEARCH LIVE--------------
+}); // ----------------------------------ATTIVATIONE SEARCH LIVE--------------
 
 $.ajaxSetup({
   headers: {

@@ -1,0 +1,40 @@
+@font-face {
+    font-family: "Gotham";
+    src:
+        url("../assets/fonts/gotham_ssm_book.eot?#iefix") format('embedded-opentype'),
+        url("../assets/fonts/gotham_ssm_book.woff2"),
+        url("../assets/fonts/gotham_ssm_book.woff"),
+        url("../assets/fonts/gotham_ssm_book.ttf");
+}
+
+* {
+    box-sizing: border-box;
+
+    &:before,
+    &:after {
+        box-sizing: border-box;
+    }
+}
+
+body {
+    height: 100%;
+    margin: 0;
+}
+
+.map {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+
+.full-map {
+    flex: 1;
+    height: 100vh;
+}
+
+:root {
+    --tt-transition-function: ease;
+    --tt-transition-time: .2s;
+    --color-white: #ffffff;
+    --tt-border-radius: 1px;
+}

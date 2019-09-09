@@ -1,0 +1,33 @@
+.mapboxgl-marker {
+    cursor: pointer;
+}
+
+/* These are fixes for the pop up to prevent blurry content */
+.mapboxgl-popup {
+    will-change: unset;
+
+    .mapboxgl-popup-close-button {
+        color: #6b6b6b;
+        font-size: 18px;
+        padding-right: 7px;
+        padding-top: 3px;
+    }
+
+}
+
+/* Popup tip fix */
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip {
+    margin-top: -1;
+}
+
+.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+    margin-left: -1;
+}
+
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip {
+    margin-bottom: -1;
+}
+
+.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+    margin-right: -1;
+}

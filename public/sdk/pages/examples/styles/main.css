@@ -1,0 +1,19 @@
+
+@import "maps-sdk-for-web-ui-components/dist/index.css";
+
+@import "scaffoldings.css";
+@import "foldable.css";
+@import "marker.css";
+@import "popup.css";
+@import "search-result.css";
+@import "loader.css";
+@import "fullscreen.css";
+@import "marker-popup.css";
+
+:root {
+    --rolling-stone: #7a7e80;
+}
+
+.map-view {
+    display: flex;
+}

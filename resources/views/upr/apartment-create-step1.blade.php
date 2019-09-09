@@ -15,7 +15,19 @@
         </div>
         <div class="form-group">
           <label for="address">Indirizzo</label>
-          <input type="text" class="form-control" id="address" name="address" placeholder="Inserisci l'indirizzo del tuo appartamento" value="{{ old('address') }}" >
+          {{-- <input type="text" class="form-control" id="address" name="address" placeholder="Inserisci l'indirizzo del tuo appartamento" value="{{ old('address') }}" > --}}
+          <div class="tt-search-box-search-icon form-group has-search mt-auto mb-auto position-relative">
+            <span class="fa fa-search form-control-feedback"></span>
+            <input type="text" name="" value="{{ old('address') }}" class="tt-search-box-input form-control" placeholder="Inserisci l'indirizzo del tuo appartamento">
+            <div class="bootstrap-select-wrapper position-absolute w-100">
+              <div class="tendina">
+                <select class="list_results custom-select" name="address"></select>
+                <input type="hidden" name="address" value="">
+                <input type="hidden" value="" id="latitude_hidden" name="latitude">
+                <input type="hidden" value="" id="longitude_hidden" name="longitude">
+              </div>
+            </div>
+          </div>
           @error('address')
               <div class="alert alert-danger">{{ $message }}</div>
           @enderror
@@ -33,7 +45,7 @@
         @endif
 
         <a href="{{ route('home') }}" class="btn btn-danger">Indietro</a>
-        <input type="submit" value="Avanti" class="btn btn-success">
+        <input type="submit" value="Avanti" class="btn btn-success bt_cerca">
       </form>
     </div>
   </div>

@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+
+    <meta http-equiv='X-UA-Compatible' content='IE=Edge' />
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name='viewport'content='width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no'/>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -11,8 +15,16 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Script Tom Tom -->
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.27.0/maps/maps-web.min.js"></script>
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.27.0/services/services-web.min.js"></script>
+    <script src="{{ asset('sdk/web-sdk-services/dist/services-web.min.js') }}"></script>
+    <script src="{{ asset('sdk/tomtom.min.js') }}"></script>
+
     <!-- Handlebars -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js" type="text/javascript"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -20,7 +32,17 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 
     <!-- Styles -->
+    <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.27.0/maps/maps.css'>
+    <link rel='stylesheet' type='text/css' href="{{ asset('sdk/map.css') }}"/>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    {{-- STILE CSS MAPPA --}}
+    <style>
+      #map {
+          width: 500px;
+          height: 500px;
+      }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -30,30 +52,42 @@
                   <img style="height: 35px;" src="{{ asset('storage/logo/b-logo.png') }}" alt="">
                   {{-- {{ config('app.name', 'BoolBnB') }} --}}
                 </a>
-                {{-- -------------------------------SEARCH BAR------------------------------}}
+                {{-- -------------------------------SEARCH BAR CRISTIANO ------------------------------}}
                 <form class="d-flex align-items-center " action="{{ route('searchPage') }}" method="get">
-                     @csrf
-                      <div class="form-group has-search mt-auto mb-auto position-relative">
-                        <span class="fa fa-search form-control-feedback"></span>
-                        <input type="text" name="search" class="form-control" placeholder="Type for Search">
-                        <div class="sub-menu position-absolute p-3">
-                          <p class="">ESPLORA THE BOOLBNB</p>
-                          <span class="close"><i class="far fa-times-circle"></i></span>
-                          <div class="">
-                            <a class="btn btn btn-outline-dark mr-2 mt-2" type="button" name="button">Tutto</a>
-                            <a class="btn btn btn-outline-dark mr-2 mt-2" type="button" name="button">Soggiorni</a>
-                            <a class="btn btn btn-outline-dark mr-2 mt-2" type="button" name="button">Esperienze</a>
-                            <a class="btn btn btn-outline-dark mr-2 mt-2" type="button" name="button">Avventure</a>
-                            <a class="btn btn btn-outline-dark mr-2 mt-2" type="button" data-menu-filter="Appartamenti" name="button">Appartamenti</a>
-                            <div>
-                              <small>*funziona solo appartamneti</small>
-                            </div>
+                    @csrf
+                    {{-- DATI TOMTOM --}}
+                    <input type="hidden" value="" id="latitude_hidden" name="latitude">
+                    <input type="hidden" value="" id="longitude_hidden" name="longitude">
+                    <div id="foldable" class="tt-overlay-panel -left-top -medium js-foldable"></div>
+                    <div class="tt-search-box-search-icon form-group has-search mt-auto mb-auto position-relative">
+
+                      <span class="fa fa-search form-control-feedback"></span>
+                      <input type="text" name="search" value="" class="tt-search-box-input form-control" placeholder="Seleziona una località">
+
+                      <div class="bootstrap-select-wrapper position-absolute w-100">
+                        <div class="tendina">
+                          <select class="list_results custom-select" name=""></select>
+                        </div>
+                      </div>
+
+                      <div class="sub-menu position-absolute p-3">
+                        <p class="">ESPLORA THE BOOLBNB</p>
+                        <span class="close"><i class="far fa-times-circle"></i></span>
+                        <div class="">
+                          <a class="btn btn btn-outline-dark mr-2 mt-2" type="button" name="button">Tutto</a>
+                          <a class="btn btn btn-outline-dark mr-2 mt-2" type="button" name="button">Soggiorni</a>
+                          <a class="btn btn btn-outline-dark mr-2 mt-2" type="button" name="button">Esperienze</a>
+                          <a class="btn btn btn-outline-dark mr-2 mt-2" type="button" name="button">Avventure</a>
+                          <a class="btn btn btn-outline-dark mr-2 mt-2" type="button" data-menu-filter="Appartamenti" name="button">Appartamenti</a>
+                          <div>
+                            <small>*funziona solo appartamenti</small>
                           </div>
                         </div>
                       </div>
-                      <input type="submit" class="search_page btn btn-sm btn-outline-info" value="Go">
-
+                    </div>
+                    <input type="submit" class="bt_cerca search_page btn btn-sm btn-outline-info" value="Go">
                   </form>
+
 
                  {{-- -------------------------------FINE SEARCH BAR------------------------------}}
 
@@ -131,17 +165,6 @@
         </nav>
 
       {{-- --------------------------------------FIlter-MENU--------------------------- --}}
-       <div class="container-fluid filter-menu my-3">
-          <div class="links">
-            <a href="#" class="btn btn-sm btn-outline-secondary">Date</a>
-            <a href="#" class="btn btn-sm btn-outline-secondary">Ospiti</a>
-            <a href="#" class="btn btn-sm btn-outline-secondary">Viaggio Di Lavoro</a>
-            <a href="#" class="btn btn-sm btn-outline-secondary">Tipo Di Alloggio</a>
-            <a href="#" class="btn btn-sm btn-outline-secondary">Prezzo</a>
-            <a href="#" class="btn btn-sm btn-outline-secondary">Prenotazione Immediata</a>
-            <a href="#" class="btn btn-sm btn-outline-secondary">Piu Filtri</a>
-          </div>
-        </div>
         <main class="py-4">
             @yield('content')
         </main>
@@ -167,5 +190,11 @@
        </div>
      </a>
    </script> --}}
+   <!-- uso handlebars -->
+     <script id="entry-template_select_one" type="text/x-handlebars-template">
+        <option value="@{{ lng }}" data-lat="@{{ lat }}" class="scelto">@{{ places }} - @{{ country }}</option>
+     </script>
+     <!-- fine handlebars -->
+    {{-- <script src="{{ asset('sdk/tomtom.min.js') }}"></script> --}}
   </body>
 </html>

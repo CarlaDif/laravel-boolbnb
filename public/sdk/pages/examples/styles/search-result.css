@@ -1,0 +1,22 @@
+.tt-search-result {
+    font-size: 14px;
+    &__name {
+        display: block;
+    }
+
+    &__address {
+        color: var(--rolling-stone);
+        display: block;
+    }
+
+    &__distance {
+        color: var(--rolling-stone);
+        display: block;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    &__name + &__address + &__distance {
+        margin-top: 8px;
+    }
+}

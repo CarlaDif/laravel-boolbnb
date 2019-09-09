@@ -32,6 +32,9 @@
       </div>
       <div class="col-4">
         <a href="#">{{ $apartment->address }}</a>
+          {{-- input hidden che prende valori da database e li passa a java --}}
+          <input type="hidden" id="latitude" name="latitude" value="{{ $apartment->latitude}}" class="latitude_details">
+          <input type="hidden" id="latitude" name="longitude" value="{{ $apartment->longitude}}" class="longitude_details">
       </div>
       <div class="row justify-content-between mt-3">
         <div class="col-md-8">
@@ -98,18 +101,19 @@
               </div>
             @endif
           @endauth
-
-
-
         </div>
+
         <div class="col-md-4">
           {{-- Mappa --}}
-          <div class="card">
-            <img src="https://media.wired.com/photos/59269cd37034dc5f91bec0f1/master/pass/GoogleMapTA.jpg" class="card-img-top" alt="Anteprima non disponibile">
-            <div class="card-body">
-              <p class="card-text"><a href="#">{{ $apartment->address }}</a></p>
-            </div>
-          </div>
+            {{-- <img src="https://media.wired.com/photos/59269cd37034dc5f91bec0f1/master/pass/GoogleMapTA.jpg" class="card-img-top" alt="Anteprima non disponibile"> --}}
+
+          <div id="map" class="map"></div>
+          <div id="foldable" class="tt-overlay-panel -left-top -medium js-foldable"></div>
+            {{-- <div class="card">
+              <div class="card-body">
+                <p class="card-text"><a href="#">{{ $apartment->address }}</a></p>
+              </div>
+            </div> --}}
         </div>
       </div>
     </div> {{--fine riga dettagli e mappa --}}
