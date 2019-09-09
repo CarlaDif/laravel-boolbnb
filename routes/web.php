@@ -38,9 +38,8 @@ Route::middleware('auth')->namespace('Upr')->name('upr.')->group(function(){
 
   Route::get('/apartment/create-step3', 'ApartmentController@createStep3')->name('apartments.create-step3');
 
-  // Route::get('/mymessages', 'UserMessageController@myMessages')->name('mymessages');
+  Route::get('mymessages', 'MessageController@showMessages')->name('all-messages');
 
-  Route::get('messages', 'ProfileController@showMessage')->name('all-messages');
 });
 
 Route::get('search-apartments','SearchApartments@inputSearch')->name('searchApartments');

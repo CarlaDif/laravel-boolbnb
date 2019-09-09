@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Apartment;
 use App\Message;
 use App\Mail\MessageConfirm;
+use App\Mail\MessageFromWebsite;
 use Illuminate\Support\Facades\Mail;
 
 class MessageController extends Controller
@@ -34,6 +35,7 @@ class MessageController extends Controller
 
     //invio l'email di conferma all'utente che ha inviato il messaggio
     Mail::to($email_utente)->send(new MessageConfirm($new_message));
+    Mail::to($email_utente)->send(new MessageFromWebsite($new_message));
 
     //
 

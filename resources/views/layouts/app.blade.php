@@ -134,7 +134,7 @@
                               <a class="nav-link" href="">Viaggi</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="">Messaggi</a>
+                              <a class="nav-link" href="{{ route('upr.all-messages') }}">Messaggi</a>
                           </li>
                           <li class="nav-item">
                               <a class="nav-link" href="">Aiuto</a>
