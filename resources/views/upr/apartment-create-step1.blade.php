@@ -20,11 +20,18 @@
 
           <div class="tt-search-box-search-icon form-group has-search mt-auto mb-auto position-relative">
             {{-- <span class="fa fa-search form-control-feedback"></span> --}}
-            <label>Paese</label>
-            <input type="text" name="country" value="" class="tt-search-box-input country form-control" placeholder="Paese">
+            <div class="form-group">
+              <label>Paese</label>
+              <input type="text" name="country" value="" class="tt-search-box-input country form-control" placeholder="Paese">
+            </div>
 
-            <label>Via</label>
-            <input type="text" name="place" value="" class="tt-search-box-input form-control input-address" placeholder="Indirizzo">
+            <div class="form-group">
+              <label>Via</label>
+              <input type="text" name="place" value="" class="tt-search-box-input form-control input-address" placeholder="Indirizzo">
+            </div>
+
+
+
             {{-- <div class="bootstrap-select-wrapper position-absolute w-100"> --}}
               {{-- indirizzi disponibili popolati da handlebars --}}
               {{-- <select class="country_results custom-select" name=""></select>

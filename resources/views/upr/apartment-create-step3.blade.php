@@ -42,7 +42,7 @@
               <div class="alert alert-danger">{{ $message }}</div>
           @enderror
           {{-- messaggio errore img multiple - funziona non benissimo --}}
-          <div class="alert alert-danger">{{ $errors->has('paths') ? $errors->first('paths') : '' }}</div>
+          {{-- <div class="alert alert-danger">{{ $errors->has('paths') ? $errors->first('paths') : '' }}</div> --}}
 
 
         </div>
