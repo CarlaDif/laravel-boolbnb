@@ -101,7 +101,6 @@ $(document).ready(function(){
       var cap = $('.list_results option:selected').attr('data-postalCode');
       var paese = $('.list_results option:selected').attr('data-country');
       var civico = $('.list_results option:selected').attr('data-street-number');
-      console.log('civico'+ civico);
       $('input[type=hidden][name=latitude]').val(lat_place_int);
       $('input[type=hidden][name=longitude]').val(lng_int);
       $('input[type=text][name=place]').val(via + ' ' + civico + ', ' + city + '-' + paese);

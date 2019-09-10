@@ -15,11 +15,47 @@
               <div class="alert alert-danger">{{ $message }}</div>
           @enderror
         </div>
-
-        {{-- address --}}
+        
+        {{-- indirizzo --}}
         <div class="form-group">
-          <label for="address">Indirizzo</label>
-          <input type="text" class="form-control" id="address" name="address" placeholder="Inserisci l'indirizzo del tuo appartamento" value="{{ old('address', $apartment->address) }}" >
+          <div class="tt-search-box-search-icon form-group has-search mt-auto mb-auto position-relative">
+            <div class="form-group">
+              <label>Paese</label>
+              <input type="text" name="country" value="{{ old('country', $apartment->country) }}" class="tt-search-box-input country form-control" placeholder="Paese">
+            </div>
+
+            <div class="form-group">
+              <label>Via</label>
+              <input type="text" name="place" value="{{ old('address', $apartment->address) }}" class="tt-search-box-input form-control input-address" placeholder="Indirizzo">
+            </div>
+
+            <div class="bootstrap-select-wrapper position-absolute w-100">
+              <div class="tendina">
+                {{-- select che restituisce il codice della nazione --}}
+                <select class="list_results custom-select" name="" multiple></select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Città</label>
+              <input type="text" name="city" value="" class="form-control" placeholder="Città">
+            </div>
+
+            <div class="form-group">
+              <label>Regione</label>
+              <input type="text" name="regione" value="" class="form-control" placeholder="Regione">
+            </div>
+
+            <div class="form-group">
+              <label>CAP</label>
+              <input type="text" name="cap" value="" class="form-control" placeholder="CAP">
+            </div>
+
+            {{-- input hidden --}}
+            <input type="hidden" value="" name="address">
+            <input type="hidden" value="{{ old('latitude', $apartment->latitude) }}" id="latitude_hidden" name="latitude">
+            <input type="hidden" value="{{ old('longitude', $apartment->longitude) }}" id="longitude_hidden" name="longitude">
+          </div>
           @error('address')
               <div class="alert alert-danger">{{ $message }}</div>
           @enderror
@@ -28,7 +64,7 @@
         {{-- description --}}
         <div class="form-group">
           <label for="description">Descrizione</label>
-          <textarea class="form-control" name="description" rows="8" placeholder="Inserisci una breve descrizione per il tuo appartamento">{{ old('description', $apartment->description) }}</textarea>
+          <textarea class="form-control" name="description" rows="9" placeholder="Inserisci una breve descrizione per il tuo appartamento">{{ old('description', $apartment->description) }}</textarea>
           @error('description')
               <div class="alert alert-danger">{{ $message }}</div>
           @enderror
