@@ -125,7 +125,7 @@
 
 
                               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('upr.apartments.create-step1') }}">Pubblica il tuo annuncio</a>
+                                <a class="dropdown-item" href="{{ route('upr.apartments.create-step0') }}">Pubblica il tuo annuncio</a>
                               </div>
                           </li>
                           <li class="nav-item">
