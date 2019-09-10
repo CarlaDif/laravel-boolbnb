@@ -9,7 +9,7 @@
             <h4>{{ Auth::user()->name }}, non hai ancora caricato nessun appartamento <i class="fas fa-frown"></i></h4><br>
           </div>
           <div class="row mt-3">
-            <a href="{{ route('upr.apartments.create-step1') }}" class="btn btn-info mt-3">Diventa un host</a>
+            <a href="{{ route('upr.apartments.create-step0') }}" class="btn btn-info mt-3">Diventa un host</a>
           </div>
         @else
           <div class="row mt-5">
