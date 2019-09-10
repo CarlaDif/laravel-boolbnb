@@ -6,9 +6,9 @@
   {{-- --------------------------------------FIlter-MENU--------------------------- --}}
   <div class="container-fluid search_filters px-4">
      <div class="">
-       <form class="" action="{{ route('filtersPage') }}" >
+       <form class="" action="{{ route('filtersPage') }}">
         <div class="links d-flex align-items-center">
-  
+
           <span>
             <a href="#" class="btn btn-sm btn-outline-secondary search_filter">Date</a>
           </span>
@@ -82,8 +82,36 @@
                     </div>
                     <div class="ml-auto">
                       <i class="fas fa-minus-circle"></i>
-                      <input class="count mx-1" value="0" name="price_per_night" >
+                      <input type="range" name="price_per_night" value="0" class="count mx-1 form-control-range" min="0" max="1500">
                       <i class="fas fa-plus-circle"></i>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="save_filter btn btn-info">Save</div>
+                </li>
+            </div>
+          </span>
+
+          <span class="position-relative search_filter">
+            <a href="#" class="btn btn-sm btn-outline-secondary search_filter">
+              <span class="ux_filter_result"></span > Kilometri </a>
+            <div class="position-absolute sub_filter">
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <div class="d-flex">
+                    <div class="">
+                      Distanza dal centro
+                    </div>
+                    <div class="ml-auto">
+                      <div class="form-group">
+                        <label class="tt-form-label js-slider">Raggio (<span class="js-counter">0</span>Km)
+                          <input type="hidden" name="latitude" value="{{ $latitude }}">
+                          <input type="hidden" name="longitude" value="{{ $longitude }}">
+                          <input type="range" name="inputRadius" value="0" class="tt-slider form-control-range" min="0" max="200" class="raggio">
+                          {{-- <p>Value: <span id="demo"></span></p> --}}
+                        </label>
+                      </div>
                     </div>
                   </div>
                 </li>

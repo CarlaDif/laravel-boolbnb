@@ -45,4 +45,5 @@ Route::middleware('auth')->namespace('Upr')->name('upr.')->group(function(){
 Route::get('search-apartments','SearchApartments@inputSearch')->name('searchApartments');
 Route::get('search','SearchApartments@page')->name('searchPage');
 Route::get('filters','SearchApartments@filters')->name('filtersPage');
+// Route::get('filter','SearchApartments@filterApartments')->name('filterApartments');
 // Route::get('/apartments/{apartment}', 'ApartmentController@show')->name('apartments.show');

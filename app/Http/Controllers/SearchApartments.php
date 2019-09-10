@@ -21,7 +21,7 @@ class SearchApartments extends Controller
      }
    }
 
-  public function page(Request $request){
+  public function page(Request $request) {
 
       // $validatedData = $request->validate([
       //   'search' => 'required',
@@ -39,28 +39,67 @@ class SearchApartments extends Controller
           ->orderByRaw('distance')
           ->get();
 
-
       return view('search_page')->with([
          'apartments'=>$apartments,
-         // 'search'=>$search
+         'latitude' => $lat,
+         'longitude' => $lon
       ]);
-
    }
 
   public function filters(Request $request){
 
     $apartments = new Apartment;
-    $apartments = DB::table('apartments')
-    ->where('n_baths',$request->n_baths )
-    ->where('n_single_beds',$request->n_single_beds )
-    ->where('n_double_beds',$request->n_double_beds );
-    if ($request->price >0) {
+
+    if ($request->n_baths > 0 || $request->n_single_beds > 0 || $request->n_double_beds > 0) {
+      $apartments = DB::table('apartments')
+                ->where('n_baths',$request->n_baths )
+                ->where('n_single_beds',$request->n_single_beds )
+                ->where('n_double_beds',$request->n_double_beds );
+    }
+
+    if ($request->price > 0) {
       $apartments = $apartments->where('price',$request->price );
     }
+
+    if ($request->latitude && $request->longitude) {
+      $radius = $request->inputRadius;
+      $lat = $request->latitude;
+      $lon = $request->longitude;
+      $R = 6371;
+
+      $apartments = $apartments
+              ->selectRaw('id, title, address, latitude, longitude, main_img, acos(sin(".$lat.")*sin(radians(latitude)) + cos(".$lat.")*cos(radians(latitude))*cos(radians(longitude)-".$lon.")) * ".$R." As distance')
+              ->whereRaw("acos(sin($lat*0.0175)*sin(radians(latitude)) + cos($lat*0.0175)*cos(radians(latitude))*cos(radians(longitude)-$lon*0.0175)) * $R< $radius")
+              ->orderByRaw('distance');
+    }
+
     $apartments = $apartments->get();
+
     return view('search_page')->with([
        'apartments'=>$apartments,
+       'latitude' => $lat,
+       'longitude' => $lon
        // 'search'=>$search
     ]);
   }
-}
+  //
+  // public function filterApartments(Request $request) {
+  //   $radius = $request->inputRadius;
+  //   $lat = $request->latitude;
+  //   $lon = $request->longitude;
+  //   $R = 6371;
+  //
+  //   $apartments = DB::table('apartments')
+  //       ->selectRaw('id, title, address, latitude, longitude, main_img, acos(sin(".$lat.")*sin(radians(latitude)) + cos(".$lat.")*cos(radians(latitude))*cos(radians(longitude)-".$lon.")) * ".$R." As distance')
+  //       ->whereRaw("acos(sin($lat*0.0175)*sin(radians(latitude)) + cos($lat*0.0175)*cos(radians(latitude))*cos(radians(longitude)-$lon*0.0175)) * $R< $radius")
+  //       ->orderByRaw('distance')
+  //       ->get();
+  //
+  //   return view('search_page')->with([
+  //      'apartments'=>$apartments,
+  //      'latitude' => $lat,
+  //      'longitude' => $lon
+  //   ]);
+  // }
+
+ }
