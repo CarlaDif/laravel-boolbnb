@@ -10724,3 +10724,53 @@ a.text-dark:focus {
   text-align: center;
 }
 
+.welcome-option {
+  height: 70px;
+  max-width: 540px;
+}
+
+.welcome-option img {
+  height: 70px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.card-apartment {
+  height: 20rem;
+}
+
+.card-apartment img {
+  width: 100%;
+  height: 150px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.welcome-image {
+  width: 100vw;
+  height: 600px;
+  background-image: url("https://www.thetimes.co.uk/expert-traveller/wp-content/uploads/2018/11/shutterstock_776445706-1-2200x880.jpg");
+}
+
+.py-4 {
+  padding-top: 0 !important;
+}
+
+.messagecontainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.receivedmessage {
+  width: 20%;
+  margin: 23px;
+  background-color: #F4F2EF;
+}
+
+.preview-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
