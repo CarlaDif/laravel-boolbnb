@@ -27,3 +27,38 @@
 .py-4 {
   padding-top: 0 !important;
 }
+
+@media screen and (max-width:576px){
+  #categories {
+    display:none;
+  }
+  .card-apartment {
+    width:95vw;
+  }
+  .single-apartment {
+    flex:0;
+  }
+}
+
+@media screen and (min-width:577px) and (max-width:768px){
+  #categories {
+    display:none;
+  }
+  .card-apartment {
+    width:95vw;
+  }
+  .single-apartment {
+    flex:0;
+  }
+}
+
+@media screen and (max-width:768px) and (max-width:1024px) {
+  
+}
+
+
+// @media screen and (min-width:992px){
+//   #categories {
+//     display:none;
+//   }
+// }
