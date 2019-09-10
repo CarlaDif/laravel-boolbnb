@@ -65,3 +65,14 @@
 
   background-color: white;
 }
+.sub_filter{
+  display: none;
+  width:500px;
+  z-index: 100;
+  input{
+    border:none;
+    outline:none;
+    width:40px;
+    text-align: center;
+  }
+}

@@ -49190,44 +49190,50 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-// const files = require.context('./', true, /\.vue$/i);
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
-
 $(document).ready(function () {
   Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
-  /**
-   * Next, we will create a fresh Vue application instance and attach it to
-   * the page. Then, you may begin adding components to this application
-   * or customize the JavaScript scaffolding to fit your unique needs.
-   */
-
   var app = new Vue({
     el: '#app'
   });
 
-  var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+  var $ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"); // --------------------------------------SEARCH FILTER-------------------------------------
+  //------------------------------------------------------------------------------------------
+
+
+  $('.search_filter').click(function () {
+    $(this).find('.sub_filter').show();
+  }); //---controller add filter beds..
+
+  $('.fa-plus-circle').click(function () {
+    count = $(this).prev('.count').val();
+    add = parseInt(count) + 1;
+    $(this).prev('.count').val(add);
+    $(this).prev('.count').attr('value', add);
+  });
+  $('.fa-minus-circle').click(function () {
+    count = $(this).next('.count').val();
+
+    if (count != 0) {
+      less = parseInt(count) - 1;
+      $(this).next('.count').val(less);
+      $(this).next('.count').attr('value', less);
+    }
+  });
+  $('.save_filter').click(function () {
+    $(this).closest('.sub_filter').hide();
+    $(this).closest('.search_filter').find('.ux_filter_result').text('ok').css('font-weight', 'bold');
+  }); // --------------------------------------ENDSEARCH FILTER-------------------------------------
+  // ------------------------------------------------------------------------.----------------
 
   var template_html_select_one = $('#entry-template_select_one').html();
   var template_function_select_one = Handlebars.compile(template_html_select_one); // var template_html_select_two = $('#entry-template_select_two').html();
   // var template_function_select_two = Handlebars.compile(template_html_select_two);
 
   $('.tendina').hide();
-  $('.input-address').on('click', function () {
+  $('.input-address').on('keyup', function () {
     $('.tendina').show();
   }).off('click', function () {
     $('.tendina').hide();
@@ -49322,62 +49328,62 @@ $(document).ready(function () {
     zoom: 12
   });
   var marker = new tt.Marker().setLngLat([longitude_details, latitude_details]).addTo(map);
-});
-/*-------------------------------------NAV SEARCH----------------------------------*/
+  /*-------------------------------------NAV SEARCH----------------------------------*/
 
-$('.has-search input').click(function () {
-  $('.has-search').find('.sub-menu').toggle();
-}); // ----------------------CLose panel Sub-menu
+  $('.has-search input').click(function () {
+    $('.has-search').find('.sub-menu').toggle();
+  }); // ----------------------CLose panel Sub-menu
 
-$('.has-search .close').click(function () {
-  $('.has-search').find('.sub-menu').toggle();
-}); //------------------------Visualizzazione Filtro Appartamento
+  $('.has-search .close').click(function () {
+    $('.has-search').find('.sub-menu').toggle();
+  }); //------------------------Visualizzazione Filtro Appartamento
 
-$('a[data-menu-filter="Appartamenti"]').click(function () {
-  $('.has-search').find('.sub-menu').toggle();
-  $('.filter-menu').toggle();
-});
-$('.price').click(function () {
-  $(this).find('.price_menu').show();
-}); // ----------------------------------ATTIVATIONE SEARCH LIVE--------------
+  $('a[data-menu-filter="Appartamenti"]').click(function () {
+    $('.has-search').find('.sub-menu').toggle();
+    $('.filter-menu').toggle();
+  });
+  $('.price').click(function () {
+    $(this).find('.price_menu').show();
+  }); // ----------------------------------ATTIVATIONE SEARCH LIVE--------------
 
-$.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-});
-$('.has-search input').keyup(function () {
-  var query = $(this).val();
-  console.log(query);
-  $.ajax({
-    url: "search-apartments",
-    method: 'GET',
-    data: {
-      'apartment_name': query
-    },
-    success: function success(response) {
-      console.log(query);
-      $('#apartments').empty();
-      n = response['search'].length;
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  $('.has-search input').keyup(function () {
+    var query = $(this).val();
+    console.log(query);
+    $.ajax({
+      url: "search-apartments",
+      method: 'GET',
+      data: {
+        'apartment_name': query
+      },
+      success: function success(response) {
+        console.log(query);
+        $('#apartments').empty();
+        n = response['search'].length;
 
-      for (var i = 0; i < n; i++) {
-        var apartment_template = $('#apartment_template').html();
-        var print_apartment_template = Handlebars.compile(apartment_template);
-        title = response['search'][i]['title'];
-        id = response['search'][i]['id'];
-        main_img = response['search'][i]['main_img'];
-        var apartments_property = {
-          'title': title,
-          'address': 'user/apartments/' + id,
-          'main_img': '/storage/' + main_img
-        };
-        $('#apartments').append(print_apartment_template(apartments_property));
-      } //for
+        for (var i = 0; i < n; i++) {
+          var apartment_template = $('#apartment_template').html();
+          var print_apartment_template = Handlebars.compile(apartment_template);
+          title = response['search'][i]['title'];
+          id = response['search'][i]['id'];
+          main_img = response['search'][i]['main_img'];
+          var apartments_property = {
+            'title': title,
+            'address': 'user/apartments/' + id,
+            'main_img': '/storage/' + main_img
+          };
+          $('#apartments').append(print_apartment_template(apartments_property));
+        } //for
 
-    } //Success
+      } //Success
 
-  }); // AJAX
-}); // keyup
+    }); // AJAX
+  }); // keyup
+}); //READY DOCUMENT
 
 /***/ }),
 

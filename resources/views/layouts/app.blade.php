@@ -61,7 +61,7 @@
 
                       <span class="fa fa-search form-control-feedback"></span>
                       {{-- ABBIAMO MODIFICATO IL NAME DA "search" a "city" SOLO PER INSERIRE IL VALORE CERCATO NELL'INPUT --}}
-                      <input type="text" name="city" value="" class="tt-search-box-input form-control input-address" placeholder="Seleziona una località">
+                      <input type="text" name="city" value="" class="tt-search-box-input form-control input-address" placeholder="Seleziona una località" autocomplete="off">
                       <input type="hidden" value="" id="latitude_hidden" name="latitude">
                       <input type="hidden" value="" id="longitude_hidden" name="longitude">
                       <div class="bootstrap-select-wrapper position-absolute w-100">
@@ -169,6 +169,7 @@
             @yield('content')
         </main>
     </div>
+
     {{-- <script id="apartment_template" type="text/x-handlebars-template">
      <a href=
       @guest
@@ -190,6 +191,7 @@
        </div>
      </a>
    </script> --}}
+
    <!-- uso handlebars -->
      <script id="entry-template_select_one" type="text/x-handlebars-template">
         <option value="@{{ lng }}" data-lat="@{{ lat }}" data-city="@{{ city }}" class="scelto">@{{ city }} - @{{ country }}</option>
