@@ -12,7 +12,7 @@
         @guest
           <h3 class="mt-4 ml-3">Esplora BoolBnB</h3>
         @else
-          <h3>Cosa possiamo aiutarti a cercare, {{ $user->name }}?</h3>
+          <h3 class="mt-4 ml-3">Cosa possiamo aiutarti a cercare, {{ $user->name }}?</h3>
         @endguest
       </div>
     </div>
@@ -97,7 +97,7 @@
             >
             <div class="card mt-3 card-apartment">
               @if (!empty($apartment->main_img))
-                <img src="{{ asset('storage/' . $apartment->main_img) }}" class="card-img-top" style="width: 100%; height: 150px; object-fit: cover;" alt="Anteprima Appartamento">
+                <img src="{{ asset('storage/' . $apartment->main_img) }}" class="card-img-top" alt="Anteprima Appartamento">
               @else
                 <img src="https://kitv.images.worldnow.com/images/16468883_G.png?lastEditedDate=1522902908000" class="card-img-top" alt="Anteprima non disponibile">
               @endif

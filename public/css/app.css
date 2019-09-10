@@ -10741,7 +10741,7 @@ a.text-dark:focus {
 
 .card-apartment img {
   width: 100%;
-  height: 150px;
+  height: 200px;
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -10768,9 +10768,11 @@ a.text-dark:focus {
 }
 
 .preview-message {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 80ch;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 

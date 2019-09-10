@@ -8,8 +8,10 @@
   background-color: #F4F2EF
 }
 .preview-message {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  max-width: 80ch;
+  display: -webkit-box;
+ -webkit-line-clamp: 1;
+ -webkit-box-orient: vertical;
 }
