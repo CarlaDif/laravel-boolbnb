@@ -55,7 +55,8 @@
                 </li>
                 <li class="list-group-item ">
                   <div class="w-100 d-flex align-items-center">
-                    <div class="save_filter btn btn-info mr-auto">Salva</div>
+                    <div class="save_filter btn btn-success">Salva</div>
+                    <div class="reset_filter btn btn-outline-secondary">Reset</div>
                   </div>
                 </li>
               </ul>
@@ -87,7 +88,8 @@
                   </div>
                 </li>
                 <li class="list-group-item">
-                  <div class="save_filter btn btn-info">Save</div>
+                  <div class="save_filter btn btn-success">Salva</div>
+                  <div class="reset_filter btn btn-outline-secondary">Reset</div>
                 </li>
             </div>
           </span>
@@ -114,7 +116,8 @@
                   </div>
                 </li>
                 <li class="list-group-item">
-                  <div class="save_filter btn btn-info">Save</div>
+                  <div class="save_filter btn btn-success">Salva</div>
+                  <div class="reset_filter btn btn-outline-secondary">Reset</div>
                 </li>
             </div>
           </span>
