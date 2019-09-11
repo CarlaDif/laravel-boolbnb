@@ -28,6 +28,10 @@
   padding-top: 0 !important;
 }
 
+.card-apartment {
+  box-shadow: 1px 1px lightgrey;
+}
+
 @media screen and (max-width:576px){
   #categories {
     display:none;
@@ -47,14 +51,20 @@
   .card-apartment {
     width:95vw;
   }
-  .single-apartment {
-    flex:0;
+  // .single-apartment {
+  //   flex:0;
+  // }
+}
+
+@media screen and (max-width: 992px) {
+  #categories {
+    display:none;
   }
 }
 
-@media screen and (max-width:768px) and (max-width:1024px) {
-  
-}
+// @media screen and (max-width:768px) and (max-width:1024px) {
+//
+// }
 
 
 // @media screen and (min-width:992px){

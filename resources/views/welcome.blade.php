@@ -87,7 +87,7 @@
       <div class="row justify-content-between mt-3">
       <div class="card-deck" id="apartments">
         @foreach ($apartments as $apartment)
-          <div class="col-4 single-apartment">
+          <div class="col-md-4 col-sm-12 col-lg-4 single-apartment">
             <a href=
             @guest
               "{{ route('ui.apartments.show', $apartment->id) }}"

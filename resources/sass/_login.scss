@@ -1,0 +1,11 @@
+@media screen and (max-width:768px) {
+  .login-button {
+    display:block;
+    width:100%;
+  }
+  .forgot-password {
+    position: relative;
+    left:50%;
+    transform:translateX(-50%);
+  }
+}
