@@ -10644,6 +10644,10 @@ a.text-dark:focus {
   }
 }
 
+.sub_filter .search-slider {
+  width: 200px;
+}
+
 .has-search {
   z-index: 10;
 }

@@ -195,7 +195,7 @@
 
    <!-- uso handlebars -->
      <script id="entry-template_select_one" type="text/x-handlebars-template">
-        <option value="@{{ lng }}" data-lat="@{{ lat }}" data-city="@{{ city }}" class="scelto">@{{ city }} - @{{ country }}</option>
+        <option value="@{{ lng }}" data-id="@{{ id }}" data-lat="@{{ lat }}" data-country="@{{ country }}" data-city="@{{ city }}" class="scelto">@{{ city }} - @{{ country }}</option>
      </script>
      <!-- fine handlebars -->
     {{-- <script src="{{ asset('sdk/tomtom.min.js') }}"></script> --}}

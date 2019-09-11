@@ -13,8 +13,8 @@
             <a href="#" class="btn btn-sm btn-outline-secondary search_filter">Date</a>
           </span>
 
-          <span class="position-relative search_filter" >
-            <a href="#" class="btn btn-sm btn-outline-secondary"><span class="ux_filter_result"></span> Ospiti</a>
+          <span class="position-relative" >
+            <a href="#" class="btn btn-sm btn-outline-secondary search_filter"><span class="ux_filter_result"></span> Ospiti</a>
             <div class="position-absolute sub_filter">
               <ul class="list-group host-menu">
                 <li class="list-group-item">
@@ -70,7 +70,7 @@
             <a href="#" class="btn btn-sm btn-outline-secondary search_filter">Tipo Di Alloggio</a>
           </span>
 
-          <span class="position-relative search_filter">
+          <span class="position-relative">
             <a href="#" class="btn btn-sm btn-outline-secondary search_filter">
               <span class="ux_filter_result"></span > Prezzo </a>
             <div class="position-absolute sub_filter">
@@ -80,10 +80,9 @@
                     <div class="">
                       Prezzo a notte
                     </div>
-                    <div class="ml-auto">
-                      <i class="fas fa-minus-circle"></i>
-                      <input type="range" name="price_per_night" value="0" class="count mx-1 form-control-range" min="0" max="1500">
-                      <i class="fas fa-plus-circle"></i>
+                    <div class="col-6 ml-auto">
+                      <label class="tt-form-label js-slider">Prezzo (<span class="js-counter">0</span>€)</label>
+                      <input type="range" name="price_per_night" value="0" class="count mx-1 form-control-range search-slider" min="0" max="1500">
                     </div>
                   </div>
                 </li>
@@ -93,7 +92,7 @@
             </div>
           </span>
 
-          <span class="position-relative search_filter">
+          <span class="position-relative">
             <a href="#" class="btn btn-sm btn-outline-secondary search_filter">
               <span class="ux_filter_result"></span > Kilometri </a>
             <div class="position-absolute sub_filter">
@@ -103,12 +102,12 @@
                     <div class="">
                       Distanza dal centro
                     </div>
-                    <div class="ml-auto">
+                    <div class="col-6 ml-auto">
                       <div class="form-group">
                         <label class="tt-form-label js-slider">Raggio (<span class="js-counter">0</span>Km)
                           <input type="hidden" name="latitude" value="{{ $latitude }}">
                           <input type="hidden" name="longitude" value="{{ $longitude }}">
-                          <input type="range" name="inputRadius" value="0" class="tt-slider form-control-range" min="0" max="200" class="raggio">
+                          <input type="range" name="inputRadius" value="0" class="tt-slider form-control-range raggio search-slider" min="0" max="200">
                           {{-- <p>Value: <span id="demo"></span></p> --}}
                         </label>
                       </div>
