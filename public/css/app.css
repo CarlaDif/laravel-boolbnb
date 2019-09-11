@@ -10793,6 +10793,10 @@ a.text-dark:focus {
   padding-top: 0 !important;
 }
 
+.card-apartment {
+  box-shadow: 1px 1px lightgrey;
+}
+
 @media screen and (max-width: 576px) {
   #categories {
     display: none;
@@ -10815,9 +10819,11 @@ a.text-dark:focus {
   .card-apartment {
     width: 95vw;
   }
+}
 
-  .single-apartment {
-    flex: 0;
+@media screen and (max-width: 992px) {
+  #categories {
+    display: none;
   }
 }
 
@@ -10835,9 +10841,71 @@ a.text-dark:focus {
 .preview-message {
   text-overflow: ellipsis;
   overflow: hidden;
-  max-width: 80ch;
+  max-width: 50ch;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+}
+
+@media screen and (max-width: 768px) {
+  .titolo-messaggi {
+    font-size: 350%;
+    text-align: center;
+    color: #5F5F5F;
+  }
+
+  .preview-message {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 15ch;
+  }
+
+  .preview-message {
+    font-size: 300%;
+  }
+
+  .message-card {
+    margin-bottom: 40px;
+    background-color: white;
+  }
+
+  a.visualizza-messaggio {
+    display: block;
+    width: 100%;
+    height: 80px;
+    font-size: 300%;
+    color: #5F5F5F;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .tt-search-box-input {
+    display: none;
+  }
+
+  .bt_cerca {
+    display: none;
+  }
+
+  span.lente {
+    display: none;
+  }
+
+  .register-button {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .login-button {
+    display: block;
+    width: 100%;
+  }
+
+  .forgot-password {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 

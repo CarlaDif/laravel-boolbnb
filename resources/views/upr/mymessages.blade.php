@@ -1,15 +1,18 @@
 @extends('layouts.app')
 @section('content')
   <div class="container">
-    <h2 class="mt-4 mb-4">I miei messaggi</h2>
+    <h2 class="mt-4 mb-4 titolo-messaggi">I miei messaggi</h2>
     @foreach ($messages as $message)
-      <div class="card">
-        <div class="card-header">
-          <div class="row justify-content-between">
-            <p class="preview-message">Messaggio da: {{ $message->name }} - {{ $message->subject }} - {{ $message->message }}</p> <a class="btn btn-outline-info pull-right" data-toggle="modal" data-target="#modal{{ $message->id }}">Visualizza Messaggio</a>
-          </div>
-        </div>
+
+    <div class="card message-card">
+      <div class="card-header">
+        <div class="row justify-content-between">
+          <p class="preview-message">Da: {{ $message->name }} - {{ $message->subject }} - {{ $message->message }}</p> <a class="btn btn-outline-info pull-right visualizza-messaggio" data-toggle="modal" data-target="#modal{{ $message->id }}"> Leggi</a>
+
+		 </div>
       </div>
+    </div>
+
     @endforeach
   </div>
 
