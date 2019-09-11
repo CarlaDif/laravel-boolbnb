@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Apartment;
 use App\User;
+use App\Service;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,7 @@ class SearchApartments extends Controller
       // $validatedData = $request->validate([
       //   'search' => 'required',
       // ]);
-
+      $services = Service::all();
       $lat = $request->latitude;
       $lon = $request->longitude;
       $radius = 20;
@@ -42,13 +43,16 @@ class SearchApartments extends Controller
       return view('search_page')->with([
          'apartments'=>$apartments,
          'latitude' => $lat,
-         'longitude' => $lon
+         'longitude' => $lon,
+         'services'=> $services
+
       ]);
    }
 
   public function filters(Request $request){
 
     $apartments = new Apartment;
+    $services = Service::all();
 
     if ($request->n_baths > 0 || $request->n_single_beds > 0 || $request->n_double_beds > 0) {
       $apartments = DB::table('apartments')
@@ -58,8 +62,20 @@ class SearchApartments extends Controller
     }
 
     if ($request->price > 0) {
-      $apartments = $apartments->where('price',$request->price );
+      $apartments = $apartments->where('price','<=',$request->price );
     }
+
+
+// -------------------------SERVIZI-------------------------
+// ---------------------------------------------------------
+    if (!empty($request->services) ) {
+          $apartments = $apartments->whereHas('services', function($q) use ($request) {
+                          $q->where('services.name',$request->services);
+                      });
+    }//IF
+    // -------------------------END SERVIZI----------------------
+    // ---------------------------------------------------------
+
 
     if ($request->latitude && $request->longitude) {
       $radius = $request->inputRadius;
@@ -69,7 +85,7 @@ class SearchApartments extends Controller
 
       $apartments = $apartments
               ->selectRaw('id, title, address, latitude, longitude, main_img, acos(sin(".$lat.")*sin(radians(latitude)) + cos(".$lat.")*cos(radians(latitude))*cos(radians(longitude)-".$lon.")) * ".$R." As distance')
-              ->whereRaw("acos(sin($lat*0.0175)*sin(radians(latitude)) + cos($lat*0.0175)*cos(radians(latitude))*cos(radians(longitude)-$lon*0.0175)) * $R< $radius")
+              ->whereRaw("acos(sin($lat*0.0175)*sin(radians(latitude)) + cos($lat*0.0175)*cos(radians(latitude))*cos(radians(longitude)-$lon*0.0175)) * $R < $radius")
               ->orderByRaw('distance');
     }
 
@@ -78,7 +94,8 @@ class SearchApartments extends Controller
     return view('search_page')->with([
        'apartments'=>$apartments,
        'latitude' => $lat,
-       'longitude' => $lon
+       'longitude' => $lon,
+       'services'=> $services
        // 'search'=>$search
     ]);
   }
