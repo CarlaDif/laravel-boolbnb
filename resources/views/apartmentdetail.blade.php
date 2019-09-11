@@ -37,7 +37,7 @@
           <input type="hidden" id="latitude" name="longitude" value="{{ $apartment->longitude}}" class="longitude_details">
       </div>
       <div class="row justify-content-between mt-3">
-        <div class="col-md-8">
+        <div class="col-md-7">
           {{-- Card Appartamento--}}
           <div class="card mb-3">
             <div class="card-body">
@@ -103,7 +103,7 @@
           @endauth
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-5  ml-auto">
           {{-- Mappa --}}
             {{-- <img src="https://media.wired.com/photos/59269cd37034dc5f91bec0f1/master/pass/GoogleMapTA.jpg" class="card-img-top" alt="Anteprima non disponibile"> --}}
 

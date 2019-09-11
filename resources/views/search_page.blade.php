@@ -81,8 +81,8 @@
                       Prezzo a notte
                     </div>
                     <div class="col-6 ml-auto">
-                      <label class="tt-form-label js-slider">Prezzo (<span class="js-counter">0</span>€)</label>
-                      <input type="range" name="price_per_night" value="0" class="count mx-1 form-control-range search-slider" min="0" max="1500">
+                      <label class="tt-form-label js-slider">Prezzo (<span id="prezzo" class="js-counter">0</span>€)</label>
+                      <input type="range" name="price_per_night" value="0" id="id_prezzo" class="count mx-1 form-control-range search-slider" min="0" max="1500">
                     </div>
                   </div>
                 </li>
@@ -104,12 +104,11 @@
                     </div>
                     <div class="col-6 ml-auto">
                       <div class="form-group">
-                        <label class="tt-form-label js-slider">Raggio (<span class="js-counter">0</span>Km)
+                        <label class="tt-form-label js-slider">Raggio: (<span id="km" class="js-counter">0</span>Km)</label>
                           <input type="hidden" name="latitude" value="{{ $latitude }}">
                           <input type="hidden" name="longitude" value="{{ $longitude }}">
-                          <input type="range" name="inputRadius" value="0" class="tt-slider form-control-range raggio search-slider" min="0" max="200">
+                          <input type="range" name="inputRadius" value="0" id="id_raggio" class="tt-slider form-control-range raggio search-slider" min="0" max="200">
                           {{-- <p>Value: <span id="demo"></span></p> --}}
-                        </label>
                       </div>
                     </div>
                   </div>

@@ -38,13 +38,13 @@ $(document).ready(function(){
       $('.search_filter').next('.sub_filter').hide();
       $(this).closest('.search_filter').find('.ux_filter_result').css('font-weight', 'bold');
 
-      // count = $(this).closest('.count').val();
+      count = $(this).closest('.count').val();
       // console.log(count);
-      // if(count == 0){
-      //   $(this).closest('.sub_filter').siblings('.search_filter').removeClass('btn-secondary').addClass('btn-outline-secondary');
-      // } else {
-      //   $(this).closest('.sub_filter').siblings('.search_filter').addClass('btn-secondary').removeClass('btn-outline-secondary');
-      // }
+      if(count == 0){
+        $(this).closest('.sub_filter').siblings('.search_filter').removeClass('btn-secondary').addClass('btn-outline-secondary');
+      } else {
+        $(this).closest('.sub_filter').siblings('.search_filter').addClass('btn-secondary').removeClass('btn-outline-secondary');
+      }
    })
 
 
@@ -79,7 +79,6 @@ $(document).ready(function(){
       .then(function(response) {
         for (var i = 0; i < 5; i++) {
           var variabile_hldbar_one = {
-            'id': i,
             'country': response.results[i].address.country,
             'city': response.results[i].address.municipality,
             'streetName': response.results[i].address.streetName,
@@ -122,6 +121,7 @@ $(document).ready(function(){
     });
 
     $('.bt_cerca').click(function(){
+
       var via = $('.list_results option:selected').attr('data-address');
       var city = $('.list_results option:selected').attr('data-city');
       var country = $('.list_results option:selected').attr('data-country');
@@ -132,21 +132,45 @@ $(document).ready(function(){
       $('input[type=text][name=city]').val(city);
       $("input[type=hidden][name=latitude]").val(lat_place_int);
       $("input[type=hidden][name=longitude]").val(lng_int);
-      $("input[type=hidden][name=address]").val();
+      $("input[type=hidden][name=address]").val(via);
 
-      var prima_option = $('.list_results option:first').attr('selected', 'selected');
-      var prima_option_via = prima_option.attr('data-address');
-      var prima_option_city = prima_option.attr('data-city');
-      var prima_option_country = prima_option.attr('data-country');
-      var prima_option_lng_place = $('.list_results').val();
-      var prima_option_lng_int = parseFloat(prima_option_lng_place);
-      var prima_option_lat_place = prima_option.attr('data-lat');
-      var prima_option_lat_int = parseFloat(prima_option_lat_place);
-      $('input[type=text][name=city]').val(prima_option_city);
-      $("input[type=hidden][name=latitude]").val(prima_option_lat_int);
-      $("input[type=hidden][name=longitude]").val(prima_option_lng_int);
-      $("input[type=hidden][name=address]").val(prima_option_via);
+      if (!city || !lng_int || !lat_place_int) {
+        //option non selected
+        var prima_option = $('.list_results option:first').attr('selected', 'selected');
+        var prima_option_via = prima_option.attr('data-address');
+        var prima_option_city = prima_option.attr('data-city');
+        var prima_option_country = prima_option.attr('data-country');
+        var prima_option_lng_place = $('.list_results').val();
+        var prima_option_lng_int = parseFloat(prima_option_lng_place);
+        var prima_option_lat_place = prima_option.attr('data-lat');
+        var prima_option_lat_int = parseFloat(prima_option_lat_place);
+        $('input[type=text][name=city]').val(prima_option_city);
+        $("input[type=hidden][name=latitude]").val(prima_option_lat_int);
+        $("input[type=hidden][name=longitude]").val(prima_option_lng_int);
+        $("input[type=hidden][name=address]").val(prima_option_via);
+      }
+
    }); //fine click
+
+    //avanzamento valori slider raggio
+    $('#id_raggio').click(function(){
+      var slider_raggio = (document.getElementById('id_raggio'));
+      var output_raggio = document.getElementById('km');
+      output_raggio.innerHTML = slider_raggio.value;
+      slider_raggio.oninput = function() {
+        output_raggio.innerHTML = this.value;
+      }
+    });
+
+    // avanzamento valori slider prezzo
+    $('#id_prezzo').click(function(){
+      var slider_prezzo = (document.getElementById('id_prezzo'));
+      var output_prezzo = document.getElementById('prezzo');
+      output_prezzo.innerHTML = slider_prezzo.value;
+      slider_prezzo.oninput = function() {
+        output_prezzo.innerHTML = this.value;
+      }
+    });
 
    //SEZIONE DETTAGLI APPARTAMENTO
    //recupero valore lat e long ecuperati dall'input hidden del file
