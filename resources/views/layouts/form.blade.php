@@ -52,7 +52,7 @@
         </main>
     </div>
   <script id="entry-template_select_one" type="text/x-handlebars-template">
-    <option value="@{{ lng }}" data-lat="@{{ lat }}" data-city="@{{ city }}" data-street-number="@{{ streetNumber }}" data-countrySubdivision="@{{ countrySubdivision }}" data-postalCode="@{{ postalCode }}" data-country="@{{ country }}" data-address="@{{ streetName }}" class="scelto">@{{ streetName }} @{{ streetNumber }} @{{ city }}</option>
+    <option value="@{{ lng }}" data-lat="@{{ lat }}" data-city="@{{ city }}" data-streetNumber="@{{ streetNumber }}" data-countrySubdivision="@{{ countrySubdivision }}" data-postalCode="@{{ postalCode }}" data-country="@{{ country }}" data-address="@{{ streetName }}" class="scelto">@{{ streetName }} @{{ streetNumber }} @{{ city }}</option>
   </script>
   {{-- <script id="entry-template_select_two" type="text/x-handlebars-template">
     <option value="@{{ lng }}" data-lat="@{{ lat }}" data-city="@{{ city }}" class="">@{{ country }}</option>

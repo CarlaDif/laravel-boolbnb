@@ -49284,25 +49284,25 @@ $(document).ready(function () {
     var lng_int = parseFloat(lng_place);
     var lat_place = $('.list_results option:selected').attr('data-lat');
     var lat_place_int = parseFloat(lat_place);
-    var lat_place = $('.list_results option:selected').attr('data-lat');
     var city = $('.list_results option:selected').attr('data-city');
     var regione = $('.list_results option:selected').attr('data-countrySubdivision');
     var cap = $('.list_results option:selected').attr('data-postalCode');
     var paese = $('.list_results option:selected').attr('data-country');
-    var civico = $('.list_results option:selected').attr('data-street-number');
+    var civico = $('.list_results option:selected').attr('data-streetNumber');
     $('input[type=hidden][name=latitude]').val(lat_place_int);
     $('input[type=hidden][name=longitude]').val(lng_int);
-    $('input[type=text][name=place]').val(via + ' ' + civico + ', ' + city + '-' + paese);
+    $('input[type=text][name=place]').val(via + ' ' + civico + ', ' + city + ' - ' + paese);
     $('input[type=text][name=city]').val(city);
     $('input[type=text][name=regione]').val(regione);
     $('input[type=text][name=cap]').val(cap);
-    $('input[type=hidden][name=address]').val(via + ' ' + civico + ', ' + city + '-' + paese);
+    $('input[type=hidden][name=address]').val(via + ' ' + civico + ', ' + city + ' - ' + paese);
     $('.tendina').hide(); //fine click
   });
   $('.bt_cerca').click(function () {
     var via = $('.list_results option:selected').attr('data-address');
-    var city = $('.list_results option:selected').attr('data-city');
-    var country = $('.list_results option:selected').attr('data-country');
+    var city = $('.list_results option:selected').attr('data-city'); // var country = $('.list_results option:selected').attr('data-country');
+
+    var paese = $('.list_results option:selected').attr('data-country');
     var lng_place = $('.list_results').val();
     var lng_int = parseFloat(lng_place);
     var lat_place = $('.list_results option:selected').attr('data-lat');
@@ -49310,7 +49310,7 @@ $(document).ready(function () {
     $('input[type=text][name=city]').val(city);
     $("input[type=hidden][name=latitude]").val(lat_place_int);
     $("input[type=hidden][name=longitude]").val(lng_int);
-    $("input[type=hidden][name=address]").val(via);
+    $("input[type=hidden][name=address]").val(via + ' ' + civico + ', ' + city + ' - ' + paese);
 
     if (!city || !lng_int || !lat_place_int) {
       //option non selected

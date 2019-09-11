@@ -310,6 +310,8 @@ class ApartmentController extends Controller
       $validatedData = $request->validate([
         'title' => 'required',
         'address' => 'required',
+        'latitude' => 'required',
+        'longitude' => 'required',
         'description' => 'required',
         'n_rooms' => 'numeric|min:1',
         'n_single_beds' => 'required|numeric|min:0|max:1000',
