@@ -49225,7 +49225,13 @@ $(document).ready(function () {
   });
   $('.save_filter').click(function () {
     $('.search_filter').next('.sub_filter').hide();
-    $(this).closest('.search_filter').find('.ux_filter_result').text('ok').css('font-weight', 'bold');
+    $(this).closest('.search_filter').find('.ux_filter_result').css('font-weight', 'bold'); // count = $(this).closest('.count').val();
+    // console.log(count);
+    // if(count == 0){
+    //   $(this).closest('.sub_filter').siblings('.search_filter').removeClass('btn-secondary').addClass('btn-outline-secondary');
+    // } else {
+    //   $(this).closest('.sub_filter').siblings('.search_filter').addClass('btn-secondary').removeClass('btn-outline-secondary');
+    // }
   }); // --------------------------------------ENDSEARCH FILTER-------------------------------------
   // ------------------------------------------------------------------------.----------------
 
@@ -49318,8 +49324,7 @@ $(document).ready(function () {
     $("input[type=hidden][name=longitude]").val(prima_option_lng_int);
     $("input[type=hidden][name=address]").val(prima_option_via);
   }); //fine click
-
-  $('.input-address').keyup(function () {}); //SEZIONE DETTAGLI APPARTAMENTO
+  //SEZIONE DETTAGLI APPARTAMENTO
   //recupero valore lat e long ecuperati dall'input hidden del file
   //blade a cui ho mandato dati dal database
 
