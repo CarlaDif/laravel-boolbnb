@@ -119,7 +119,12 @@ $(document).ready(function(){
     //fine click
     });
 
-    $('.bt_cerca').click(function(){
+    $('.bt_cerca').on('click', function(e){
+
+      if( !$('.input-address').val().length ){
+       e.preventDefault();
+      }
+      
       var via = $('.list_results option:selected').attr('data-address');
       var city = $('.list_results option:selected').attr('data-city');
       // var country = $('.list_results option:selected').attr('data-country');
