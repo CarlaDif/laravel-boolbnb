@@ -19,7 +19,7 @@
               <ul class="list-group host-menu">
                 <li class="list-group-item">
                   <div class="d-flex">
-                    <div class="">
+                    <div>
                       Numero Letti Singoli
                     </div>
                     <div class="ml-auto">
