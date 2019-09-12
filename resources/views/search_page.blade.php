@@ -64,7 +64,26 @@
           </span>
 
           <span>
-            <a href="#" class="btn btn-sm btn-outline-secondary search_filter">Viaggio Di Lavoro</a>
+            <a href="#" class="btn btn-sm btn-outline-secondary search_filter">
+            <span class="ux_filter_result"></span> Servizi</a>
+            <div class="position-absolute sub_filter">
+              <ul class="list-group host-menu">
+                <li class="list-group-item ">
+                  @foreach ($services as $service)
+                    <div class="form-check form-check-inline">
+                      <label class="form-check-label" for="{{ $service->name }}">{{ $service->name }}
+                      <input type="checkbox" name="services[]" id="{{ $service->name }}" value="{{ $service->name }}">
+                      </label>
+                    </div>
+                  @endforeach
+                </li>
+                <li class="list-group-item ">
+                  <div class="w-100 d-flex align-items-center">
+                    <div class="save_filter btn btn-success">Salva</div>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </span>
 
           <span>
