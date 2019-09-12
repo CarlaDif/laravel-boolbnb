@@ -69,10 +69,17 @@ class SearchApartments extends Controller
 // -------------------------SERVIZI-------------------------
 // ---------------------------------------------------------
     if (!empty($request->services) ) {
-          $apartments = $apartments->whereHas('services', function($q) use ($request) {
-                          $q->where('services.name',$request->services);
-                      });
+        $apartments = $apartments->whereHas('services', function($q) use ($request) {
+                        $q->where('services.name', $request->services);
+                    });
     }//IF
+
+    // if (!empty($request->services)) {
+    //   // dd($request->services);
+    //   $services = $request->services;
+    //   $apartments = DB::table('apartment_service')
+    //   ->whereHas('service_id', $services);
+    // }
     // -------------------------END SERVIZI----------------------
     // ---------------------------------------------------------
 
