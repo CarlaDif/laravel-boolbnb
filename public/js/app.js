@@ -49303,19 +49303,6 @@ $(document).ready(function () {
       e.preventDefault();
     }
 
-    var via = $('.list_results option:selected').attr('data-address');
-    var city = $('.list_results option:selected').attr('data-city'); // var country = $('.list_results option:selected').attr('data-country');
-
-    var paese = $('.list_results option:selected').attr('data-country');
-    var lng_place = $('.list_results').val();
-    var lng_int = parseFloat(lng_place);
-    var lat_place = $('.list_results option:selected').attr('data-lat');
-    var lat_place_int = parseFloat(lat_place);
-    $('input[type=text][name=city]').val(city);
-    $("input[type=hidden][name=latitude]").val(lat_place_int);
-    $("input[type=hidden][name=longitude]").val(lng_int);
-    $("input[type=hidden][name=address]").val(via + ' ' + civico + ', ' + city + ' - ' + paese);
-
     if (!city || !lng_int || !lat_place_int) {
       //option non selected
       var prima_option = $('.list_results option:first').attr('selected', 'selected');
@@ -49331,6 +49318,19 @@ $(document).ready(function () {
       $("input[type=hidden][name=longitude]").val(prima_option_lng_int);
       $("input[type=hidden][name=address]").val(prima_option_via);
     }
+
+    var via = $('.list_results option:selected').attr('data-address');
+    var city = $('.list_results option:selected').attr('data-city'); // var country = $('.list_results option:selected').attr('data-country');
+
+    var paese = $('.list_results option:selected').attr('data-country');
+    var lng_place = $('.list_results').val();
+    var lng_int = parseFloat(lng_place);
+    var lat_place = $('.list_results option:selected').attr('data-lat');
+    var lat_place_int = parseFloat(lat_place);
+    $('input[type=text][name=city]').val(city);
+    $("input[type=hidden][name=latitude]").val(lat_place_int);
+    $("input[type=hidden][name=longitude]").val(lng_int);
+    $("input[type=hidden][name=address]").val(via + ' ' + civico + ', ' + city + ' - ' + paese);
   }); //fine click
   //avanzamento valori slider raggio
 
