@@ -67,6 +67,7 @@
               <div class="row">
                 <div class="col-md-8">
                   <a class="btn btn-info mb-2" href="{{ route('upr.apartments.edit', $apartment->id) }}">Modifica</a>
+                  <a class="btn btn-outline-secondary" href="{{ route('upr.sponsor', $apartment->id) }}" >Sponsorizza appartamento</a>
 
                   {{-- richiamo al modal per il messaggio di conferma --}}
                   <a class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Elimina inserzione</a>
