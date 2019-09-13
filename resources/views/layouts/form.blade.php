@@ -57,16 +57,18 @@
   </script>
   {{-- script braintree --}}
   <script src="https://js.braintreegateway.com/web/dropin/1.20.1/js/dropin.min.js"></script>
+
   <script>
       var form = document.querySelector('#payment-form');
       var client_token = '{{ $token }}';
+      console.log(client_token);
 
       braintree.dropin.create({
         authorization: client_token,
         selector: '#bt-dropin',
-        paypal: {
-          flow: 'vault'
-        }
+        // paypal: {
+        //   flow: 'vault'
+        // }
       }, function (createErr, instance) {
         if (createErr) {
           console.log('Create Error', createErr);
@@ -76,20 +78,18 @@
           event.preventDefault();
 
           instance.requestPaymentMethod(function (err, payload) {
+
             if (err) {
               console.log('Request Payment Method Error', err);
               return;
             }
 
             // Add the nonce to the form and submit
-            document.querySelector('#nonce').value = payload.nonce;
+            document.querySelector("nonce").value = payload.nonce;
             form.submit();
           });
         });
       });
   </script>
-  {{-- <script id="entry-template_select_two" type="text/x-handlebars-template">
-    <option value="@{{ lng }}" data-lat="@{{ lat }}" data-city="@{{ city }}" class="">@{{ country }}</option>
-  </script> --}}
 </body>
 </html>

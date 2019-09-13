@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Apartment;
 use Braintree;
 
@@ -16,10 +17,10 @@ class SponsorController extends Controller
 {
   public function index($apartment_id) {
     $gateway = new Braintree\Gateway([
-      'environment' => env('BT_ENVIRONMENT', 'sandbox'),
-      'merchantId' => env('BT_MERCHANT_ID'),
-      'publicKey' => env('BT_PUBLIC_KEY'),
-      'privateKey' => env('BT_PRIVATE_KEY')
+      'environment' => config('services.braintree.environment'),
+      'merchantId' => config('services.braintree.merchantId'),
+      'publicKey' => config('services.braintree.publicKey'),
+      'privateKey' => config('services.braintree.privateKey')
     ]);
 
     $token = $gateway->clientToken()->generate();
@@ -34,18 +35,19 @@ class SponsorController extends Controller
 
   public function checkout(Request $request) {
     $gateway = new Braintree\Gateway([
-      'environment' => env('BT_ENVIRONMENT', 'sandbox'),
-      'merchantId' => env('BT_MERCHANT_ID'),
-      'publicKey' => env('BT_PUBLIC_KEY'),
-      'privateKey' => env('BT_PRIVATE_KEY')
+      'environment' => config('services.braintree.environment'),
+      'merchantId' => config('services.braintree.merchantId'),
+      'publicKey' => config('services.braintree.publicKey'),
+      'privateKey' => config('services.braintree.privateKey')
     ]);
 
     $amount = $request->amount;
-    $nonce = $request->payment_method_nonce;
+
+    // $nonce = $request->payment_method_nonce;
 
     $result = $gateway->transaction()->sale([
         'amount' => $amount,
-        'paymentMethodNonce' => $nonce,
+        'paymentMethodNonce' => 'fake-valid-nonce',
         'customer' => [
           'firstName' => 'Chris',
           'lastName' => 'Evans',
@@ -56,23 +58,22 @@ class SponsorController extends Controller
         ]
     ]);
 
-    dd($result);
-
-    if ($result->success) {
+    if ($result->success || !is_null($result->transaction)) {
         $transaction = $result->transaction;
-        // header("Location: " . $baseUrl . "transaction.php?id=" . $transaction->id);
-        return back()->with('success_message', 'Transazione avvenuta con successo. L\'ID è: ' . $transaction->id);
+        $apartment_id = $request->apartment_id;
+        $apartment_is_sponsored = $users = DB::table('apartments')
+        ->where('id', $apartment_id)
+        ->update(['is_sponsored' => 1]);
+
+        return back()->with('success_message', 'Transazione avvenuta con successo.');
     } else {
-        $errorString = "";
+        $errorString = '';
 
         foreach($result->errors->deepAll() as $error) {
             $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
         }
 
-        return back()->withErrore('Si è verificato un errore: ' . $result->message);
-
-        // $_SESSION["errors"] = $errorString;
-        // header("Location: " . $baseUrl . "index.php");
+        return back()->withError('Si è verificato un errore: ' . $result->message);
     }
   }
 }

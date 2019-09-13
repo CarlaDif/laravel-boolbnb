@@ -45,7 +45,7 @@ Route::middleware('auth')->namespace('Upr')->name('upr.')->group(function(){
 
   Route::get('sponsor/{apartment_id}', 'SponsorController@index')->name('sponsor');
 
-  Route::post('checkout', 'SponsorController@checkout')->name('checkout');
+  Route::post('/checkout', 'SponsorController@checkout')->name('checkout');
 
 });
 
