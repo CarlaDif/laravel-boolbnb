@@ -8,6 +8,7 @@ use App\Apartment;
 use App\User;
 use App\Service;
 use App\Apartment_img;
+use App\Sponsorship;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
@@ -25,7 +26,7 @@ class ApartmentController extends Controller
      */
     public function myIndex()
     {
-      $apartments = Apartment::where('user_id', Auth::user()->id)->get();
+      $apartments = Apartment::where('user_id', Auth::user()->id)->orderBy('is_sponsored', 'DESC')->get();
       return view('upr.myapartments', compact('apartments', $apartments));
     }
 
@@ -254,6 +255,8 @@ class ApartmentController extends Controller
 
         $apartment_imgs = Apartment_img::where('apartment_id', $apartment_id)->take(4)->get();
 
+        $sponsorships = Sponsorship::where('apartment_id', $apartment_id)->get();
+
         if (!$apartment) {
           abort(404);
         }
@@ -263,7 +266,8 @@ class ApartmentController extends Controller
         $data = [
         'apartment' => $apartment,
         'services' => $services,
-        'apartment_imgs' => $apartment_imgs
+        'apartment_imgs' => $apartment_imgs,
+        'sponsorships' => $sponsorships
         ];
 
         return view('apartmentdetail', $data);
@@ -379,6 +383,19 @@ class ApartmentController extends Controller
       $apartment->delete();
       return redirect()->route('upr.my-apartments');
 
+    }
+
+    public function statistics($apartment_id) {
+      $apartment = Apartment::find($apartment_id);
+      $sponsors = Sponsorship::where('apartment_id', $apartment_id)->get();
+
+      $data = [
+        'apartment' => $apartment,
+        'sponsors' => $sponsors
+      ];
+
+
+      return view('upr.statistics', $data);
     }
 
 }

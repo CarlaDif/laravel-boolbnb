@@ -67,7 +67,12 @@
               <div class="row">
                 <div class="col-md-8">
                   <a class="btn btn-info mb-2" href="{{ route('upr.apartments.edit', $apartment->id) }}">Modifica</a>
-                  <a class="btn btn-outline-secondary" href="{{ route('upr.sponsor', $apartment->id) }}" >Sponsorizza appartamento</a>
+
+                  @if ($apartment->is_sponsored)
+                    <a class="btn btn-warning">Sponsorizzazione attiva!!!</a>
+                    @else
+                    <a class="btn btn-outline-secondary" href="{{ route('upr.sponsor', $apartment->id) }}">Sponsorizza appartamento</a>
+                  @endif
 
                   {{-- richiamo al modal per il messaggio di conferma --}}
                   <a class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Elimina inserzione</a>
@@ -98,6 +103,11 @@
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col-12">
+                  <a href="{{ route('upr.apartments.statistics', $apartment->id) }}">Visualizza statitiche appartamento</a>
                 </div>
               </div>
             @endif

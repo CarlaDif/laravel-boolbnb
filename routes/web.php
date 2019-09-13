@@ -47,6 +47,8 @@ Route::middleware('auth')->namespace('Upr')->name('upr.')->group(function(){
 
   Route::post('/checkout', 'SponsorController@checkout')->name('checkout');
 
+  Route::get('/statistic/{apartment_id}', 'ApartmentController@statistics')->name('apartments.statistics');
+
 });
 
 Route::get('search-apartments','SearchApartments@inputSearch')->name('searchApartments');
