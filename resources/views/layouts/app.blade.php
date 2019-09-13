@@ -60,9 +60,9 @@
                     <div id="foldable" class="tt-overlay-panel -left-top -medium js-foldable"></div>
                     <div class="tt-search-box-search-icon form-group has-search mt-auto mb-auto position-relative">
 
-                      <span class="fa fa-search form-control-feedback"></span>
+                      <span class="fa fa-search lente form-control-feedback"></span>
                       {{-- ABBIAMO MODIFICATO IL NAME DA "search" a "city" SOLO PER INSERIRE IL VALORE CERCATO NELL'INPUT --}}
-                      <input type="text" name="city" value="" class="tt-search-box-input form-control input-address" placeholder="Seleziona una località" autocomplete="off">
+                      <input type="text" name="city" value="" class="tt-search-box-input form-control input-address box-ricerca" placeholder="Seleziona una località" autocomplete="off">
                       <input type="hidden" value="" id="latitude_hidden" name="latitude">
                       <input type="hidden" value="" id="longitude_hidden" name="longitude">
                       <div class="bootstrap-select-wrapper position-absolute w-100">
