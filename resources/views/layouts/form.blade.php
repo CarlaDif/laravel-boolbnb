@@ -58,7 +58,7 @@
   {{-- script braintree --}}
   <script src="https://js.braintreegateway.com/web/dropin/1.20.1/js/dropin.min.js"></script>
 
-  <script>
+  {{-- <script>
       var form = document.querySelector('#payment-form');
       var client_token = '{{ $token }}';
       console.log(client_token);
@@ -90,6 +90,6 @@
           });
         });
       });
-  </script>
+  </script> --}}
 </body>
 </html>

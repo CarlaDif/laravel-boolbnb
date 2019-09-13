@@ -10681,6 +10681,22 @@ a.text-dark:focus {
   cursor: pointer;
 }
 
+.fa-star {
+  color: yellow;
+}
+
+@media screen and (max-width: 768px) {
+  .bt_cerca {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .tt-search-box-search-icon {
+    width: 150px;
+  }
+}
+
 .has-search {
   z-index: 10;
 }
@@ -10798,10 +10814,6 @@ a.text-dark:focus {
 }
 
 @media screen and (max-width: 576px) {
-  .navbar-brand {
-    display: none;
-  }
-
   .welcome-image,
   #categories {
     display: none;
@@ -10809,13 +10821,14 @@ a.text-dark:focus {
 
   .single-apartment {
     flex: 0;
+    color: #01BFFF;
   }
 
   .esplora,
   .aiutarti,
-  .alloggi,
-  .single-apartment {
+  .alloggi {
     font-size: 180%;
+    color: #017FFF;
   }
 }
 
@@ -10854,9 +10867,9 @@ a.text-dark:focus {
 
 @media screen and (max-width: 768px) {
   .titolo-messaggi {
-    font-size: 350%;
+    font-size: 250%;
     text-align: center;
-    color: #5F5F5F;
+    color: #73B879;
   }
 
   .preview-message {
@@ -10866,7 +10879,7 @@ a.text-dark:focus {
   }
 
   .preview-message {
-    font-size: 300%;
+    font-size: 150%;
   }
 
   .message-card {
@@ -10877,9 +10890,10 @@ a.text-dark:focus {
   a.visualizza-messaggio {
     display: block;
     width: 100%;
-    height: 80px;
-    font-size: 300%;
+    height: 60px;
+    font-size: 170%;
     color: #5F5F5F;
+    background-color: #73B879;
   }
 
   #exampleModalLong {
@@ -10947,6 +10961,34 @@ a.text-dark:focus {
   }
 
   #navbarDropdown a {
+    font-size: 200%;
+  }
+}
+
+.opzioni-appartamento {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 767px) {
+  .opzioni-appartamento {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .opzioni-appartamento {
+    margin-bottom: 10px;
+  }
+
+  .modifica-appartamento,
+  .sponsorizza-appartamento,
+  .elimina-inserzione {
+    height: 50px;
+    font-size: 150%;
+    margin-bottom: 10px;
+  }
+
+  .info-appartamento {
     font-size: 200%;
   }
 }
