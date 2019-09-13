@@ -27,7 +27,7 @@ class HomeController extends Controller
 
       if(Auth::user()) {
         $user = Auth::user();
-        $apartments = Apartment::where('is_public', 1)->get();
+        $apartments = Apartment::where('is_public', 1)->orderBy('is_sponsored', 'DESC')->get();
 
         return view('welcome')->with([
           'apartments'=>$apartments,
