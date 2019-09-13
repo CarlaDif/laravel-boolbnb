@@ -18,9 +18,9 @@
 
 @media screen and (max-width:768px) {
   .titolo-messaggi {
-    font-size: 350%;
+    font-size: 250%;
     text-align: center;
-    color:#5F5F5F;
+    color:#73B879;
   }
   .preview-message {
     text-overflow:ellipsis;
@@ -28,7 +28,7 @@
     max-width: 15ch;
   }
   .preview-message {
-    font-size: 300%;
+    font-size: 150%;
   }
   .message-card {
     margin-bottom: 40px;
@@ -37,9 +37,10 @@
   a.visualizza-messaggio {
     display:block;
     width:100%;
-    height:80px;
-    font-size: 300%;
+    height:60px;
+    font-size: 170%;
     color: #5F5F5F;
+    background-color: #73B879;
   }
   #exampleModalLong {
     font-size: 250%;

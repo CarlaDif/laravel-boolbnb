@@ -33,17 +33,19 @@
 }
 
 @media screen and (max-width:576px){
-  .navbar-brand {
-    display:none;
-  }
+  // .navbar-brand {
+  //   display:none;
+  // }
   .welcome-image, #categories {
     display: none;
   }
   .single-apartment {
     flex:0;
+    color:#01BFFF;
   }
-  .esplora, .aiutarti, .alloggi, .single-apartment {
+  .esplora, .aiutarti, .alloggi {
     font-size: 180%;
+    color:#017FFF;
   }
 }
 

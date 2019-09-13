@@ -40,3 +40,18 @@
  background: #4CAF50;
  cursor: pointer;
 }
+
+.fa-star {
+  color:yellow;
+}
+
+@media screen and (max-width:768px) {
+    .bt_cerca {
+      display:none;
+    }
+  }
+  @media screen and (max-width:360px) {
+      .tt-search-box-search-icon {
+        width:150px;
+      }
+    }
