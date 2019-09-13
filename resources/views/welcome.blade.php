@@ -10,9 +10,9 @@
     <div class="container">
       <div class="row">
         @guest
-          <h3 class="mt-4 ml-3">Esplora BoolBnB</h3>
+          <h3 class="mt-4 ml-3 esplora">Esplora BoolBnB</h3>
         @else
-          <h3 class="mt-4 ml-3">Cosa possiamo aiutarti a cercare, {{ $user->name }}?</h3>
+          <h3 class="mt-4 ml-3 aiutarti">Cosa possiamo aiutarti a cercare, {{ $user->name }}?</h3>
         @endguest
       </div>
     </div>
@@ -82,12 +82,12 @@
   <section id="apartments-prewiew">
     <div class="container">
       <div class="row mt-5">
-        <h4 class="ml-3">Alloggi in tutto il mondo</h4>
+        <h4 class="ml-3 alloggi">Alloggi in tutto il mondo</h4>
       </div>
       <div class="row justify-content-between mt-3">
       <div class="card-deck" id="apartments">
         @foreach ($apartments as $apartment)
-          <div class="col-md-4 col-sm-12 col-lg-4 single-apartment">
+          <div class="col-md-6 col-sm-12 col-lg-4 single-apartment">
             <a href=
             @guest
               "{{ route('ui.apartments.show', $apartment->id) }}"
@@ -102,7 +102,7 @@
                 <img src="https://kitv.images.worldnow.com/images/16468883_G.png?lastEditedDate=1522902908000" class="card-img-top" alt="Anteprima non disponibile">
               @endif
                 <div class="card-body">
-                  <h5 class="card-title">{{ $apartment->title }}</h5>
+                  <h5 class="card-title nome-appartamento">{{ $apartment->title }}</h5>
                   <p>{{ $apartment->address }}</p>
                 </div>
               </div>

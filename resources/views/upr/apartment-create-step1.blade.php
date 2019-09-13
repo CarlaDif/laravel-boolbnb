@@ -2,8 +2,8 @@
 
 @section('content')
   <div class="container-fluid d-flex">
-    <div class="col-md-7 mt-5">
-      <form class="w-50 ml-auto" action="{{ route('upr.apartments.create-step1') }}" method="post">
+    <div class="col-md-7 mt-5 insert-1 col-sm-12">
+      <form class="" action="{{ route('upr.apartments.create-step1') }}" method="post">
         @csrf
         <h3>Inserisci i primi dati del tuo appartamento!</h3>
         <div class="form-group mt-5">

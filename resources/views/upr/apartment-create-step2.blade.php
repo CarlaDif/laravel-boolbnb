@@ -3,7 +3,7 @@
 @section('content')
   <div class="container-fluid d-flex">
     <div class="col-md-7 mt-5">
-      <form class="w-50 ml-auto" action="{{ route('upr.apartments.create-step2') }}" method="post">
+      <form class="ml-auto" action="{{ route('upr.apartments.create-step2') }}" method="post">
         @csrf
         <h3>Quante persone può ospitare il tuo alloggio?</h3>
         <div class="form-group mt-5">

@@ -1,0 +1,32 @@
+
+@media screen and (max-width:767px) {
+  .info-utente {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin:0;
+    padding: 0;
+  }
+  .dettagli-utente {
+    margin:0;
+    padding:0;
+  }
+  .info-account-utente {
+    font-size: 200%;
+    text-align: center;
+  }
+  .dettagli-account-utente {
+    font-size: 200%;
+  }
+  .visualizza-inserzioni {
+    button {
+      width:100%;
+      height:100px;
+      font-size: 200%;
+      background-color: #80BDFF;
+      a {
+        color:#FFF;
+      }
+    }
+  }
+}

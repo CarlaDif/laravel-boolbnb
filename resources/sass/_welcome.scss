@@ -33,27 +33,24 @@
 }
 
 @media screen and (max-width:576px){
-  #categories {
+  .navbar-brand {
     display:none;
   }
-  .card-apartment {
-    width:95vw;
+  .welcome-image, #categories {
+    display: none;
   }
   .single-apartment {
     flex:0;
   }
+  .esplora, .aiutarti, .alloggi, .single-apartment {
+    font-size: 180%;
+  }
 }
 
 @media screen and (min-width:577px) and (max-width:768px){
-  #categories {
+  .welcome-image, #categories {
     display:none;
   }
-  .card-apartment {
-    width:95vw;
-  }
-  // .single-apartment {
-  //   flex:0;
-  // }
 }
 
 @media screen and (max-width: 992px) {
@@ -61,14 +58,3 @@
     display:none;
   }
 }
-
-// @media screen and (max-width:768px) and (max-width:1024px) {
-//
-// }
-
-
-// @media screen and (min-width:992px){
-//   #categories {
-//     display:none;
-//   }
-// }

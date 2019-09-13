@@ -3,7 +3,7 @@
 @section('content')
   <div class="container-fluid d-flex">
     <div class="col-md-7 mt-5">
-      <form class="w-50 ml-auto" action="{{ route('upr.apartments.store') }}" method="post" enctype="multipart/form-data">
+      <form class="ml-auto" action="{{ route('upr.apartments.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <h3>Quanto costa?</h3>
         <div class="form-group mt-5">
