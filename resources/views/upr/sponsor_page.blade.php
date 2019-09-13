@@ -1,4 +1,4 @@
-@extends('layouts.form')
+@extends('layouts.sponsor')
 
 @section('content')
   @if (session('success_message'))
