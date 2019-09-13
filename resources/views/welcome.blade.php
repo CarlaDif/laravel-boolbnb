@@ -3,11 +3,9 @@
 @section('content')
   <section id="title-prewiew">
     @guest
-      <div class="welcome-image">
-
-      </div>
+      <div class="welcome-image"></div>
     @endguest
-    <div class="container">
+    <div class="container container-82">
       <div class="row">
         @guest
           <h3 class="mt-4 ml-3 esplora">Esplora BoolBnB</h3>
@@ -18,7 +16,7 @@
     </div>
   </section>
   <section id="categories">
-    <div class="container">
+    <div class="container container-82">
       <div class="row justify-content-between mt-5">
         <div class="col-3">
           <div class="card mb-3">
@@ -80,14 +78,14 @@
     </div>
   </section>
   <section id="apartments-prewiew">
-    <div class="container">
+    <div class="container container-82">
       <div class="row mt-5">
         <h4 class="ml-3 alloggi">Alloggi in tutto il mondo</h4>
       </div>
       <div class="row justify-content-between mt-3">
-      <div class="card-deck" id="apartments">
+      <div class="card-deck no-gutters" id="apartments">
         @foreach ($apartments as $apartment)
-          <div class="col-md-6 col-sm-12 col-lg-4 single-apartment">
+          {{-- <div class="col-md-6 col-sm-12 col-lg-4 single-apartment"> --}}
             <a href=
             @guest
               "{{ route('ui.apartments.show', $apartment->id) }}"
@@ -112,7 +110,7 @@
                 </div>
               </div>
             </a>
-          </div>
+          {{-- </div> --}}
         @endforeach
       </div>
       </div>

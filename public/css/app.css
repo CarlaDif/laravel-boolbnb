@@ -10644,6 +10644,10 @@ a.text-dark:focus {
   }
 }
 
+.container-82 {
+  max-width: 82%;
+}
+
 .sub_filter .search-slider {
   width: 200px;
 }
@@ -10789,6 +10793,7 @@ a.text-dark:focus {
 }
 
 .card-apartment {
+  width: 18rem;
   height: 20rem;
 }
 
