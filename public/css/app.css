@@ -10686,7 +10686,7 @@ a.text-dark:focus {
 }
 
 .fa-star {
-  color: yellow;
+  color: #f9ca24;
 }
 
 @media screen and (max-width: 768px) {
