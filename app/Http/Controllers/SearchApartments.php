@@ -6,6 +6,7 @@ use App\User;
 use App\Service;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class SearchApartments extends Controller
 {
@@ -23,10 +24,27 @@ class SearchApartments extends Controller
    }
 
   public function page(Request $request) {
+      //query per aggiornare lo status sponsorizzazione degli appartamenti
+      $sponsorships = DB::table('sponsorships')
+                      ->join('apartments', 'sponsorships.apartment_id','=' , 'apartments.id' )
+                      ->select('sponsorships.*')
+                      ->get();
 
-      // $validatedData = $request->validate([
-      //   'search' => 'required',
-      // ]);
+      $now = Carbon::now()->format('Y-m-d H:i:s');
+
+      foreach ($sponsorships as $sponsor) {
+        $end = $sponsor->sponsor_end_at;
+        $now_string = strval($now);
+        $end_string = strval($end);
+
+        $diff = Carbon::parse($now_string)->greaterThanOrEqualTo($end_string);
+        if ($diff) {
+          $apartment_is_sponsored = DB::table('apartments')
+          ->where('id', $sponsor->apartment_id)
+          ->update(['is_sponsored' => 0]);
+        }
+      }
+
       $services = Service::all();
       $lat = $request->latitude;
       $lon = $request->longitude;
@@ -35,9 +53,9 @@ class SearchApartments extends Controller
 
       //$place_radius = 5;
       $apartments = DB::table('apartments')
-          ->selectRaw('id, title, address, latitude, longitude, main_img, acos(sin(".$lat.")*sin(radians(latitude)) + cos(".$lat.")*cos(radians(latitude))*cos(radians(longitude)-".$lon.")) * ".$R." As distance')
+          ->selectRaw('id, title, address, latitude, longitude, is_sponsored, main_img, acos(sin('.$lat.')*sin(radians(latitude)) + cos('.$lat.')*cos(radians(latitude))*cos(radians(longitude)-'.$lon.')) * '.$R.' As distance')
           ->whereRaw("acos(sin($lat*0.0175)*sin(radians(latitude)) + cos($lat*0.0175)*cos(radians(latitude))*cos(radians(longitude)-$lon*0.0175)) * $R< $radius")
-          ->orderByRaw('distance')
+          ->orderBy('distance')
           ->get();
 
       return view('search_page')->with([
@@ -45,12 +63,34 @@ class SearchApartments extends Controller
          'latitude' => $lat,
          'longitude' => $lon,
          'services'=> $services
-
       ]);
    }
 
   public function filters(Request $request){
-    $services = Service::all();
+
+    dd($request);
+    //query per aggiornare lo status sponsorizzazione degli appartamenti
+    $sponsorships = DB::table('sponsorships')
+                    ->join('apartments', 'sponsorships.apartment_id','=' , 'apartments.id' )
+                    ->select('sponsorships.*')
+                    ->get();
+
+    $now = Carbon::now()->format('Y-m-d H:i:s');
+
+    foreach ($sponsorships as $sponsor) {
+      $end = $sponsor->sponsor_end_at;
+      $now_string = strval($now);
+      $end_string = strval($end);
+
+      $diff = Carbon::parse($now_string)->greaterThanOrEqualTo($end_string);
+      if ($diff) {
+        $apartment_is_sponsored = DB::table('apartments')
+        ->where('id', $sponsor->apartment_id)
+        ->update(['is_sponsored' => 0]);
+      }
+    }
+
+   $services = Service::all();
    $apartments = new Apartment;
    if ($request->n_baths > 0 ) {
      $apartments = $apartments
@@ -84,10 +124,15 @@ class SearchApartments extends Controller
      $lon = $request->longitude;
      $R = 6371;
      $apartments = $apartments
-             ->selectRaw('id, title, address, latitude, longitude, main_img, acos(sin(".$lat.")*sin(radians(latitude)) + cos(".$lat.")*cos(radians(latitude))*cos(radians(longitude)-".$lon.")) * ".$R." As distance')
+             ->selectRaw('id, title, address, latitude, longitude, is_sponsored, main_img, acos(sin('.$lat.')*sin(radians(latitude)) + cos('.$lat.')*cos(radians(latitude))*cos(radians(longitude)-'.$lon.')) * '.$R.' As distance')
              ->whereRaw("acos(sin($lat*0.0175)*sin(radians(latitude)) + cos($lat*0.0175)*cos(radians(latitude))*cos(radians(longitude)-$lon*0.0175)) * $R< $radius")
-             ->orderByRaw('distance');
+             ->orderBy('distance');
    }
+
+    // funzione tom tom originale
+    // ->selectRaw('id, title, address, latitude, longitude, is_sponsored, main_img, acos(sin(".$lat.")*sin(radians(latitude)) + cos(".$lat.")*cos(radians(latitude))*cos(radians(longitude)-".$lon.")) * ".$R." As distance')
+     // ->whereRaw("acos(sin($lat*0.0175)*sin(radians(latitude)) + cos($lat*0.0175)*cos(radians(latitude))*cos(radians(longitude)-$lon*0.0175)) * $R< $radius")
+
    $apartments = $apartments->get();
    return view('search_page')->with([
       'apartments'=>$apartments,

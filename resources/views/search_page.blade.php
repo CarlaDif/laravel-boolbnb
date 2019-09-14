@@ -166,6 +166,11 @@
         @endguest
         >
         <div class="card mt-3 " style="width: 16rem;">
+          @if ($apartment->is_sponsored == 1)
+            <div class="position-absolute">
+              <i class="fas fa-star mt-1 ml-1"></i>
+            </div>
+          @endif
           @if (!empty($apartment->main_img))
             <img src="{{ asset('storage/' . $apartment->main_img) }}" class="card-img-top" style="width: 100%; height: 150px; object-fit: cover;" alt="Anteprima Appartamento">
           @else
