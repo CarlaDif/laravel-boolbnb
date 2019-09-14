@@ -48,6 +48,11 @@
 .fa-star {
   color:#f9ca24;
 }
+.bt_cerca {
+  border-color: $iconic-color;
+  color:$iconic-color;
+  padding:8px;
+}
 
 @media screen and (max-width:768px) {
     .bt_cerca {

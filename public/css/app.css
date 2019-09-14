@@ -10689,6 +10689,12 @@ a.text-dark:focus {
   color: #f9ca24;
 }
 
+.bt_cerca {
+  border-color: #73B879;
+  color: #73B879;
+  padding: 8px;
+}
+
 @media screen and (max-width: 768px) {
   .bt_cerca {
     display: none;
