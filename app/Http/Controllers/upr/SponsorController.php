@@ -28,11 +28,14 @@ class SponsorController extends Controller
     $token = $gateway->clientToken()->generate();
 
     $apartment = Apartment::find($apartment_id);
+    if ($apartment->is_sponsored == 0) {
+      return view('upr.sponsor_page')->with([
+        'apartment'=> $apartment,
+        'token' => $token
+      ]);
+    }
 
-    return view('upr.sponsor_page')->with([
-      'apartment'=> $apartment,
-      'token' => $token
-    ]);
+    return back()->with('message', 'Questo appartamento è già sponsorizzato.');
   }
 
   public function checkout(Request $request) {
@@ -78,7 +81,7 @@ class SponsorController extends Controller
         $sponsorship->apartment_id = $apartment_id;
 
         if ($transaction->amount == 2.99) {
-          $sponsorship->sponsor_end_at = Carbon::now()->addHours(24);
+          $sponsorship->sponsor_end_at = Carbon::now()->addMinutes(5);
         } elseif ($transaction->amount == 5.99) {
           $sponsorship->sponsor_end_at = Carbon::now()->addHours(72);
         } else {
@@ -89,7 +92,7 @@ class SponsorController extends Controller
 
         $apartment_is_sponsored = DB::table('apartments')
         ->where('id', $apartment_id)
-        ->update(['is_sponsored' => 1])->endAt($sponsorship->sponsor_end_at);
+        ->update(['is_sponsored' => 1]);
 
         return redirect()->route('upr.my-apartments')->with('success_message', 'Transazione avvenuta con successo.');
     } else {
@@ -102,4 +105,12 @@ class SponsorController extends Controller
         return back()->withError('Si è verificato un errore: ' . $result->message);
     }
   }
+
+  // public function resetIsSponsored($apartment_id) {
+  //   $fine = $sponsorship->sponsor_end_at;
+
+  //   $apartment_is_sponsored = DB::table('apartments')
+  //   ->where('id', $apartment_id)
+  //   ->update(['is_sponsored' => 0]);
+  // }
 }

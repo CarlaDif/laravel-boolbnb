@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+  @if (session('message'))
+    <div class="alert alert-success">
+      {{ session('message') }}
+    </div>
+  @endif
   <div class="container-fluid no-gutters px-0">
     <div class="row no-gutters">
       <div class="col-md-6" style="height:500px;">{{-- COLONNA PRINCIPALE --}}
