@@ -12,7 +12,7 @@
         </div>
       @else
         <div class="row mt-5">
-          <h4>{{ Auth::user()->name }}, ecco la lista dei tuoi appartamenti! <i class="far fa-smile"></i></h4>
+          <h4 class="mia-lista">{{ Auth::user()->name }}, ecco la lista dei tuoi appartamenti! <i class="far fa-smile"></i></h4>
         </div>
         <div class="row justify-content-between mt-3">
           <div class="card-deck no-gutters" id="apartments">

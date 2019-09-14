@@ -6,6 +6,13 @@
       <form class="" action="{{ route('upr.apartments.create-step1') }}" method="post">
         @csrf
         <h3>Inserisci un titolo e una descrizione!</h3>
+        <div class="step-inserimento mb-4">
+          <p>Passaggio 2 di 4</p>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+            </div>
+          </div>
+        </div>
         <div class="form-group mt-5">
           <label for="title">Nome dell'appartamento</label>
           <input type="text" class="form-control" id="title" name="title" placeholder="Inserisci un nome del tuo appartamento" value="{{ old('title') }}" >

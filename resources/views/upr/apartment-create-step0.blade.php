@@ -3,9 +3,17 @@
 @section('content')
   <div class="container-fluid d-flex">
     <div class="col-md-7 mt-5">
-      <form class="w-50 ml-auto" action="{{ route('upr.apartments.create-step0') }}" method="post">
+      <form class="ml-auto" action="{{ route('upr.apartments.create-step0') }}" method="post">
         @csrf
         <h3>Inserisci i primi dati del tuo appartamento!</h3>
+        <div class="step-inserimento mb-4">
+          <p>Passaggio 1 di 4</p>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+              {{-- <span class="sr-only">73% Complete</span> --}}
+            </div>
+          </div>
+        </div>
 
         {{-- indirizzo --}}
         <div class="form-group">

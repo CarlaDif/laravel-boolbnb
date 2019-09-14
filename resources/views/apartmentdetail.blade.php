@@ -42,7 +42,7 @@
           <input type="hidden" id="latitude" name="longitude" value="{{ $apartment->longitude}}" class="longitude_details">
       </div>
       <div class="row justify-content-between mt-3">
-        <div class="col-md-7 ">
+        <div class="col-md-7">
           {{-- Card Appartamento--}}
           <div class="card mb-3 info-appartamento">
             <div class="card-body">
@@ -72,12 +72,12 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="col-md-12 opzioni-appartamento">
-                    <a class="btn btn-info modifica-appartamento" href="{{ route('upr.apartments.edit', $apartment->id) }}">Modifica</a>
+                    <a class="btn btn-outline-secondary modifica-appartamento mr-2" href="{{ route('upr.apartments.edit', $apartment->id) }}">Modifica</a>
 
                     @if ($apartment->is_sponsored)
-                      <a class="btn btn-warning">Sponsorizzazione attiva!!!</a>
+                      <a class="btn btn-warning mr-2">Sponsorizzazione attiva!!!</a>
                       @else
-                      <a class="btn btn-outline-secondary sponsorizza-appartamento" href="{{ route('upr.sponsor', $apartment->id) }}">Sponsorizza appartamento</a>
+                      <a class="btn sponsorizza-appartamento mr-2" href="{{ route('upr.sponsor', $apartment->id) }}">Sponsorizza appartamento</a>
                     @endif
                       {{-- richiamo al modal per il messaggio di conferma --}}
                       <a class="btn btn-danger elimina-inserzione" data-toggle="modal" data-target="#exampleModal">Elimina inserzione</a>
