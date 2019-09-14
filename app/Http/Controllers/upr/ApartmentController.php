@@ -430,15 +430,30 @@ class ApartmentController extends Controller
 
     public function statistics(Request $request, $apartment_id) {
       $apartment = Apartment::find($apartment_id);
-      $sponsors = Sponsorship::where('apartment_id', $apartment_id)->get();
-      // $visits = Counter::count('apartmentdetail', $apartment->id);
+      $sponsors = Sponsorship::where('apartment_id', $apartment_id)
+      ->orderBy('created_at', 'DESC')
+      ->get();
+      $somma = 0;
 
-      $ip = $request->getClientIp();
+      foreach ($sponsors as $sponsor) {
+        $tipo_sponsor = $sponsor->sponsor_type_id;
+
+        if ($tipo_sponsor == '1') {
+          $costo = '2.99';
+        } elseif ($tipo_sponsor == '2') {
+          $costo = '5.99';
+        } else {
+          $costo = '9.99';
+        }
+
+        $somma += $costo;
+      }
+
 
       $data = [
         'apartment' => $apartment,
         'sponsors' => $sponsors,
-        // 'visits' => $visits
+        'somma' => $somma,
       ];
 
       return view('upr.statistics', $data);
