@@ -93,7 +93,7 @@
               "{{ route('upr.apartments.show', $apartment->id) }}"
             @endguest
             >
-            <div class="card mt-3 card-apartment position-relative">
+            <div class="card mt-3 card-apartment position-relative visit-counter">
               @if ($apartment->is_sponsored == 1)
                 <div class="position-absolute">
                   <i class="fas fa-star mt-1 ml-1"></i>

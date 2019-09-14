@@ -40,6 +40,7 @@
           {{-- input hidden che prende valori da database e li passa a java --}}
           <input type="hidden" id="latitude" name="latitude" value="{{ $apartment->latitude}}" class="latitude_details">
           <input type="hidden" id="latitude" name="longitude" value="{{ $apartment->longitude}}" class="longitude_details">
+
       </div>
       <div class="row justify-content-between mt-3">
         <div class="col-md-7 ">

@@ -259,5 +259,14 @@ $(document).ready(function(){
     });// AJAX
   });// keyup
 
+  // $('.visit-counter').on('click', function(){
+  //   $.ajax({
+  //     url: ,
+  //     method: ,
+  //     success: function() {
+  //
+  //     }
+  //   });
+  // });
 
 });//READY DOCUMENT

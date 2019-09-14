@@ -428,13 +428,17 @@ class ApartmentController extends Controller
 
     }
 
-    public function statistics($apartment_id) {
+    public function statistics(Request $request, $apartment_id) {
       $apartment = Apartment::find($apartment_id);
       $sponsors = Sponsorship::where('apartment_id', $apartment_id)->get();
+      // $visits = Counter::count('apartmentdetail', $apartment->id);
+
+      $ip = $request->getClientIp();
 
       $data = [
         'apartment' => $apartment,
-        'sponsors' => $sponsors
+        'sponsors' => $sponsors,
+        // 'visits' => $visits
       ];
 
       return view('upr.statistics', $data);

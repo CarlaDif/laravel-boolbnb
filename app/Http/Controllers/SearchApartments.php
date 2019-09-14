@@ -55,6 +55,7 @@ class SearchApartments extends Controller
       $apartments = DB::table('apartments')
           ->selectRaw('id, title, address, latitude, longitude, is_sponsored, main_img, acos(sin('.$lat.')*sin(radians(latitude)) + cos('.$lat.')*cos(radians(latitude))*cos(radians(longitude)-'.$lon.')) * '.$R.' As distance')
           ->whereRaw("acos(sin($lat*0.0175)*sin(radians(latitude)) + cos($lat*0.0175)*cos(radians(latitude))*cos(radians(longitude)-$lon*0.0175)) * $R< $radius")
+          ->orderBy('is_sponsored', 'DESC')
           ->orderBy('distance')
           ->get();
 
@@ -67,8 +68,6 @@ class SearchApartments extends Controller
    }
 
   public function filters(Request $request){
-
-    dd($request);
     //query per aggiornare lo status sponsorizzazione degli appartamenti
     $sponsorships = DB::table('sponsorships')
                     ->join('apartments', 'sponsorships.apartment_id','=' , 'apartments.id' )
@@ -126,6 +125,7 @@ class SearchApartments extends Controller
      $apartments = $apartments
              ->selectRaw('id, title, address, latitude, longitude, is_sponsored, main_img, acos(sin('.$lat.')*sin(radians(latitude)) + cos('.$lat.')*cos(radians(latitude))*cos(radians(longitude)-'.$lon.')) * '.$R.' As distance')
              ->whereRaw("acos(sin($lat*0.0175)*sin(radians(latitude)) + cos($lat*0.0175)*cos(radians(latitude))*cos(radians(longitude)-$lon*0.0175)) * $R< $radius")
+             ->orderBy('is_sponsored', 'DESC')
              ->orderBy('distance');
    }
 
