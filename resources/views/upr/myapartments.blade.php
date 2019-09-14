@@ -1,6 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+  @if (session('success_message'))
+    <div class="alert alert-success">
+      {{ session('success_message') }}
+    </div>
+  @endif
+  @if(count($errors) > 0)
+    <div class="alert alert-danger">
+      <ul>
+          @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+          @endforeach
+      </ul>
+    </div>
+  @endif
   <section id="apartments-prewiew">
     <div class="container container-82">
       @if (count($apartments) == 0)
@@ -19,18 +33,17 @@
             @foreach ($apartments as $apartment)
               <a href="{{ route('upr.apartments.show', $apartment->id) }}">
                 <div class="card card-apartment mt-3 position-relative">
-                  @if ($apartment->is_sponsored == 1)
-                    <div class="position-absolute">
-                      <i class="fas fa-star mt-1 ml-1"></i>
-                    </div>
-                  @endif
                   @if (!empty($apartment->main_img))
                     <img src="{{ asset('storage/' . $apartment->main_img) }}" class="card-img-top" style="width: 100%; height: 150px; object-fit: cover;" alt="Anteprima Appartamento">
                   @else
                     <img style="width: 100%; height: 150px; object-fit: cover;" src="https://kitv.images.worldnow.com/images/16468883_G.png?lastEditedDate=1522902908000" class="card-img-top" alt="Anteprima non disponibile">
                   @endif
                   <div class="card-body">
-                    <h5 class="card-title">{{ $apartment->title }}</h5>
+                    @if ($apartment->is_sponsored == 1)
+                      <h5 class="card-title nome-appartamento"> {{ $apartment->title }} <i class="fas fa-star"></i> </h5>
+                    @else
+                      <h5 class="card-title nome-appartamento">{{ $apartment->title }}</h5>
+                    @endif
                     <p>{{ $apartment->address }}</p>
                   </div>
                 </div>

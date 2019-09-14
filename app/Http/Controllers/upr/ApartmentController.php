@@ -429,6 +429,27 @@ class ApartmentController extends Controller
     }
 
     public function statistics(Request $request, $apartment_id) {
+      //query per aggiornare lo status sponsorizzazione degli appartamenti
+      $sponsorships = DB::table('sponsorships')
+                      ->join('apartments', 'sponsorships.apartment_id','=' , 'apartments.id' )
+                      ->select('sponsorships.*')
+                      ->get();
+
+      $now = Carbon::now()->format('Y-m-d H:i:s');
+
+      foreach ($sponsorships as $sponsor) {
+        $end = $sponsor->sponsor_end_at;
+        $now_string = strval($now);
+        $end_string = strval($end);
+
+        $diff = Carbon::parse($now_string)->greaterThanOrEqualTo($end_string);
+        if ($diff) {
+          $apartment_is_sponsored = DB::table('apartments')
+          ->where('id', $sponsor->apartment_id)
+          ->update(['is_sponsored' => 0]);
+        }
+      }
+
       $apartment = Apartment::find($apartment_id);
       $sponsors = Sponsorship::where('apartment_id', $apartment_id)
       ->orderBy('created_at', 'DESC')
@@ -437,6 +458,9 @@ class ApartmentController extends Controller
 
       foreach ($sponsors as $sponsor) {
         $tipo_sponsor = $sponsor->sponsor_type_id;
+        $end = Carbon::parse($sponsor->sponsor_end_at)->format('d-m-Y');
+        $orario_end = Carbon::parse($sponsor->sponsor_end_at)->format('H:i');
+
 
         if ($tipo_sponsor == '1') {
           $costo = '2.99';
@@ -454,6 +478,8 @@ class ApartmentController extends Controller
         'apartment' => $apartment,
         'sponsors' => $sponsors,
         'somma' => $somma,
+        'end' => $end,
+        'orario_end' => $orario_end
       ];
 
       return view('upr.statistics', $data);

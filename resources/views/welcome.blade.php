@@ -106,10 +106,8 @@
               @endif
                 <div class="card-body">
                   @if ($apartment->is_sponsored == 1)
-                    <div class="">
-                      <h5 class="card-title nome-appartamento"> {{ $apartment->title }} <i class="fas fa-star mt-1 ml-1"></i> </h5>
-                    </div>
-                    @else
+                    <h5 class="card-title nome-appartamento"> {{ $apartment->title }} <i class="fas fa-star"></i> </h5>
+                  @else
                     <h5 class="card-title nome-appartamento">{{ $apartment->title }}</h5>
                   @endif
                   <p>{{ $apartment->address }}</p>

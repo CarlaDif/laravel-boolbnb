@@ -32,11 +32,11 @@
     <div class="row mt-5">
       {{-- Titolo e Indirizzo Appartamento--}}
       {{-- <div class="row "> --}}
-      <div class="col-12">
+      <div class="col-12 p-0">
         <h1>{{ $apartment->title }}</h1>
       </div>
-      <div class="col-4">
-        <a href="#">{{ $apartment->address }}</a>
+      <div class="col-4 p-0">
+        <p>{{ $apartment->address }}</p>
           {{-- input hidden che prende valori da database e li passa a java --}}
           <input type="hidden" id="latitude" name="latitude" value="{{ $apartment->latitude}}" class="latitude_details">
           <input type="hidden" id="latitude" name="longitude" value="{{ $apartment->longitude}}" class="longitude_details">
