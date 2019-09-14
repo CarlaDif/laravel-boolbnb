@@ -1,6 +1,9 @@
 .opzioni-appartamento {
   display:flex;
-  justify-content: space-between;
+  padding-left: 0;
+}
+.sponsorizza-appartamento {
+  background-color: $iconic-color;
 }
 
 @media screen and (max-width:767px) {
@@ -17,6 +20,6 @@
     margin-bottom: 10px;
   }
   .info-appartamento {
-    font-size: 200%;
+    font-size: 150%;
   }
 }

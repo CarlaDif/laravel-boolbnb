@@ -8,9 +8,17 @@
   }
 }
 
+.aiutarti, .alloggi {
+  color:#73B879;
+}
+.card-deck {
+  display:flex;
+}
 .card-apartment {
-  width:18rem;
+  width:23rem;
   height:20rem;
+  box-shadow: 1px 1px lightgrey;
+  color:black;
 
   img {
     width: 100%;
@@ -28,28 +36,32 @@
   padding-top: 0 !important;
 }
 
-.card-apartment {
-  box-shadow: 1px 1px lightgrey;
+@media screen and (max-width:320px) {
+  .card-apartment {
+    width:17rem;
+  }
+}
+@media screen and (width:375px) {
+  .card-apartment {
+    width:19rem;
+  }
 }
 
 @media screen and (max-width:576px){
-  // .navbar-brand {
-  //   display:none;
-  // }
+
   .welcome-image, #categories {
     display: none;
   }
   .single-apartment {
-    flex:0;
+    // flex:0;
     color:#01BFFF;
   }
   .esplora, .aiutarti, .alloggi {
     font-size: 180%;
-    color:#017FFF;
   }
 }
 
-@media screen and (min-width:577px) and (max-width:768px){
+@media screen and (max-width:767px){
   .welcome-image, #categories {
     display:none;
   }
@@ -58,5 +70,8 @@
 @media screen and (max-width: 992px) {
   #categories {
     display:none;
+  }
+  .card-apartment {
+    width:18rem;
   }
 }

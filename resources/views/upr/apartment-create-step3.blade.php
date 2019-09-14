@@ -6,6 +6,14 @@
       <form class="ml-auto" action="{{ route('upr.apartments.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <h3>Quanto costa?</h3>
+        <div class="step-inserimento mb-4">
+          <p>Passaggio 4 di 4</p>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+              {{-- <span class="sr-only">73% Complete</span> --}}
+            </div>
+          </div>
+        </div>
         <div class="form-group mt-5">
           <label>Servizi dell'appartamento</label>
           <div class="row justify-content-between">

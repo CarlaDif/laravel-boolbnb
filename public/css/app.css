@@ -10792,9 +10792,20 @@ a.text-dark:focus {
      object-fit: cover;
 }
 
+.aiutarti,
+.alloggi {
+  color: #73B879;
+}
+
+.card-deck {
+  display: flex;
+}
+
 .card-apartment {
-  width: 18rem;
+  width: 23rem;
   height: 20rem;
+  box-shadow: 1px 1px lightgrey;
+  color: black;
 }
 
 .card-apartment img {
@@ -10814,8 +10825,16 @@ a.text-dark:focus {
   padding-top: 0 !important;
 }
 
-.card-apartment {
-  box-shadow: 1px 1px lightgrey;
+@media screen and (max-width: 320px) {
+  .card-apartment {
+    width: 17rem;
+  }
+}
+
+@media screen and (width: 375px) {
+  .card-apartment {
+    width: 19rem;
+  }
 }
 
 @media screen and (max-width: 576px) {
@@ -10825,7 +10844,6 @@ a.text-dark:focus {
   }
 
   .single-apartment {
-    flex: 0;
     color: #01BFFF;
   }
 
@@ -10833,11 +10851,10 @@ a.text-dark:focus {
   .aiutarti,
   .alloggi {
     font-size: 180%;
-    color: #017FFF;
   }
 }
 
-@media screen and (min-width: 577px) and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .welcome-image,
   #categories {
     display: none;
@@ -10847,6 +10864,10 @@ a.text-dark:focus {
 @media screen and (max-width: 992px) {
   #categories {
     display: none;
+  }
+
+  .card-apartment {
+    width: 18rem;
   }
 }
 
@@ -10868,6 +10889,14 @@ a.text-dark:focus {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+}
+
+a.visualizza-messaggio {
+  background-color: #73B879;
+}
+
+.titolo-messaggi {
+  color: #73B879;
 }
 
 @media screen and (max-width: 768px) {
@@ -10912,7 +10941,15 @@ a.text-dark:focus {
   }
 }
 
-@media screen and (max-width: 768px) {
+.login-button {
+  background-color: #73B879;
+}
+
+.forgot-password {
+  color: #73B879;
+}
+
+@media screen and (max-width: 767px) {
   .login-button {
     display: block;
     width: 100%;
@@ -10923,6 +10960,14 @@ a.text-dark:focus {
     left: 50%;
     transform: translateX(-50%);
   }
+}
+
+.visualizza-inserzioni button {
+  background-color: #73B879;
+}
+
+.visualizza-inserzioni button a {
+  color: #FFF;
 }
 
 @media screen and (max-width: 767px) {
@@ -10951,28 +10996,35 @@ a.text-dark:focus {
   .visualizza-inserzioni button {
     width: 100%;
     height: 100px;
-    font-size: 200%;
-    background-color: #80BDFF;
-  }
-
-  .visualizza-inserzioni button a {
-    color: #FFF;
+    font-size: 150%;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   #navbarSupportedContent a {
-    font-size: 200%;
+    font-size: 150%;
   }
 
   #navbarDropdown a {
-    font-size: 200%;
+    font-size: 150%;
   }
+}
+
+.progress-bar {
+  background-color: #73B879;
+}
+
+.mia-lista {
+  color: #73B879;
 }
 
 .opzioni-appartamento {
   display: flex;
-  justify-content: space-between;
+  padding-left: 0;
+}
+
+.sponsorizza-appartamento {
+  background-color: #73B879;
 }
 
 @media screen and (max-width: 767px) {
@@ -10994,7 +11046,7 @@ a.text-dark:focus {
   }
 
   .info-appartamento {
-    font-size: 200%;
+    font-size: 150%;
   }
 }
 

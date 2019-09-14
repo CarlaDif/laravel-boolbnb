@@ -86,9 +86,6 @@
             </div>
           </span>
 
-          <span>
-            <a href="#" class="btn btn-sm btn-outline-secondary search_filter">Tipo Di Alloggio</a>
-          </span>
 
           <span class="position-relative">
             <a href="#" class="btn btn-sm btn-outline-secondary search_filter">
@@ -142,10 +139,6 @@
           </span>
 
           <span>
-            <a href="#" class="btn btn-sm btn-outline-secondary search_filter">Prenotazione Immediata</a>
-          </span>
-
-          <span>
             <button type="submit" class="btn"><i class="fas fa-search"></i></button>
           </span>
         </div>
@@ -153,10 +146,11 @@
 
      </div>
     </div>
-  <div class="container search_result">
+  <div class="container search_result container-82">
     <div class="row justify-content-between mt-3">
 
     @if ($apartments->isNotEmpty())
+      <div class="card-deck no-gutters" id="apartments">
       @foreach ($apartments as $apartment)
         <a href=
         @guest
@@ -165,7 +159,7 @@
           "{{ route('upr.apartments.show', $apartment->id) }}"
         @endguest
         >
-        <div class="card mt-3 " style="width: 16rem;">
+        <div class="card mt-3 card-apartment">
           @if ($apartment->is_sponsored == 1)
             <div class="position-absolute">
               <i class="fas fa-star mt-1 ml-1"></i>
@@ -183,6 +177,7 @@
           </div>
         </a>
       @endforeach
+    </div>
     @else
       <p>Spiacenti, non ci sono risultati per questa ricerca</p>
     @endif

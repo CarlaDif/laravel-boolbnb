@@ -15,6 +15,12 @@
  -webkit-line-clamp: 1;
  -webkit-box-orient: vertical;
 }
+a.visualizza-messaggio {
+  background-color: #73B879;
+}
+.titolo-messaggi {
+  color:#73B879;
+}
 
 @media screen and (max-width:768px) {
   .titolo-messaggi {

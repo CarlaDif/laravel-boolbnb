@@ -82,7 +82,7 @@
       <div class="row mt-5">
         <h4 class="ml-3 alloggi">Alloggi in tutto il mondo</h4>
       </div>
-      <div class="row justify-content-between mt-3">
+      <div class="row mt-3">
       <div class="card-deck no-gutters" id="apartments">
         @foreach ($apartments as $apartment)
           {{-- <div class="col-md-6 col-sm-12 col-lg-4 single-apartment"> --}}
