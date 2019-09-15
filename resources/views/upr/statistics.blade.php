@@ -30,7 +30,7 @@
               @endif
             </li>
 
-            <li class="list-group-item">Numero visite: {{ Counter::showAndCount('apartmentdetail') }}</li>
+            <li class="list-group-item">Numero visite: {{ Counter::showAndCount('apartmentdetail', $apartment->id) }}</li>
           </ul>
         </div>
       </div>

@@ -15,24 +15,23 @@
               <div class="alert alert-danger">{{ $message }}</div>
           @enderror
         </div>
-        
+
         {{-- indirizzo --}}
         <div class="form-group">
           <div class="tt-search-box-search-icon form-group has-search mt-auto mb-auto position-relative">
             <div class="form-group">
               <label>Paese</label>
-              <input type="text" name="country" value="{{ old('country', $apartment->country) }}" class="tt-search-box-input country form-control" placeholder="Paese">
+              <input type="text" value="{{ old('country', $apartment->country) }}" class="tt-search-box-input country form-control" placeholder="Paese"  autocomplete="country">
             </div>
 
             <div class="form-group">
               <label>Via</label>
-              <input type="text" name="place" value="{{ old('address', $apartment->address) }}" class="tt-search-box-input form-control input-address" placeholder="Indirizzo">
-            </div>
-
-            <div class="bootstrap-select-wrapper position-absolute w-100">
-              <div class="tendina">
-                {{-- select che restituisce il codice della nazione --}}
-                <select class="list_results custom-select" name="" multiple></select>
+              <input type="text" name="place" value="{{ old('address', $apartment->address) }}" class="tt-search-box-input form-control input-address" placeholder="Indirizzo" autocomplete="off">
+              <div class="bootstrap-select-wrapper position-absolute w-100">
+                <div class="tendina">
+                  {{-- select che restituisce il codice della nazione --}}
+                  <select class="list_results custom-select" name="" multiple></select>
+                </div>
               </div>
             </div>
 
