@@ -10646,6 +10646,7 @@ a.text-dark:focus {
 
 .container-82 {
   max-width: 82%;
+  margin: 0 auto;
 }
 
 .sub_filter .search-slider {
@@ -10693,6 +10694,15 @@ a.text-dark:focus {
   border-color: #73B879;
   color: #73B879;
   padding: 8px;
+}
+
+.title {
+  color: #73B879;
+}
+
+.btn-success {
+  background-color: #73B879;
+  color: #fff;
 }
 
 @media screen and (max-width: 768px) {
@@ -11024,6 +11034,10 @@ a.visualizza-messaggio {
   color: #73B879;
 }
 
+.sponsorizza-appartamento {
+  color: #fff;
+}
+
 .opzioni-appartamento {
   display: flex;
   padding-left: 0;
@@ -11031,6 +11045,38 @@ a.visualizza-messaggio {
 
 .sponsorizza-appartamento {
   background-color: #73B879;
+}
+
+.slider {
+  box-shadow: 2px 2px 2px lightgrey;
+}
+
+.slider-main {
+  height: 500px;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.slider-mini {
+  height: 500px;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.slider-mini .multiple-img {
+  height: 250px;
+  width: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.slider-mini .solo-img {
+  height: 500px;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 @media screen and (max-width: 767px) {

@@ -31,6 +31,8 @@ class ApartmentController extends Controller
       $sponsorships = DB::table('sponsorships')
                       ->join('apartments', 'sponsorships.apartment_id','=' , 'apartments.id' )
                       ->select('sponsorships.*')
+                      ->orderBy('apartment_id', 'ASC')
+                      ->orderBy('sponsor_end_at', 'DESC')
                       ->get();
 
       $now = Carbon::now()->format('Y-m-d H:i:s');
@@ -274,25 +276,24 @@ class ApartmentController extends Controller
     public function show($apartment_id)
     {
       //query per aggiornare lo status sponsorizzazione degli appartamenti
-      $sponsorships = DB::table('sponsorships')
+      $sponsorship = DB::table('sponsorships')
                       ->join('apartments', 'sponsorships.apartment_id','=' , 'apartments.id' )
                       ->select('sponsorships.*')
-                      ->get();
+                      ->orderBy('sponsor_end_at', 'DESC')
+                      ->first();
 
-      $now = Carbon::now()->format('Y-m-d H:i:s');
-
-      foreach ($sponsorships as $sponsor) {
-        $end = $sponsor->sponsor_end_at;
+        $now = Carbon::now()->format('Y-m-d H:i:s');
+        $end = $sponsorship->sponsor_end_at;
         $now_string = strval($now);
         $end_string = strval($end);
 
         $diff = Carbon::parse($now_string)->greaterThanOrEqualTo($end_string);
+
         if ($diff) {
           $apartment_is_sponsored = DB::table('apartments')
-          ->where('id', $sponsor->apartment_id)
+          ->where('id', $apartment_id)
           ->update(['is_sponsored' => 0]);
         }
-      }
 
         $apartment = Apartment::find($apartment_id);
 
@@ -430,24 +431,23 @@ class ApartmentController extends Controller
 
     public function statistics(Request $request, $apartment_id) {
       //query per aggiornare lo status sponsorizzazione degli appartamenti
-      $sponsorships = DB::table('sponsorships')
+      $sponsorship = DB::table('sponsorships')
                       ->join('apartments', 'sponsorships.apartment_id','=' , 'apartments.id' )
                       ->select('sponsorships.*')
-                      ->get();
+                      ->orderBy('sponsor_end_at', 'DESC')
+                      ->first();
 
       $now = Carbon::now()->format('Y-m-d H:i:s');
 
-      foreach ($sponsorships as $sponsor) {
-        $end = $sponsor->sponsor_end_at;
-        $now_string = strval($now);
-        $end_string = strval($end);
+      $end = $sponsorship->sponsor_end_at;
+      $now_string = strval($now);
+      $end_string = strval($end);
 
-        $diff = Carbon::parse($now_string)->greaterThanOrEqualTo($end_string);
-        if ($diff) {
-          $apartment_is_sponsored = DB::table('apartments')
-          ->where('id', $sponsor->apartment_id)
-          ->update(['is_sponsored' => 0]);
-        }
+      $diff = Carbon::parse($now_string)->greaterThanOrEqualTo($end_string);
+      if ($diff) {
+        $apartment_is_sponsored = DB::table('apartments')
+        ->where('id', $apartment_id)
+        ->update(['is_sponsored' => 0]);
       }
 
       $apartment = Apartment::find($apartment_id);
@@ -458,9 +458,8 @@ class ApartmentController extends Controller
 
       foreach ($sponsors as $sponsor) {
         $tipo_sponsor = $sponsor->sponsor_type_id;
-        $end = Carbon::parse($sponsor->sponsor_end_at)->format('d-m-Y');
-        $orario_end = Carbon::parse($sponsor->sponsor_end_at)->format('H:i');
-
+        // $end = Carbon::parse($sponsor->sponsor_end_at)->format('d-m-Y');
+        // $orario_end = Carbon::parse($sponsor->sponsor_end_at)->format('H:i');
 
         if ($tipo_sponsor == '1') {
           $costo = '2.99';
@@ -473,13 +472,15 @@ class ApartmentController extends Controller
         $somma += $costo;
       }
 
+      $end = Carbon::parse($end_string)->format('d-m-Y');
+      $orario_end = Carbon::parse($end_string)->format('H:i');
 
       $data = [
         'apartment' => $apartment,
         'sponsors' => $sponsors,
         'somma' => $somma,
         'end' => $end,
-        'orario_end' => $orario_end
+        'orario_end' => $orario_end,
       ];
 
       return view('upr.statistics', $data);

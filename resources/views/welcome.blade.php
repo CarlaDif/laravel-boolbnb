@@ -80,7 +80,7 @@
   <section id="apartments-prewiew">
     <div class="container container-82">
       <div class="row mt-5">
-        <h4 class="ml-3 alloggi">Alloggi in tutto il mondo</h4>
+        <h4 class="alloggi">Alloggi in tutto il mondo</h4>
       </div>
       <div class="row mt-3">
       <div class="card-deck no-gutters" id="apartments">

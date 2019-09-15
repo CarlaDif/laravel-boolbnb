@@ -1,5 +1,6 @@
 .container-82 {
   max-width: 82%;
+  margin: 0 auto;
 }
 
 .sub_filter {
@@ -52,6 +53,15 @@
   border-color: $iconic-color;
   color:$iconic-color;
   padding:8px;
+}
+
+.title {
+  color: $iconic-color;
+}
+
+.btn-success {
+  background-color: $iconic-color;
+  color: #fff;
 }
 
 @media screen and (max-width:768px) {

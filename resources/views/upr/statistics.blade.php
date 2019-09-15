@@ -7,19 +7,18 @@
         <div class="card mt-4">
           <ul class="list-group list-group-flush">
             <li class="list-group-item"><h5>{{ $apartment->title }}</h5></li>
-
-            <li class="list-group-item">Stato sponsorizzazione: <b>Attivo</b>
               @if ($apartment->is_sponsored)
+                <li class="list-group-item">Stato sponsorizzazione: <b>Attivo</b>
                 <div class="row justify-content-between">
                   <div class="col-6">
                     <small class="text-right ml-auto">
                       Scade il: {{ $end }}
-                      alle: {{ $orario_end }}
+                      alle ore: {{ $orario_end }}
                     </small>
                   </div>
                 </div>
               @else
-                <b>Inattivo</b>
+                <li class="list-group-item">Stato sponsorizzazione: <b>Inattivo</b
               @endif
             </li>
 

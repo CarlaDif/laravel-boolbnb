@@ -6,13 +6,9 @@
       {{ session('success_message') }}
     </div>
   @endif
-  @if(count($errors) > 0)
+  @if (session('error_message'))
     <div class="alert alert-danger">
-      <ul>
-          @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-          @endforeach
-      </ul>
+      {{ session('error_message') }}
     </div>
   @endif
   <section id="apartments-prewiew">

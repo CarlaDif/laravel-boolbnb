@@ -49,24 +49,35 @@ class SponsorController extends Controller
     $amount = $request->amount;
 
     // $nonce = $request->payment_method_nonce;
+    $result = $gateway->customer()->create([
+      'firstName' => $request->name,
+      'lastName' => $request->surname,
+      'email' => $request->email,
+      'phone' => '281.330.8004',
+      'fax' => '419.555.1235',
+    ]);
+
+    $result->customer->id;
+    // dd($result->customer->id);
 
     $result = $gateway->transaction()->sale([
         'amount' => $amount,
         'paymentMethodNonce' => 'fake-valid-nonce',
-        'customer' => [
-          'firstName' => 'Chris',
-          'lastName' => 'Evans',
-          'email' => 'cap@america.com', //variabili utente che ha fatto la sponsorizzazione
-        ],
         'options' => [
             'submitForSettlement' => true
         ]
     ]);
 
     if ($result->success) {
-        $settledTransaction = $result->transaction;
+
         $transaction = $result->transaction;
         $apartment_id = $request->apartment_id;
+
+        if($transaction->status == 'submitForSettlement') {
+          $apartment_is_sponsored = DB::table('apartments')
+          ->where('id', $apartment_id)
+          ->update(['is_sponsored' => 1]);
+        }
 
         $apartment_is_sponsored = DB::table('apartments')
         ->where('id', $apartment_id)
@@ -75,9 +86,9 @@ class SponsorController extends Controller
         //salvataggio dati sponsorizzazione nel database
         $sponsorship = new Sponsorship;
 
-        if ($transaction->amount == 2.99 || $settledTransaction->amount == 2.99) {
+        if ($transaction->amount == 2.99) {
           $sponsorship->sponsor_type_id = '1';
-        } elseif ($transaction->amount == 5.99 || $settledTransaction->amount == 5.99) {
+        } elseif ($transaction->amount == 5.99) {
           $sponsorship->sponsor_type_id = '2';
         } else {
           $sponsorship->sponsor_type_id = '3';
@@ -85,9 +96,9 @@ class SponsorController extends Controller
 
         $sponsorship->apartment_id = $apartment_id;
 
-        if ($transaction->amount == 2.99 || $settledTransaction->amount == 2.99) {
+        if ($transaction->amount == 2.99) {
           $sponsorship->sponsor_end_at = Carbon::now()->addMinutes(5);
-        } elseif ($transaction->amount == 5.99 || $settledTransaction->amount == 5.99) {
+        } elseif ($transaction->amount == 5.99) {
           $sponsorship->sponsor_end_at = Carbon::now()->addHours(72);
         } else {
           $sponsorship->sponsor_end_at = Carbon::now()->addHours(144);
@@ -97,21 +108,7 @@ class SponsorController extends Controller
 
         return redirect()->route('upr.my-apartments')->with('success_message', 'Transazione avvenuta con successo.');
     } else {
-        $errorString = '';
-
-        foreach($result->errors->deepAll() as $error) {
-            $errorString .= 'Error: ' . $error->code . ": " . $error->message . "\n";
-        }
-
-        return back()->withError('Si è verificato un errore: ' . $result->message);
+        return redirect()->route('upr.my-apartments')->with('error_message', 'Si è verificato un errore durante il pagamento. Riprova o contatta l\'assistenza.');
     }
   }
-
-  // public function resetIsSponsored($apartment_id) {
-  //   $fine = $sponsorship->sponsor_end_at;
-
-  //   $apartment_is_sponsored = DB::table('apartments')
-  //   ->where('id', $apartment_id)
-  //   ->update(['is_sponsored' => 0]);
-  // }
 }

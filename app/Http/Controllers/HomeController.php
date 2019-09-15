@@ -31,6 +31,8 @@ class HomeController extends Controller
       $sponsorships = DB::table('sponsorships')
                       ->join('apartments', 'sponsorships.apartment_id','=' , 'apartments.id' )
                       ->select('sponsorships.*')
+                      ->orderBy('apartment_id', 'ASC')
+                      ->orderBy('sponsor_end_at', 'DESC')
                       ->get();
 
       $now = Carbon::now()->format('Y-m-d H:i:s');
