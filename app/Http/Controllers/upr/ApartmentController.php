@@ -104,11 +104,11 @@ class ApartmentController extends Controller
           //se i dati non sono sufficenti
           if(count($array_apartment) < 4) {
             Session::flash('message', 'Devi prima compilare tutti i campi del form!');
-            return redirect()->route('upr.apartments.create-step1');
+            return redirect()->route('upr.apartments.create-step0');
           }
         } elseif (!$apartment) {
           Session::flash('message', 'Devi prima compilare tutti i campi del form!');
-          return redirect()->route('upr.apartments.create-step1');
+          return redirect()->route('upr.apartments.create-step0');
         }
 
         return view('upr.apartment-create-step1', compact('apartment', $apartment));

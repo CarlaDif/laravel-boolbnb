@@ -86,7 +86,7 @@
                         </div>
                       </div> --}}
                     </div>
-                    <input type="submit" class="bt_cerca ml-2 search_page btn btn-sm btn-outline-info" value="Cerca">
+                    <input type="submit" class="bt_cerca padding-bt_cerca ml-2 search_page btn btn-sm btn-outline-info" value="Cerca">
                   </form>
 
 

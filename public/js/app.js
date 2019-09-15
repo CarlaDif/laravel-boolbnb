@@ -49313,15 +49313,17 @@ $(document).ready(function () {
       var prima_option_lng_int = parseFloat(prima_option_lng_place);
       var prima_option_lat_place = prima_option.attr('data-lat');
       var prima_option_lat_int = parseFloat(prima_option_lat_place);
+      var prima_option_civico = prima_option.attr('data-streetNumber');
       $('input[type=text][name=city]').val(prima_option_city);
       $("input[type=hidden][name=latitude]").val(prima_option_lat_int);
       $("input[type=hidden][name=longitude]").val(prima_option_lng_int);
-      $("input[type=hidden][name=address]").val(prima_option_via);
+      $("input[type=hidden][name=address]").val(prima_option_via + ' ' + prima_option_civico + ', ' + prima_option_city + ' - ' + prima_option_country);
     }
 
     var via = $('.list_results option:selected').attr('data-address');
     var city = $('.list_results option:selected').attr('data-city'); // var country = $('.list_results option:selected').attr('data-country');
 
+    var civico = $('.list_results option:selected').attr('data-streetNumber');
     var paese = $('.list_results option:selected').attr('data-country');
     var lng_place = $('.list_results').val();
     var lng_int = parseFloat(lng_place);
