@@ -5,32 +5,6 @@
 .sponsorizza-appartamento {
   background-color: $iconic-color;
 }
-.slider {
-  box-shadow: 2px 2px 2px lightgrey;
-}
-.slider-main {
-  height:500px;
-  width:100%;
-  object-fit: cover;
-
-}
-.slider-mini {
-  height:500px;
-  width:100%;
-  object-fit: cover;
-
-  .multiple-img {
-    height:250px;
-    width:50%;
-    object-fit: cover;
-  }
-
-  .solo-img {
-    height:500px;
-    width:100%;
-    object-fit: cover;
-  }
-}
 
 @media screen and (max-width:767px) {
   .opzioni-appartamento {

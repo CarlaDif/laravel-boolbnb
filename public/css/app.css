@@ -11047,38 +11047,6 @@ a.visualizza-messaggio {
   background-color: #73B879;
 }
 
-.slider {
-  box-shadow: 2px 2px 2px lightgrey;
-}
-
-.slider-main {
-  height: 500px;
-  width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.slider-mini {
-  height: 500px;
-  width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.slider-mini .multiple-img {
-  height: 250px;
-  width: 50%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.slider-mini .solo-img {
-  height: 500px;
-  width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
 @media screen and (max-width: 767px) {
   .opzioni-appartamento {
     display: flex;

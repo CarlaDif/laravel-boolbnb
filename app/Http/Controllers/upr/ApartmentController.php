@@ -27,28 +27,28 @@ class ApartmentController extends Controller
      */
     public function myIndex()
     {
-      //query per aggiornare lo status sponsorizzazione degli appartamenti
-      $sponsorships = DB::table('sponsorships')
-                      ->join('apartments', 'sponsorships.apartment_id','=' , 'apartments.id' )
-                      ->select('sponsorships.*')
-                      ->orderBy('apartment_id', 'ASC')
-                      ->orderBy('sponsor_end_at', 'DESC')
-                      ->get();
-
-      $now = Carbon::now()->format('Y-m-d H:i:s');
-
-      foreach ($sponsorships as $sponsor) {
-        $end = $sponsor->sponsor_end_at;
-        $now_string = strval($now);
-        $end_string = strval($end);
-
-        $diff = Carbon::parse($now_string)->greaterThanOrEqualTo($end_string);
-        if ($diff) {
-          $apartment_is_sponsored = DB::table('apartments')
-          ->where('id', $sponsor->apartment_id)
-          ->update(['is_sponsored' => 0]);
-        }
-      }
+      // //query per aggiornare lo status sponsorizzazione degli appartamenti
+      // $sponsorships = DB::table('sponsorships')
+      //                 ->join('apartments', 'sponsorships.apartment_id','=' , 'apartments.id' )
+      //                 ->select('sponsorships.*')
+      //                 // ->orderBy('apartment_id', 'ASC')
+      //                 ->orderBy('sponsor_end_at', 'DESC')
+      //                 ->get();
+      //
+      // $now = Carbon::now()->format('Y-m-d H:i:s');
+      //
+      // foreach ($sponsorships as $sponsor) {
+      //   $end = $sponsor->sponsor_end_at;
+      //   $now_string = strval($now);
+      //   $end_string = strval($end);
+      //
+      //   $diff = Carbon::parse($now_string)->greaterThanOrEqualTo($end_string);
+      //   if ($diff) {
+      //     $apartment_is_sponsored = DB::table('apartments')
+      //     ->where('id', $sponsor->apartment_id)
+      //     ->update(['is_sponsored' => 0]);
+      //   }
+      // }
 
       $apartments = Apartment::where('user_id', Auth::user()->id)->orderBy('is_sponsored', 'DESC')->get();
       return view('upr.myapartments', compact('apartments', $apartments));

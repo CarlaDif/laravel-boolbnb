@@ -49,29 +49,35 @@ class SponsorController extends Controller
     $amount = $request->amount;
 
     // $nonce = $request->payment_method_nonce;
-    $result = $gateway->customer()->create([
-      'firstName' => $request->name,
-      'lastName' => $request->surname,
-      'email' => $request->email,
-      'phone' => '281.330.8004',
-      'fax' => '419.555.1235',
-    ]);
+    // $result = $gateway->customer()->create([
+    //   'firstName' => $request->name,
+    //   'lastName' => $request->surname,
+    //   'email' => $request->email,
+    //   'phone' => '281.330.8004',
+    //   'fax' => '419.555.1235',
+    // ]);
 
-    $result->customer->id;
+    // $result->customer->id;
     // dd($result->customer->id);
 
     $result = $gateway->transaction()->sale([
         'amount' => $amount,
         'paymentMethodNonce' => 'fake-valid-nonce',
+        'customer' => [
+          'firstName' => $request->name,
+          'lastName' => $request->surname,
+          'email' => $request->email,
+        ],
         'options' => [
             'submitForSettlement' => true
         ]
     ]);
 
     if ($result->success) {
-
         $transaction = $result->transaction;
         $apartment_id = $request->apartment_id;
+
+        // dd($transaction);
 
         if($transaction->status == 'submitForSettlement') {
           $apartment_is_sponsored = DB::table('apartments')
