@@ -30,9 +30,9 @@
               <a href="{{ route('upr.apartments.show', $apartment->id) }}">
                 <div class="card card-apartment mt-3 position-relative">
                   @if (!empty($apartment->main_img))
-                    <img src="{{ asset('storage/' . $apartment->main_img) }}" class="card-img-top" style="width: 100%; height: 150px; object-fit: cover;" alt="Anteprima Appartamento">
+                    <img src="{{ asset('storage/' . $apartment->main_img) }}" class="card-img-top" alt="Anteprima Appartamento">
                   @else
-                    <img style="width: 100%; height: 150px; object-fit: cover;" src="https://kitv.images.worldnow.com/images/16468883_G.png?lastEditedDate=1522902908000" class="card-img-top" alt="Anteprima non disponibile">
+                    <img src="https://kitv.images.worldnow.com/images/16468883_G.png?lastEditedDate=1522902908000" class="card-img-top" alt="Anteprima non disponibile">
                   @endif
                   <div class="card-body">
                     @if ($apartment->is_sponsored == 1)
