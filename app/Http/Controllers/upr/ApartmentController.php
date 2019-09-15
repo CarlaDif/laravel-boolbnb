@@ -25,30 +25,33 @@ class ApartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function myIndex()
-    {
-      // //query per aggiornare lo status sponsorizzazione degli appartamenti
-      // $sponsorships = DB::table('sponsorships')
-      //                 ->join('apartments', 'sponsorships.apartment_id','=' , 'apartments.id' )
-      //                 ->select('sponsorships.*')
-      //                 // ->orderBy('apartment_id', 'ASC')
-      //                 ->orderBy('sponsor_end_at', 'DESC')
-      //                 ->get();
-      //
-      // $now = Carbon::now()->format('Y-m-d H:i:s');
-      //
-      // foreach ($sponsorships as $sponsor) {
-      //   $end = $sponsor->sponsor_end_at;
-      //   $now_string = strval($now);
-      //   $end_string = strval($end);
-      //
-      //   $diff = Carbon::parse($now_string)->greaterThanOrEqualTo($end_string);
-      //   if ($diff) {
-      //     $apartment_is_sponsored = DB::table('apartments')
-      //     ->where('id', $sponsor->apartment_id)
-      //     ->update(['is_sponsored' => 0]);
-      //   }
-      // }
+    public function myIndex() {
+      $now_query = Carbon::now();
+      $sponsorships = DB::table('sponsorships')
+                      ->join('apartments', 'sponsorships.apartment_id','=' , 'apartments.id' )
+                      ->where('is_sponsored', 1)
+                      ->where('sponsor_end_at', '>', $now_query) //recupero le date di scadenza delle sponsorizzazioni che ancora devono scadere
+                      ->get();
+      // dd($sponsorships);
+
+      if ($sponsorships) {
+        foreach ($sponsorships as $sponsorship) {
+          //controllo tra la data attuale e quella della scadenza dell'ultima sponsorizzazione
+          $now = Carbon::now()->format('Y-m-d H:i:s');
+          $end = $sponsorship->sponsor_end_at;
+          $now_string = strval($now);
+          $end_string = strval($end);
+
+          //condizione per resettare o meno la sponsorizzazione
+          $diff = Carbon::parse($now_string)->greaterThanOrEqualTo($end_string);
+
+          if ($diff) {
+            $apartment_is_sponsored = DB::table('apartments')
+            ->where('id', $sponsorship->apartment_id)
+            ->update(['is_sponsored' => 0]);
+          }
+        }
+      }
 
       $apartments = Apartment::where('user_id', Auth::user()->id)->orderBy('is_sponsored', 'DESC')->get();
       return view('upr.myapartments', compact('apartments', $apartments));
@@ -275,18 +278,28 @@ class ApartmentController extends Controller
      */
     public function show($apartment_id)
     {
-      //query per aggiornare lo status sponsorizzazione degli appartamenti
       $sponsorship = DB::table('sponsorships')
                       ->join('apartments', 'sponsorships.apartment_id','=' , 'apartments.id' )
-                      ->select('sponsorships.*')
+                      ->where('apartments.id', $apartment_id)
                       ->orderBy('sponsor_end_at', 'DESC')
                       ->first();
 
+      // query per aggiornare lo status sponsorizzazione degli appartamenti
+      // $sponsorship = DB::table('sponsorships')
+      //                 ->join('apartments', 'sponsorships.apartment_id','=' , 'apartments.id' )
+      //                 ->select('sponsorships.*')
+      //                 ->orderBy('sponsor_end_at', 'DESC')
+      //                 ->first();
+
+      //se il risultato della query non è nullo
+      if($sponsorship) {
+        //controllo tra la data attuale e quella della scadenza dell'ultima sponsorizzazione
         $now = Carbon::now()->format('Y-m-d H:i:s');
         $end = $sponsorship->sponsor_end_at;
         $now_string = strval($now);
         $end_string = strval($end);
 
+        //condizione per resettare o meno la sponsorizzazione
         $diff = Carbon::parse($now_string)->greaterThanOrEqualTo($end_string);
 
         if ($diff) {
@@ -294,6 +307,8 @@ class ApartmentController extends Controller
           ->where('id', $apartment_id)
           ->update(['is_sponsored' => 0]);
         }
+      }
+
 
         $apartment = Apartment::find($apartment_id);
 
@@ -430,24 +445,60 @@ class ApartmentController extends Controller
     }
 
     public function statistics(Request $request, $apartment_id) {
+      // $sponsorship = DB::table('sponsorships')
+      //                 ->join('apartments', 'sponsorships.apartment_id','=' , 'apartments.id' )
+      //                 ->where('apartment_id', $apartment_id)
+      //                 ->orderBy('sponsor_end_at', 'DESC')
+      //                 ->first();
       //query per aggiornare lo status sponsorizzazione degli appartamenti
-      $sponsorship = DB::table('sponsorships')
+      // $sponsorships = DB::table('sponsorships')
+      //                 ->join('apartments', 'sponsorships.apartment_id','=' , 'apartments.id' )
+      //                 ->select('sponsorships.*')
+      //                 ->orderBy('sponsor_end_at', 'DESC')
+      //                 ->get();
+      //
+      // $now = Carbon::now()->format('Y-m-d H:i:s');
+      //
+      // foreach ($sponsorships as $sponsorship) {
+      //   $end = $sponsorship->sponsor_end_at;
+      //   $now_string = strval($now);
+      //   $end_string = strval($end);
+      //
+      //   $diff = Carbon::parse($now_string)->greaterThanOrEqualTo($end_string);
+      //   if ($diff) {
+      //     $apartment_is_sponsored = DB::table('apartments')
+      //     ->where('id', $apartment_id)
+      //     ->update(['is_sponsored' => 0]);
+      //   }
+      // }
+
+
+      $now_query = Carbon::now();
+      $sponsorships = DB::table('sponsorships')
                       ->join('apartments', 'sponsorships.apartment_id','=' , 'apartments.id' )
-                      ->select('sponsorships.*')
-                      ->orderBy('sponsor_end_at', 'DESC')
-                      ->first();
+                      ->where('is_sponsored', 1)
+                      ->where('sponsor_end_at', '>', $now_query) //recupero le date di scadenza delle sponsorizzazioni che ancora devono scadere
+                      ->get();
+      // dd($sponsorships);
 
-      $now = Carbon::now()->format('Y-m-d H:i:s');
+      //funzione di reset nel caso in cui la sponsorizzazione sia scaduta
+      if ($sponsorships) {
+        foreach ($sponsorships as $sponsorship) {
+          //controllo tra la data attuale e quella della scadenza dell'ultima sponsorizzazione
+          $now = Carbon::now()->format('Y-m-d H:i:s');
+          $end = $sponsorship->sponsor_end_at;
+          $now_string = strval($now);
+          $end_string = strval($end);
 
-      $end = $sponsorship->sponsor_end_at;
-      $now_string = strval($now);
-      $end_string = strval($end);
+          //condizione per resettare o meno la sponsorizzazione
+          $diff = Carbon::parse($now_string)->greaterThanOrEqualTo($end_string);
 
-      $diff = Carbon::parse($now_string)->greaterThanOrEqualTo($end_string);
-      if ($diff) {
-        $apartment_is_sponsored = DB::table('apartments')
-        ->where('id', $apartment_id)
-        ->update(['is_sponsored' => 0]);
+          if ($diff) {
+            $apartment_is_sponsored = DB::table('apartments')
+            ->where('id', $sponsorship->apartment_id)
+            ->update(['is_sponsored' => 0]);
+          }
+        }
       }
 
       $apartment = Apartment::find($apartment_id);

@@ -77,8 +77,6 @@ class SponsorController extends Controller
         $transaction = $result->transaction;
         $apartment_id = $request->apartment_id;
 
-        // dd($transaction);
-
         if($transaction->status == 'submitForSettlement') {
           $apartment_is_sponsored = DB::table('apartments')
           ->where('id', $apartment_id)
@@ -90,7 +88,7 @@ class SponsorController extends Controller
         ->update(['is_sponsored' => 1]);
 
         //salvataggio dati sponsorizzazione nel database
-        $sponsorship = new Sponsorship;
+        $sponsorship = new Sponsorship();
 
         if ($transaction->amount == 2.99) {
           $sponsorship->sponsor_type_id = '1';
@@ -109,7 +107,6 @@ class SponsorController extends Controller
         } else {
           $sponsorship->sponsor_end_at = Carbon::now()->addHours(144);
         }
-
         $sponsorship->save();
 
         return redirect()->route('upr.my-apartments')->with('success_message', 'Transazione avvenuta con successo.');

@@ -60,7 +60,7 @@
                     {{ $tipo = 'Sponsozizzazione per 6 giorni' }}
                   @endif
                 </td>
-                <td>{{ $sponsor->created_at->format('d-m-Y') }}</td>
+                <td><small>{{ $sponsor->created_at->format('d-m-Y') }}</small> <small>{{ $sponsor->created_at->format('H:i') }}</small></td>
                 <td>
                   @if ($sponsor->sponsor_type_id == '1')
                     {{ $costo = '2.99 €' }}
